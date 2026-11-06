@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Родословное древо: Ветка Каландия / Лукава</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --gold: #f59e0b;
+      --emerald: #10b981;
+      --blue: #38bdf8;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .legend-banner {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 10px;
+      padding: 12px 20px;
+      max-width: 900px;
+      margin-bottom: 35px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #fde68a;
+      text-align: center;
+    }
+    .tree-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 1200px;
+      position: relative;
+    }
+    .level {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      position: relative;
+    }
+    .level-label {
+      position: absolute;
+      left: 0;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--subtext);
+      font-weight: 600;
+      border-left: 3px solid var(--gold);
+      padding-left: 8px;
+    }
+    .node-group {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px dashed var(--card-border);
+    }
+    .node {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 18px;
+      min-width: 200px;
+      max-width: 260px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .node:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      border-color: var(--gold);
+    }
+    .node.root { border-color: var(--gold); background: linear-gradient(135deg, #1e293b, #2d3748); }
+    .node.kalandia { border-color: var(--blue); }
+    .node.lukava { border-color: var(--emerald); }
+    .node.female { border-left: 4px solid var(--rose); }
+    .node.male { border-left: 4px solid var(--blue); }
+    .name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .geo-name {
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 12px;
+      color: var(--subtext);
+      line-height: 1.35;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .badge-origin { background: rgba(56, 189, 248, 0.15); color: var(--blue); }
+    .badge-obudji { background: rgba(16, 185, 129, 0.15); color: var(--emerald); }
+    .badge-guria { background: rgba(244, 63, 94, 0.15); color: var(--rose); }
+    .arrow {
+      color: var(--subtext);
+      font-size: 18px;
+      user-select: none;
+    }
+    .sisters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .sister-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌳 Родословное древо: Ветка Каландия & Лукава</h1>
+  
+  <div class="legend-banner">
+    👑 <strong>Семейное предание:</strong> Исконный корень рода — <strong>Каландадзе (Гурия)</strong>. Из-за кровного конфликта предки перешли в Самегрело (Зугдиди/Цаленджиха) и стали <strong>Каландия</strong>.<br>
+    📍 Семья Лукава переселилась в <strong>1880-х годах</strong> из родового села <strong>Обуджи</strong> в <strong>Нижнюю Абжакву</strong> (Сухуми).
+  </div>
+
+  <div class="tree-container">
+
+    <!-- ПОКОЛЕНИЕ 5 (Конец XVIII - нач. XIX века) -->
+    <div class="level">
+      <span class="level-label">Поколение V</span>
+      <div class="node male kalandia">
+        <div class="name">Биту Каландадзе / Каландия</div>
+        <div class="geo-name">ბითუ კალანდია</div>
+        <div class="meta">Прапрапрадед (рубеж XVIII–XIX вв.)</div>
+        <span class="badge badge-guria">Корень из Гурии</span>
+      </div>
+      <div style="width: 200px;"></div>
+      <div class="node male lukava" style="opacity: 0.6; border-style: dashed;">
+        <div class="name">Отец Павла Лукава</div>
+        <div class="geo-name">პავლე ლუკავას მამა</div>
+        <div class="meta">Село Обуджи (Самегрело)</div>
+        <span class="badge badge-obudji">с. Обуджи (ობუჯი)</span>
+      </div>
+    </div>
+
+    <div class="arrow">⬇️</div>
+
+    <!-- ПОКОЛЕНИЕ 4 (Середина XIX века) -->
+    <div class="level">
+      <span class="level-label">Поколение IV</span>
+      
+      <!-- Бачу + Кесо -->
+      <div class="node-group">
+        <div class="node male kalandia">
+          <div class="name">Бачу Каландия</div>
+          <div class="geo-name">ბაჩუ კალანდია</div>
+          <div class="meta">Сын Биту. Прапрадед</div>
+          <span class="badge badge-origin">Самегрело</span>
+        </div>
+        <div style="font-weight:bold; color:var(--rose);">❤️</div>
+        <div class="node female">
+          <div class="name">Кесо Кухилава</div>
+          <div class="geo-name">კესო ქუხილავა</div>
+          <div class="meta">Прапрабабушка</div>
+        </div>
+      </div>
+
+      <div style="width: 40px;"></div>
+
+      <!-- Павел + Саломе -->
+      <div class="node-group">
+        <div class="node male lukava">
+          <div class="name">Павел Лукава</div>
+          <div class="geo-name">პავლე ლუკავა</div>
+          <div class="meta">Родом из Обуджи.<br>Переселился ок. 1880 г. в Абхазию</div>
+          <span class="badge badge-obudji">Нижняя Абжаква</span>
+        </div>
+        <div style="font-weight:bold; color:var(--rose);">❤️</div>
+        <div class="node female">
+          <div class="name">Саломе Какачия</div>
+          <div class="geo-name">სალომე კაკაჩია</div>
+          <div class="meta">Прапрабабушка</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow">⬇️</div>
+
+    <!-- ПОКОЛЕНИЕ 3 (Конец XIX - нач. XX века) -->
+    <div class="level">
+      <span class="level-label">Поколение III</span>
+      <div class="node-group" style="border: 2px solid var(--gold); background: rgba(245, 158, 11, 0.05);">
+        
+        <!-- Миха -->
+        <div class="node male kalandia">
+          <div class="name">Михаил (Миха) Каландия</div>
+          <div class="geo-name">მიხეილ (მიხა) კალანდია</div>
+          <div class="meta">Сын Бачу и Кесо. <strong>Прадед</strong><br>Брат: Эстатэ (ესტატე)</div>
+          <span class="badge badge-origin">Сухуми</span>
+        </div>
+
+        <div style="font-weight:bold; color:var(--rose); font-size: 20px;">❤️</div>
+
+        <!-- Евдокия -->
+        <div class="node female lukava">
+          <div class="name">Евдокия Павловна Лукава</div>
+          <div class="geo-name">ევდოკია ლუკავა</div>
+          <div class="meta">Дочь Павла и Саломе. <strong>Прабабушка</strong></div>
+          <span class="badge badge-obudji">из Абжаквы</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 сестры Лукава (сноска) -->
+    <div style="margin-top: -15px; margin-bottom: 5px;">
+      <div class="sisters-grid" style="max-width: 600px;">
+        <div class="sister-card" style="border-color: var(--gold); color: #fde68a;">⭐️ <strong>Евдокия</strong></div>
+        <div class="sister-card">Параскева (პარასკევა)</div>
+        <div class="sister-card">Марине (მარინე)</div>
+        <div class="sister-card">Ольга (ოლღა)</div>
+      </div>
+    </div>
+
+    <div class="arrow">⬇️</div>
+
+    <!-- ПОКОЛЕНИЕ 2: ДЕТИ МИХИ И ЕВДОКИИ -->
+    <div class="level">
+      <span class="level-label">Поколение II</span>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;">
+        
+        <!-- Евгения + Орест -->
+        <div class="node-group" style="border: 1.5px solid var(--gold);">
+          <div class="node female kalandia" style="min-width: 180px;">
+            <div class="name">Евгения Каландия</div>
+            <div class="geo-name">ევგენია კალანდია</div>
+            <div class="meta"><strong>Бабушка</strong></div>
+          </div>
+          <div style="font-weight:bold; color:var(--rose);">❤️</div>
+          <div class="node male" style="min-width: 180px;">
+            <div class="name">Орест Папава</div>
+            <div class="geo-name">ორესტ პაპავა</div>
+            <div class="meta"><strong>Дедушка</strong> (НКВД / МВД)</div>
+          </div>
+        </div>
+
+        <!-- Шалва -->
+        <div class="node male kalandia" style="min-width: 160px;">
+          <div class="name">Шалва Каландия</div>
+          <div class="geo-name">შალვა კალანდია</div>
+          <div class="meta">Брат бабушки<br>Дочь: <strong>Альдона</strong></div>
+        </div>
+
+        <!-- Отар -->
+        <div class="node male kalandia" style="min-width: 160px;">
+          <div class="name">Отар Каландия</div>
+          <div class="geo-name">ოთარ კალანდია</div>
+          <div class="meta">Брат бабушки<br>Жена: <strong>Нона Боджгуа</strong></div>
+        </div>
+
+        <!-- Надежда и Нина -->
+        <div class="node female kalandia" style="min-width: 140px;">
+          <div class="name">Надежда & Нина</div>
+          <div class="geo-name">ნადეჟდა და ნინა</div>
+          <div class="meta">Сёстры бабушки</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="arrow">⬇️</div>
+
+    <!-- ПОКОЛЕНИЕ 1: МАМА И ТЕЙМУРАЗ -->
+    <div class="level">
+      <span class="level-label">Поколение I</span>
+      
+      <div class="node-group" style="background: rgba(245, 158, 11, 0.12); border: 2px solid var(--gold);">
+        <div class="node female root" style="min-width: 240px;">
+          <div class="name">Лейла Орестовна Папава</div>
+          <div class="geo-name">ლეილა პაპავა</div>
+          <div class="meta"><strong>Ваша Мама</strong> (род. 07.11.1942, Сухуми)<br>Брат: Реваз (род. 21.12.1940)</div>
+        </div>
+
+        <div class="arrow" style="margin: 0 10px;">➡️</div>
+
+        <div class="node male root" style="min-width: 220px; border-color: var(--blue);">
+          <div class="name">Теймураз (Темо) Бенидзе</div>
+          <div class="geo-name">თეიმურაზ ბენიძე</div>
+          <div class="meta"><strong>ВЫ</strong> (Ветка Каландия по линии матери)</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
