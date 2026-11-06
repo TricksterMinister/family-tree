@@ -96,7 +96,44 @@
 1 SEX M
 1 RESI
 2 PLAC Lower Abzhakva (Kvemo Abzhakva), Sukhumi District, Abkhazia
+2 DATE ABT 1880
+1 NOTE Originally from Obudji (Samegrelo, Tsalenjikha), settled in Abkhazia circa 1880s
 1 FAMS @F6@
+
+0 @I25@ INDI
+1 NAME Salome /Kakachia/
+1 GIVN Salome
+1 SURN Kakachia
+1 SEX F
+1 FAMS @F6@
+
+0 @I26@ INDI
+1 NAME Paraskeva /Lukava/
+1 GIVN Paraskeva
+1 SURN Lukava
+1 SEX F
+1 FAMC @F6@
+
+0 @I27@ INDI
+1 NAME Marine /Lukava/
+1 GIVN Marine
+1 SURN Lukava
+1 SEX F
+1 FAMC @F6@
+
+0 @I28@ INDI
+1 NAME Olgha /Lukava/
+1 GIVN Olgha
+1 SURN Lukava
+1 SEX F
+1 FAMC @F6@
+
+0 @I29@ INDI
+1 NAME Keso /Kukhilava/
+1 GIVN Keso
+1 SURN Kukhilava
+1 SEX F
+1 FAMS @F10@
 
 0 @I11@ INDI
 1 NAME Shalva /Kalandia/
@@ -237,7 +274,11 @@
 
 0 @F6@ FAM
 1 HUSB @I10@
+1 WIFE @I25@
 1 CHIL @I9@
+1 CHIL @I26@
+1 CHIL @I27@
+1 CHIL @I28@
 
 0 @F7@ FAM
 1 HUSB @I11@
@@ -254,6 +295,7 @@
 
 0 @F10@ FAM
 1 HUSB @I21@
+1 WIFE @I29@
 1 CHIL @I8@
 1 CHIL @I24@
 
