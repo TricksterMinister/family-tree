@@ -192,6 +192,13 @@
 1 FAMC @F11@
 1 FAMS @F10@
 
+0 @I24@ INDI
+1 NAME Estate /Kalandia/
+1 GIVN Estate
+1 SURN Kalandia
+1 SEX M
+1 FAMC @F10@
+
 0 @I22@ INDI
 1 NAME Bitu /Kalandia/
 1 GIVN Bitu
@@ -248,6 +255,7 @@
 0 @F10@ FAM
 1 HUSB @I21@
 1 CHIL @I8@
+1 CHIL @I24@
 
 0 @F11@ FAM
 1 HUSB @I22@
