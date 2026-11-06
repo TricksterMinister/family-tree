@@ -1,0 +1,221 @@
+0 HEAD
+1 SOUR AntigravityGenealogy
+2 VERS 1.0
+1 DATE 5 NOV 2026
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+
+0 @I1@ INDI
+1 NAME Teimuraz /Benidze/
+1 SEX M
+1 FAMC @F1@
+
+0 @I2@ INDI
+1 NAME Leila /Papava/
+1 GIVN Leila
+1 SURN Papava
+1 SEX F
+1 BIRT
+2 DATE 7 NOV 1942
+2 PLAC Sukhumi, Abkhazia, Georgia
+1 FAMC @F2@
+1 FAMS @F1@
+
+0 @I3@ INDI
+1 NAME Revaz /Papava/
+1 GIVN Revaz
+1 SURN Papava
+1 SEX M
+1 BIRT
+2 DATE 21 DEC 1940
+2 PLAC Sukhumi, Abkhazia, Georgia
+1 DEAT
+2 DATE SEP 1993
+2 PLAC Sukhumi, Abkhazia, Georgia
+1 FAMC @F2@
+
+0 @I4@ INDI
+1 NAME Orest /Papava/
+1 GIVN Orest
+1 SURN Papava
+1 SEX M
+1 BIRT
+2 DATE ABT 1902
+2 PLAC Georgia
+1 OCCU People's Commissariat of Internal Affairs / Ministry of Internal Affairs Abkhaz ASSR
+1 EDUC Mingrelian Clerical School (1912-1917)
+1 FAMC @F3@
+1 FAMS @F2@
+
+0 @I5@ INDI
+1 NAME Evgenia /Kalandia/
+1 GIVN Evgenia
+1 SURN Kalandia
+1 SEX F
+1 FAMC @F4@
+1 FAMS @F2@
+
+0 @I6@ INDI
+1 NAME Giorgi /Papava/
+1 GIVN Giorgi
+1 SURN Papava
+1 SEX M
+1 FAMS @F3@
+
+0 @I7@ INDI
+1 NAME Levan /Papava/
+1 GIVN Levan
+1 SURN Papava
+1 SEX M
+1 FAMC @F3@
+1 FAMS @F5@
+
+0 @I8@ INDI
+1 NAME Mikhail /Kalandia/
+1 GIVN Mikhail
+1 SURN Kalandia
+1 SEX M
+1 FAMS @F4@
+
+0 @I9@ INDI
+1 NAME Evdokia /Lukava/
+1 GIVN Evdokia
+1 SURN Lukava
+1 SEX F
+1 FAMC @F6@
+1 FAMS @F4@
+
+0 @I10@ INDI
+1 NAME Pavel /Lukava/
+1 GIVN Pavel
+1 SURN Lukava
+1 SEX M
+1 FAMS @F6@
+
+0 @I11@ INDI
+1 NAME Shalva /Kalandia/
+1 GIVN Shalva
+1 SURN Kalandia
+1 SEX M
+1 FAMC @F4@
+1 FAMS @F7@
+
+0 @I12@ INDI
+1 NAME Aldona /Kalandia/
+1 GIVN Aldona
+1 SURN Kalandia
+1 SEX F
+1 RESI
+2 PLAC Tbilisi, Georgia
+1 FAMC @F7@
+
+0 @I13@ INDI
+1 NAME Otar /Kalandia/
+1 GIVN Otar
+1 SURN Kalandia
+1 SEX M
+1 FAMC @F4@
+
+0 @I14@ INDI
+1 NAME Nadezhda /Kalandia/
+1 GIVN Nadezhda
+1 SURN Kalandia
+1 SEX F
+1 FAMC @F4@
+
+0 @I15@ INDI
+1 NAME Nina /Kalandia/
+1 GIVN Nina
+1 SURN Kalandia
+1 SEX F
+1 FAMC @F4@
+
+0 @I16@ INDI
+1 NAME Anatoli /Papava/
+1 GIVN Anatoli
+1 SURN Papava
+1 SEX M
+1 FAMC @F5@
+1 FAMS @F8@
+
+0 @I17@ INDI
+1 NAME Nona /Papava/
+1 GIVN Nona
+1 SURN Papava
+1 SEX F
+1 RESI
+2 PLAC Tbilisi, Georgia
+1 FAMC @F5@
+1 FAMS @F9@
+
+0 @I18@ INDI
+1 NAME Angela /Papava/
+1 GIVN Angela
+1 SURN Papava
+1 SEX F
+1 FAMC @F8@
+
+0 @I19@ INDI
+1 NAME Levan /Papava/
+1 GIVN Levan
+1 SURN Papava
+1 SEX M
+1 RESI
+2 PLAC Russia
+1 FAMC @F8@
+
+0 @I20@ INDI
+1 NAME Nino //
+1 GIVN Nino
+1 SEX F
+1 FAMC @F9@
+
+0 @F1@ FAM
+1 WIFE @I2@
+1 CHIL @I1@
+
+0 @F2@ FAM
+1 HUSB @I4@
+1 WIFE @I5@
+1 CHIL @I3@
+1 CHIL @I2@
+
+0 @F3@ FAM
+1 HUSB @I6@
+1 CHIL @I4@
+1 CHIL @I7@
+
+0 @F4@ FAM
+1 HUSB @I8@
+1 WIFE @I9@
+1 CHIL @I5@
+1 CHIL @I11@
+1 CHIL @I13@
+1 CHIL @I14@
+1 CHIL @I15@
+
+0 @F5@ FAM
+1 HUSB @I7@
+1 CHIL @I16@
+1 CHIL @I17@
+
+0 @F6@ FAM
+1 HUSB @I10@
+1 CHIL @I9@
+
+0 @F7@ FAM
+1 HUSB @I11@
+1 CHIL @I12@
+
+0 @F8@ FAM
+1 HUSB @I16@
+1 CHIL @I18@
+1 CHIL @I19@
+
+0 @F9@ FAM
+1 WIFE @I17@
+1 CHIL @I20@
+
+0 TRLR
