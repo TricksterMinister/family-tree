@@ -77,6 +77,7 @@
 1 GIVN Mikhail
 1 SURN Kalandia
 1 SEX M
+1 NOTE Surnamed Kalandadze originally from Guria, changed to Kalandia after moving to Samegrelo (Zugdidi / Tsalenjikha)
 1 FAMC @F10@
 1 FAMS @F4@
 
@@ -120,6 +121,14 @@
 1 SURN Kalandia
 1 SEX M
 1 FAMC @F4@
+1 FAMS @F12@
+
+0 @I23@ INDI
+1 NAME Nona /Bojgua/
+1 GIVN Nona
+1 SURN Bojgua
+1 SEX F
+1 FAMS @F12@
 
 0 @I14@ INDI
 1 NAME Nadezhda /Kalandia/
@@ -243,5 +252,9 @@
 0 @F11@ FAM
 1 HUSB @I22@
 1 CHIL @I21@
+
+0 @F12@ FAM
+1 HUSB @I13@
+1 WIFE @I23@
 
 0 TRLR
