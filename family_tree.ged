@@ -77,6 +77,7 @@
 1 GIVN Mikhail
 1 SURN Kalandia
 1 SEX M
+1 FAMC @F10@
 1 FAMS @F4@
 
 0 @I9@ INDI
@@ -172,6 +173,21 @@
 1 SEX F
 1 FAMC @F9@
 
+0 @I21@ INDI
+1 NAME Bachu /Kalandia/
+1 GIVN Bachu
+1 SURN Kalandia
+1 SEX M
+1 FAMC @F11@
+1 FAMS @F10@
+
+0 @I22@ INDI
+1 NAME Bitu /Kalandia/
+1 GIVN Bitu
+1 SURN Kalandia
+1 SEX M
+1 FAMS @F11@
+
 0 @F1@ FAM
 1 WIFE @I2@
 1 CHIL @I1@
@@ -217,5 +233,13 @@
 0 @F9@ FAM
 1 WIFE @I17@
 1 CHIL @I20@
+
+0 @F10@ FAM
+1 HUSB @I21@
+1 CHIL @I8@
+
+0 @F11@ FAM
+1 HUSB @I22@
+1 CHIL @I21@
 
 0 TRLR
