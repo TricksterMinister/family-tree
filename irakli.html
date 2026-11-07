@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ka">
 <head>
   <meta charset="UTF-8">
   <title>Поколѣнная Роспись и Родословное Древо Ираклія Важаевича Бенидзе</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Noto+Serif+Georgian:wght@400;600;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -14,7 +14,7 @@
         radial-gradient(circle at 50% 10%, rgba(198, 151, 73, 0.14) 0%, transparent 65%),
         repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 8px);
       color: #2b1d0e;
-      font-family: 'Old Standard TT', 'Cormorant Garamond', Georgia, serif;
+      font-family: 'Old Standard TT', 'Cormorant Garamond', 'Noto Serif Georgian', Georgia, serif;
       padding: 35px 25px 90px;
       overflow-x: auto;
     }
@@ -97,6 +97,7 @@
       line-height: 1.55;
       color: #382413;
       box-shadow: inset 0 0 15px rgba(110, 79, 38, 0.1);
+      font-family: 'Noto Serif Georgian', 'Old Standard TT', serif;
     }
 
     .legend-bar {
@@ -122,7 +123,7 @@
 
     #diagram-canvas {
       position: relative;
-      height: 1420px;
+      height: 1360px;
       width: 100%;
       margin-top: 16px;
     }
@@ -166,21 +167,23 @@
       text-align: center;
     }
 
+    /* КАРТОЧКИ ПЕРСОН (РАЗГРУЖЕННЫЕ) */
     .person {
       position: absolute;
       background: #fffdfa;
       border: 2px solid #855f27;
-      border-radius: 5px;
-      padding: 10px 12px 10px;
+      border-radius: 6px;
+      padding: 9px 12px 9px;
       text-align: center;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.18), inset 0 0 10px rgba(197, 155, 78, 0.15);
+      box-shadow: 0 5px 14px rgba(0,0,0,0.16), inset 0 0 10px rgba(197, 155, 78, 0.12);
       z-index: 2;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
     .person:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.3);
-      z-index: 10;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+      z-index: 500;
     }
     .person.direct {
       border: 2.5px solid #7c1d1d;
@@ -207,7 +210,7 @@
     .irakli-photo-box {
       width: 110px;
       height: 110px;
-      margin: 0 auto 10px;
+      margin: 0 auto 8px;
       border: 3px double #c59b4e;
       border-radius: 50%;
       background: radial-gradient(circle, #fcf7ec 0%, #ecdcc0 100%);
@@ -229,34 +232,110 @@
     }
 
     .p-role {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: #7c582b;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
     .p-name {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 17px;
+      font-size: 16.5px;
       font-weight: 700;
       color: #1f140a;
       line-height: 1.15;
       margin-bottom: 2px;
     }
     .p-geo {
+      font-family: 'Noto Serif Georgian', serif;
       font-size: 13px;
-      color: #4b3621;
-      font-style: italic;
-      margin-bottom: 4px;
+      color: #3b2816;
+      font-weight: 600;
+      margin-bottom: 5px;
     }
-    .p-note {
-      font-size: 12px;
-      color: #554029;
-      border-top: 1px dashed #d1b88a;
-      padding-top: 4px;
-      margin-top: 3px;
-      line-height: 1.22;
+
+    /* БЕЙДЖ ДАТЫ РОЖДЕНИЯ */
+    .p-date {
+      display: inline-block;
+      font-size: 11px;
+      font-family: 'Noto Serif Georgian', 'Old Standard TT', serif;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(197, 155, 78, 0.18);
+      border: 1px solid rgba(133, 95, 39, 0.4);
+      color: #3b220c;
+      font-weight: 600;
+    }
+    .p-date.unknown {
+      background: rgba(124, 29, 29, 0.08);
+      border: 1px dashed rgba(124, 29, 29, 0.45);
+      color: #7c1d1d;
+    }
+
+    /* ВСПЛЫВАЮЩЕЕ ОКНО ПРИ НАВЕДЕНИИ (ТОЛЬКО НА ГРУЗИНСКОМ) */
+    .geo-tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 12px);
+      transform: translateX(-50%) translateY(6px);
+      width: 310px;
+      background: linear-gradient(145deg, #1f160f 0%, #2d1f14 100%);
+      color: #fbf5e6;
+      border: 2px solid #c59b4e;
+      border-radius: 7px;
+      padding: 12px 15px;
+      text-align: left;
+      font-family: 'Noto Serif Georgian', serif;
+      font-size: 12.5px;
+      line-height: 1.5;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.75), 0 0 15px rgba(197, 155, 78, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+      z-index: 1000;
+    }
+    .geo-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 7px;
+      border-style: solid;
+      border-color: #c59b4e transparent transparent transparent;
+    }
+    .tooltip-down .geo-tooltip {
+      bottom: auto;
+      top: calc(100% + 12px);
+    }
+    .tooltip-down .geo-tooltip::after {
+      top: auto;
+      bottom: 100%;
+      border-color: transparent transparent #c59b4e transparent;
+    }
+
+    .person:hover .geo-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .tt-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #f5d78e;
+      border-bottom: 1px solid rgba(197, 155, 78, 0.4);
+      padding-bottom: 5px;
+      margin-bottom: 7px;
+    }
+    .tt-row {
+      margin-bottom: 5px;
+    }
+    .tt-label {
+      color: #d9a05b;
+      font-weight: 700;
     }
 
     #ortho-svg {
@@ -347,19 +426,19 @@
         </svg>
       </div>
 
-      <div class="pre-title">Спеціальный Праздничный Свитокъ • Ко Дню Рожденія 13 Ноября</div>
+      <div class="pre-title">საგვარეულო გენეალოგიური ხე • საჩუქარი დაბადების დღისთვის (13 ნოემბერი)</div>
       <h1>Родословное Древо Ираклія Важаевича Бенидзе</h1>
-      <div class="charter-subtitle">Семья Ираклія и Кети Бочоришвили съ Чадами • Магистраль Прямыхъ Предковъ и Боковыя Отрасли</div>
+      <div class="charter-subtitle">ირაკლი ბენიძისა და ქეთი ბოჭორიშვილის ოჯახი • ბენიძე • აგუმავა • პაპავა • კალანდია • ლუკავა</div>
 
       <div class="historical-chronicle">
-        Сей памятный родословный свитокъ составленъ въ даръ дорогому брату <strong>Ираклію Важаевичу Бенидзе</strong> къ его дню рожденія (13 Ноября). На вершинѣ древа — счастливый союзъ Ираклія съ супругою <strong>Кети Бочоришвили</strong> и ихъ чада: <strong>Лейла, Важа и Георгій</strong>. По центральной оси уходятъ вглубь вѣковъ прямые предки: отецъ <em>Важа Несторовичъ Бенидзе</em> и мать <em>Лейла Орестовна Папава</em>, за коими слѣдуютъ дѣдушки, бабушки и прадѣды.
+        💡 <strong>ინტერაქტიული რეჟიმი:</strong> მიიტანეთ მაუსის კურსორი ნებისმიერ ბარათთან, რათა გაიხსნას სრული ბიოგრაფიული ცნობები, ნათესაური კავშირები და საგვარეულო ისტორიები ქართულ ენაზე. უცნობი დაბადების თარიღები მონიშნულია როგორც <strong>Unknown</strong>.
       </div>
 
       <div class="legend-bar">
-        <div class="legend-item"><span class="legend-line" style="background:#8b1e1e;"></span> Прямая магистраль предковъ (═•═)</div>
-        <div class="legend-item"><span class="legend-line" style="background:#b45309;"></span> Отцовская вѣтвь и боковая отрасль Бенидзе</div>
-        <div class="legend-item"><span class="legend-line" style="background:#162f65;"></span> Материнскій корень: Родъ Папава и Каландія</div>
-        <div class="legend-item"><span class="legend-line" style="background:#14532d;"></span> Корень рода Лукава и Какачія</div>
+        <div class="legend-item"><span class="legend-line" style="background:#8b1e1e;"></span> პირდაპირი წინაპრების ხაზი (Магистраль)</div>
+        <div class="legend-item"><span class="legend-line" style="background:#b45309;"></span> მამის შტო: ბენიძე და აგუმავა</div>
+        <div class="legend-item"><span class="legend-line" style="background:#162f65;"></span> დედის შტო: პაპავა და კალანდია</div>
+        <div class="legend-item"><span class="legend-line" style="background:#14532d;"></span> ლუკავებისა და კაკაჩიების შტო</div>
       </div>
     </div>
 
@@ -369,269 +448,457 @@
 
       <!-- Разделители колен -->
       <div class="gen-guideline" style="top: 20px; height: 380px;"><span class="gen-title">ВЕРШИНА РОСПИСИ: ИРАКЛІЙ БЕНИДЗЕ, СУПРУГА КЕТИ И ИХЪ ЧАДА</span></div>
-      <div class="gen-guideline" style="top: 420px; height: 160px;"><span class="gen-title">I-е Восходящее Колѣно (РОДИТЕЛИ — ПРЯМАЯ МАГИСТРАЛЬ)</span></div>
-      <div class="gen-guideline" style="top: 615px; height: 160px;"><span class="gen-title">II-е Восходящее Колѣно (Дѣдушки, Бабушки и Боковыя Отрасли)</span></div>
-      <div class="gen-guideline" style="top: 800px; height: 160px;"><span class="gen-title">III-е Восходящее Колѣно (Прадѣды и Прабабушки)</span></div>
-      <div class="gen-guideline" style="top: 990px; height: 160px;"><span class="gen-title">IV-е Восходящее Колѣно (Прапрадѣды и Прапрабабушки)</span></div>
-      <div class="gen-guideline" style="top: 1190px; height: 150px;"><span class="gen-title">V-е Восходящее Колѣно (Прапрапрадѣдъ Биту Каландадзе)</span></div>
+      <div class="gen-guideline" style="top: 420px; height: 150px;"><span class="gen-title">I-е Восходящее Колѣно (РОДИТЕЛИ — მშობლები)</span></div>
+      <div class="gen-guideline" style="top: 600px; height: 150px;"><span class="gen-title">II-е Восходящее Колѣно (ბებია-ბაბუები და გვერდითი შტოები)</span></div>
+      <div class="gen-guideline" style="top: 785px; height: 150px;"><span class="gen-title">III-е Восходящее Колѣно (დიდი ბებია-ბაბუები)</span></div>
+      <div class="gen-guideline" style="top: 970px; height: 150px;"><span class="gen-title">IV-е Восходящее Колѣно (წინაპრები: ბაჩუ კალანდია და პავლე ლუკავა)</span></div>
+      <div class="gen-guideline" style="top: 1155px; height: 150px;"><span class="gen-title">V-е Восходящее Колѣно (გვარის ფუძემდებელი: ბითუ კალანდაძე)</span></div>
 
       <!-- ================= КОРОНА ВЕРШИНЫ: ТРОЕ ДЕТЕЙ ИРАКЛИЯ ================= -->
-      <div class="person child-card" id="p-child-leila" style="left: 1220px; top: 35px; width: 170px;">
-        <div class="p-role" style="color:#b45309;">★ Дочь Именинника</div>
-        <div class="p-name" style="font-size:16px;">Лейла Иракліевна Бенидзе</div>
+      <div class="person child-card tooltip-down" id="p-child-leila" style="left: 1220px; top: 30px; width: 170px;">
+        <div class="p-role" style="color:#b45309;">★ Дочь (ქალიშვილი)</div>
+        <div class="p-name" style="font-size:16px;">Лейла Бенидзе</div>
         <div class="p-geo">ლეილა (ლელა) ბენიძე</div>
-        <div class="p-note">Названа въ честь бабушки Лейлы Папава</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ლეილა (ლელა) ირაკლის ასული ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ირაკლი ბენიძე და ქეთი ბოჭორიშვილი.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა:</span> სახელი დაარქვეს ბებიის — ლეილა პაპავას საპატივცემულოდ.</div>
+        </div>
       </div>
 
-      <div class="person child-card" id="p-child-vazha" style="left: 1415px; top: 35px; width: 170px;">
-        <div class="p-role" style="color:#b45309;">★ Сынъ Именинника</div>
-        <div class="p-name" style="font-size:16px;">Важа Иракліевичъ Бенидзе</div>
+      <div class="person child-card tooltip-down" id="p-child-vazha" style="left: 1415px; top: 30px; width: 170px;">
+        <div class="p-role" style="color:#b45309;">★ Сынъ (ვაჟი)</div>
+        <div class="p-name" style="font-size:16px;">Важа Бенидзе</div>
         <div class="p-geo">ვაჟა ბენიძე</div>
-        <div class="p-note">Названъ въ честь дѣдушки Важи Бенидзе</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ვაჟა ირაკლის ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ირაკლი ბენიძე და ქეთი ბოჭორიშვილი.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა:</span> სახელი დაარქვეს ბაბუის — ვაჟა ბენიძის საპატივცემულოდ.</div>
+        </div>
       </div>
 
-      <div class="person child-card" id="p-child-giorgi" style="left: 1610px; top: 35px; width: 170px;">
-        <div class="p-role" style="color:#b45309;">★ Сынъ Именинника</div>
-        <div class="p-name" style="font-size:16px;">Георгій Иракліевичъ Бенидзе</div>
+      <div class="person child-card tooltip-down" id="p-child-giorgi" style="left: 1610px; top: 30px; width: 170px;">
+        <div class="p-role" style="color:#b45309;">★ Сынъ (ვაჟი)</div>
+        <div class="p-name" style="font-size:16px;">Георгій Бенидзе</div>
         <div class="p-geo">გიორგი ბენიძე</div>
-        <div class="p-note">Сынъ Ираклія и Кети Бочоришвили</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">გიორგი ირაკლის ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ირაკლი ბენიძე და ქეთი ბოჭორიშვილი.</div>
+        </div>
       </div>
 
       <!-- ================= ЦЕНТРАЛЬНАЯ ЧЕТА: ИРАКЛИЙ И КЕТИ ================= -->
-      <!-- ИРАКЛИЙ БЕНИДЗЕ (ГЛАВНАЯ КАРТОЧКА ВЕРСИИ) -->
       <div class="person hero-card direct" id="p-irakli" style="left: 1220px; top: 175px; width: 290px;">
         <div class="irakli-photo-box">
-          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#855f27" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#855f27" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="7" r="4"/>
             <path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>
           </svg>
-          <span>Мѣсто для портрета Ираклія</span>
+          <span>ადგილი ირაკლის ფოტოსთვის</span>
         </div>
-        <div class="p-role" style="font-size:12px; color:#7c1d1d; letter-spacing:1.2px;">★ Именинникъ • 13 Ноября ★</div>
-        <div class="p-name" style="font-size:21px; margin-bottom:3px;">Ираклій Важаевичъ Бенидзе</div>
-        <div class="p-geo" style="font-size:14px; margin-bottom:5px;">ირაკლი ვაჟას ძე ბენიძე</div>
-        <div class="p-note" style="font-size:12.5px;">Глава семьи • Сынъ Важи Бенидзе и Лейлы Папава<br>Супругъ Кети Бочоришвили • Отецъ троихъ дѣтей</div>
+        <div class="p-role" style="font-size:11.5px; color:#7c1d1d;">★ Именинникъ • 13 Ноября ★</div>
+        <div class="p-name" style="font-size:20px;">Ираклій Важаевичъ Бенидзе</div>
+        <div class="p-geo" style="font-size:14px;">ირაკლი ვაჟას ძე ბენიძე</div>
+        <div class="p-date">დაბ.: 13 ნოემბერი (წელი: Unknown)</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ირაკლი ვაჟას ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების დღე:</span> 13 ნოემბერი (წელი: Unknown).</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ვაჟა ნესტორის ძე ბენიძე და ლეილა ორესტის ასული პაპავა.</div>
+          <div class="tt-row"><span class="tt-label">ღვიძლი ძმა:</span> თეიმურაზ (თემო) ბენიძე.</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ქეთი ბოჭორიშვილი.</div>
+          <div class="tt-row"><span class="tt-label">შვილები (3):</span> ლეილა (ლელა), ვაჟა და გიორგი ბენიძეები.</div>
+        </div>
       </div>
 
       <!-- КЕТИ БОЧОРИШВИЛИ (СУПРУГА) -->
-      <div class="person female" id="p-keti" style="left: 1545px; top: 190px; width: 235px;">
-        <div class="p-role" style="color:#7c1d1d;">★ Супруга Именинника ★</div>
+      <div class="person female" id="p-keti" style="left: 1545px; top: 205px; width: 235px;">
+        <div class="p-role" style="color:#7c1d1d;">★ Супруга (მეუღლე) ★</div>
         <div class="p-name" style="font-size:18px;">Кети Бочоришвили</div>
         <div class="p-geo">ქეთი ბოჭორიშვილი</div>
-        <div class="p-note">Супруга Ираклія • Мать Лейлы, Важи и Георгія</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ქეთი ბოჭორიშვილი</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ირაკლი ვაჟას ძე ბენიძე.</div>
+          <div class="tt-row"><span class="tt-label">შვილები (3):</span> ლეილა (ლელა), ვაჟა და გიორგი ბენიძეები.</div>
+        </div>
       </div>
 
       <!-- РОДНОЙ БРАТ ТЕЙМУРАЗ (ТЕМО) -->
-      <div class="person male" id="p-temo" style="left: 880px; top: 190px; width: 235px;">
-        <div class="p-role">★ Родной Братъ ★</div>
+      <div class="person male" id="p-temo" style="left: 880px; top: 205px; width: 235px;">
+        <div class="p-role">★ Родной Братъ (ძმა) ★</div>
         <div class="p-name" style="font-size:18px;">Теймуразъ (Темо) Бенидзе</div>
-        <div class="p-geo">თეიმურაზ ვაჟას ძე ბენიძე</div>
-        <div class="p-note">Старшій братъ • Создатель и даритель сего фамильнаго свитка</div>
+        <div class="p-geo">თეიმურაზ (თემო) ბენიძე</div>
+        <div class="p-date">საგვარეულო ხის ავტორი</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">თეიმურაზ (თემო) ვაჟას ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ვაჟა ბენიძე და ლეილა პაპავა.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა:</span> უფროსი ძმა • ამ საგვარეულო გენეალოგიური ხის შემდგენელი და მჩუქებელი.</div>
+        </div>
       </div>
 
       <!-- ================= I-е ВОСХОДЯЩЕЕ КОЛѢНО: СТРОГО И ТОЛЬКО РОДИТЕЛИ ================= -->
-      <!-- ВАЖА БЕНИДЗЕ (ОТЕЦ) — СЛЕВА ПО ЦЕНТРУ -->
       <div class="person male direct" id="p-vazha" style="left: 1220px; top: 435px; width: 245px;">
-        <div class="p-role">★ Отецъ Вашъ</div>
+        <div class="p-role">★ Отецъ Вашъ (მამა)</div>
         <div class="p-name" style="font-size:18px;">Важа Несторовичъ Бенидзе</div>
         <div class="p-geo">ვაჟა ნესტორის ძე ბენიძე</div>
-        <div class="p-note">Сынъ Нестора Бенидзе и Минуши Агумава</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ვაჟა ნესტორის ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ნესტორ ბენიძე და მინაშ (მინუშა) აგუმავა.</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ლეილა ორესტის ასული პაპავა.</div>
+          <div class="tt-row"><span class="tt-label">ვაჟები:</span> თეიმურაზ (თემო) და ირაკლი ბენიძე.</div>
+          <div class="tt-row"><span class="tt-label">და-ძმები:</span> შარდენ, ჟორა (გიორგი), ილია, ვენერა, ინესა.</div>
+        </div>
       </div>
 
-      <!-- ЛЕЙЛА ПАПАВА (МАТЬ) — СПРАВА ПО ЦЕНТРУ -->
       <div class="person female direct" id="p-leila" style="left: 1535px; top: 435px; width: 245px;">
-        <div class="p-role">★ Мать Ваша</div>
+        <div class="p-role">★ Мать Ваша (დედა)</div>
         <div class="p-name" style="font-size:18px;">Лейла Орестовна Папава</div>
         <div class="p-geo">ლეილა ორესტის ასული პაპავა</div>
-        <div class="p-note">Род. 07.11.1942 въ г. Сухумъ • Дочь Ореста и Жени</div>
+        <div class="p-date">დაბ.: 07.11.1942 (სოხუმი)</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ლეილა ორესტის ასული პაპავა</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> 07.11.1942 წ., ქ. სოხუმი.</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ორესტ გიორგის ძე პაპავა და ევგენია (ჟენია) მიხეილის ასული კალანდია.</div>
+          <div class="tt-row"><span class="tt-label">ღვიძლი ძმა:</span> რევაზ (რეზო) პაპავა (1940–1993).</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ვაჟა ნესტორის ძე ბენიძე.</div>
+          <div class="tt-row"><span class="tt-label">ვაჟები:</span> თეიმურაზ (თემო) და ირაკლი ბენიძე.</div>
+        </div>
       </div>
 
       <!-- ================= II-е ВОСХОДЯЩЕЕ КОЛѢНО: ДЕДУШКИ И БАБУШКИ ================= -->
-      <!-- ДЕДУШКА И БАБУШКА ПО ОТЦУ (НЕСТОР + МИНУША) -->
-      <div class="person male direct" id="p-nestor" style="left: 770px; top: 635px; width: 220px;">
-        <div class="p-role">★ Дѣдушка (по отцу)</div>
+      <div class="person male direct" id="p-nestor" style="left: 770px; top: 620px; width: 220px;">
+        <div class="p-role">★ Дѣдушка (ბაბუა მამის მხრიდან)</div>
         <div class="p-name">Несторъ Бенидзе</div>
         <div class="p-geo">ნესტორ ბენიძე</div>
-        <div class="p-note">Отецъ Важи, Шардена, Жоры, Ильи, Венеры, Инессы</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ნესტორ ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> მინაშ (მინუშა) აგუმავა.</div>
+          <div class="tt-row"><span class="tt-label">შვილები (6):</span> ვაჟა, შარდენ, ჟორა (გიორგი), ილია, ვენერა, ინესა.</div>
+        </div>
       </div>
 
-      <div class="person female direct" id="p-minusha" style="left: 1030px; top: 635px; width: 220px;">
-        <div class="p-role">★ Бабушка (по отцу)</div>
+      <div class="person female direct" id="p-minusha" style="left: 1030px; top: 620px; width: 220px;">
+        <div class="p-role">★ Бабушка (ბებია მამის მხრიდან)</div>
         <div class="p-name">Минашъ (Минуша) Агумава</div>
-        <div class="p-geo">მინუშ აგუმავა</div>
-        <div class="p-note">Супруга Нестора Бенидзе</div>
+        <div class="p-geo">მინაშ (მინუშა) აგუმავა</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">მინაშ (მინუშა) აგუმავა</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ნესტორ ბენიძე.</div>
+          <div class="tt-row"><span class="tt-label">შვილები (6):</span> ვაჟა, შარდენ, ჟორა (გიორგი), ილია, ვენერა, ინესა.</div>
+        </div>
       </div>
 
-      <!-- ДЕДУШКА И БАБУШКА ПО МАТЕРИ (ОРЕСТ + ЖЕНЯ) -->
-      <div class="person male direct" id="p-orest" style="left: 1740px; top: 635px; width: 225px;">
-        <div class="p-role">★ Дѣдушка (по матери)</div>
+      <div class="person male direct" id="p-orest" style="left: 1740px; top: 620px; width: 225px;">
+        <div class="p-role">★ Дѣдушка (ბაბუა დედის მხრიდან)</div>
         <div class="p-name">Орестъ Георгіевичъ Папава</div>
         <div class="p-geo">ორესტ გიორგის ძე პაპავა</div>
-        <div class="p-note">Воспитанникъ Мингрельскаго дух. уч.; МВД Абхазіи</div>
+        <div class="p-date unknown">დაბ.: ~1900–1904 (Unknown)</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ორესტ გიორგის ძე პაპავა</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> დაახლ. 1900–1904 წწ. (ზუსტი თარიღი: Unknown).</div>
+          <div class="tt-row"><span class="tt-label">მამა:</span> გიორგი პაპავა. <span class="tt-label">ძმა:</span> ლევან პაპავა (შვილები: ტოლიკ და ნონა პაპავა).</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ევგენია (ჟენია) მიხეილის ასული კალანდია.</div>
+          <div class="tt-row"><span class="tt-label">შვილები:</span> რევაზ (რეზო) და ლეილა პაპავა.</div>
+          <div class="tt-row"><span class="tt-label">ბიოგრაფია:</span> 1912–1917 წლებში სწავლობდა სამეგრელოს სასულიერო სასწავლებელში. მსახურობდა აფხაზეთის ასსრ შსს/НКВД ხელმძღვანელ თანამდებობებზე.</div>
+        </div>
       </div>
 
-      <div class="person female direct" id="p-zhenia" style="left: 2010px; top: 635px; width: 225px;">
-        <div class="p-role">★ Бабушка (по матери)</div>
+      <div class="person female direct" id="p-zhenia" style="left: 2010px; top: 620px; width: 225px;">
+        <div class="p-role">★ Бабушка (ბებია დედის მხრიდან)</div>
         <div class="p-name">Евгенія (Женя) Каландія</div>
         <div class="p-geo">ევგენია (ჟენია) კალანდია</div>
-        <div class="p-note">Дочь Михаила Каландія и Евдокіи Лукава</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ევგენია (ჟენია) მიხეილის ასული კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> მიხეილ (მიხა) ბაჩუს ძე კალანდია და ევდოკია პავლეს ასული ლუკავა.</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ორესტ გიორგის ძე პაპავა.</div>
+          <div class="tt-row"><span class="tt-label">შვილები:</span> რევაზ (რეზო) და ლეილა პაპავა.</div>
+          <div class="tt-row"><span class="tt-label">და-ძმები:</span> შალვა, ნადეჟდა და ნინა კალანდიები.</div>
+        </div>
       </div>
 
-      <!-- ================= БОКОВЫЯ ОТРАСЛИ ОТЦОВСКАГО КРЫЛА (ОТЪ НЕСТОРА И МИНУШИ) ================= -->
-      <div class="section-banner" style="left: 40px; top: 605px; width: 685px;">
-        Боковая Отрасль Рода Бенидзе (Дяди, Тетки и ихъ потомство)
+      <!-- ================= БОКОВЫЯ ОТРАСЛИ ОТЦОВСКАГО КРЫЛА ================= -->
+      <div class="section-banner" style="left: 40px; top: 590px; width: 685px;">
+        ბენიძეების გვერდითი შტო (ბიძები და მამიდები)
       </div>
 
-      <div class="person collateral male" id="p-sharden" style="left: 40px; top: 635px; width: 155px;">
-        <div class="p-role">Дядя (Братъ отца)</div>
+      <div class="person collateral male" id="p-sharden" style="left: 40px; top: 620px; width: 155px;">
+        <div class="p-role">Дядя (ბიძა)</div>
         <div class="p-name">Шарденъ Бенидзе</div>
         <div class="p-geo">შარდენ ბენიძე</div>
-        <div class="p-note">Былъ женатъ, бездѣтенъ</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">შარდენ ნესტორის ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ნესტორ ბენიძე და მინუშა აგუმავა.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა:</span> ვაჟა ბენიძის ძმა. იყო დაქორწინებული, შვილები არ ჰყავდა.</div>
+        </div>
       </div>
 
-      <div class="person collateral male" id="p-zhora" style="left: 210px; top: 635px; width: 190px;">
-        <div class="p-role">Дядя (Братъ отца)</div>
+      <div class="person collateral male" id="p-zhora" style="left: 210px; top: 620px; width: 190px;">
+        <div class="p-role">Дядя (ბიძა)</div>
         <div class="p-name">Жора (Георгій) Бенидзе</div>
         <div class="p-geo">ჟორა (გიორგი) ბენიძე</div>
-        <div class="p-note">Чадъ: <strong>Элисо, Нана, Хатуна, Паата</strong></div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ჟორა (გიორგი) ნესტორის ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ნესტორ ბენიძე და მინუშა აგუმავა. ვაჟა ბენიძის ძმა.</div>
+          <div class="tt-row"><span class="tt-label">შვილები (4):</span> ელისო, ნანა, ხათუნა, პაატა.</div>
+        </div>
       </div>
 
-      <div class="person collateral male" id="p-ilya" style="left: 415px; top: 635px; width: 150px;">
-        <div class="p-role">Дядя (Братъ отца)</div>
+      <div class="person collateral male" id="p-ilya" style="left: 415px; top: 620px; width: 150px;">
+        <div class="p-role">Дядя (ბიძა)</div>
         <div class="p-name">Илья Бенидзе</div>
         <div class="p-geo">ილია ბენიძე</div>
-        <div class="p-note">Былъ женатъ, бездѣтенъ</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ილია ნესტორის ძე ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ნესტორ ბენიძე და მინუშა აგუმავა.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა:</span> ვაჟა ბენიძის ძმა. იყო დაქორწინებული, უშვილო.</div>
+        </div>
       </div>
 
-      <div class="person collateral female" id="p-venera" style="left: 580px; top: 635px; width: 150px;">
-        <div class="p-role">Тетка (Сестра отца)</div>
+      <div class="person collateral female" id="p-venera" style="left: 580px; top: 620px; width: 150px;">
+        <div class="p-role">Тетка (მამიდა)</div>
         <div class="p-name">Венера Бенидзе</div>
         <div class="p-geo">ვენერა ბენიძე</div>
-        <div class="p-note">Сестра отца Важи</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ვენერა ნესტორის ასული ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ნესტორ ბენიძე და მინუშა აგუმავა. ვაჟა ბენიძის და.</div>
+        </div>
       </div>
 
       <div class="person collateral female" id="p-inessa" style="left: 510px; top: 785px; width: 220px;">
-        <div class="p-role">Тетка Мамида (Жива)</div>
+        <div class="p-role">Тетка Мамида (მამიდა)</div>
         <div class="p-name">Инесса Бенидзе</div>
         <div class="p-geo">ინესა ბენიძე</div>
-        <div class="p-note">Сыновья: <strong>Абессаломъ (палъ въ Сухумѣ), Лексо, Дата, Анзоръ</strong></div>
+        <div class="p-date unknown">დაბ.: ~1945 (Unknown)</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ინესა ნესტორის ასული ბენიძე</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> დაახლ. 1945 წ. (ზუსტი თარიღი: Unknown).</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ნესტორ ბენიძე და მინუშა აგუმავა.</div>
+          <div class="tt-row"><span class="tt-label">ვაჟები (4):</span> 1) აბესალომი (უფროსი ვაჟი, დაიღუპა სოხუმის ომში); 2) ლექსო (ალექსი); 3) დათა (დავითი); 4) ანზორი (ბაჩო).</div>
+        </div>
       </div>
 
       <!-- ================= БОКОВЫЯ ОТРАСЛИ МАТЕРИНСКАГО КРЫЛА (ПАПАВА) ================= -->
-      <div class="section-banner" style="left: 2280px; top: 605px; width: 240px;">
-        Отрасль Рода Папава
+      <div class="section-banner" style="left: 2280px; top: 590px; width: 240px;">
+        პაპავების გვერდითი შტო
       </div>
 
-      <div class="person collateral male" id="p-revaz" style="left: 2280px; top: 635px; width: 240px;">
-        <div class="p-role">Дядя (Братъ матери)</div>
+      <div class="person collateral male" id="p-revaz" style="left: 2280px; top: 620px; width: 240px;">
+        <div class="p-role">Дядя (ბიძა — დედის ძმა)</div>
         <div class="p-name">Ревазъ (Резо) Папава</div>
-        <div class="p-geo">რევაზ პაპავა</div>
-        <div class="p-note">21.12.1940 — палъ въ Сухумѣ 09.1993<br>Дочери: <strong>Нино</strong> и <strong>Евгенія</strong></div>
+        <div class="p-geo">რევაზ (რეზო) პაპავა</div>
+        <div class="p-date">21.12.1940 — 09.1993</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">რევაზ (რეზო) ორესტის ძე პაპავა</div>
+          <div class="tt-row"><span class="tt-label">ცხოვრების წლები:</span> 21.12.1940 — გარდ. 1993 წლის სექტემბერი (დაიღუპა სოხუმში).</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ორესტ პაპავა და ევგენია (ჟენია) კალანდია. ლეილა პაპავას ღვიძლი ძმა.</div>
+          <div class="tt-row"><span class="tt-label">ქალიშვილები (2):</span> 1) ნინო პაპავა (უფროსი ქალიშვილი, თემოს თანაკლასელი); 2) ევგენია / ჟენია პაპავა (უმცროსი ქალიშვილი, დაარქვეს ბებია ჟენიას საპატივცემულოდ, ირაკლის თანაკლასელი).</div>
+        </div>
       </div>
 
       <!-- ================= III-е ВОСХОДЯЩЕЕ КОЛѢНО: ПРАДЕДЫ ================= -->
-      <!-- Брат прадеда Михи: Эстатэ -->
-      <div class="person collateral male" id="p-estate" style="left: 1280px; top: 815px; width: 180px;">
+      <div class="person collateral male" id="p-estate" style="left: 1280px; top: 800px; width: 185px;">
         <div class="p-role">Братъ Прадѣда</div>
         <div class="p-name">Евстафій (Эстатэ) Каландія</div>
-        <div class="p-geo">ესტატე კალანდია</div>
-        <div class="p-note">Сынъ Бачу и Кесо Кухилава</div>
+        <div class="p-geo">ესტატე ბაჩუს ძე კალანდია</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ესტატე ბაჩუს ძე კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ბაჩუ ბითუს ძე კალანდია და კესო ქუხილავა.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა (ალდონა კალანდიასგან):</span> მიხეილ (მიხა) კალანდიას ღვიძლი ძმა.</div>
+        </div>
       </div>
 
-      <div class="person male direct" id="p-mikha" style="left: 1495px; top: 815px; width: 235px;">
-        <div class="p-role">★ Прадѣдъ (по матери)</div>
+      <div class="person male direct" id="p-mikha" style="left: 1495px; top: 800px; width: 235px;">
+        <div class="p-role">★ Прадѣдъ (დიდი პაპა)</div>
         <div class="p-name">Михаилъ (Миха) Каландія</div>
         <div class="p-geo">მიხეილ (მიხა) კალანდია</div>
-        <div class="p-note">Сынъ Бачу Каландія и Кесо Кухилава</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">მიხეილ (მიხა) ბაჩუს ძე კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> ბაჩუ ბითუს ძე კალანდია და კესო ქუხილავა.</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ევდოკია პავლეს ასული ლუკავა.</div>
+          <div class="tt-row"><span class="tt-label">შვილები:</span> ევგენია (ჟენია), შალვა, ნადეჟდა, ნინა.</div>
+          <div class="tt-row"><span class="tt-label">საგვარეულო გადმოცემა (ალდონასა და ნონა ბიცოლას ნაამბობით):</span> მიხა კალანდიას თქმით, გვარის თავდაპირველი ფორმა იყო <strong>კალანდაძე</strong> (წარმოშობით გურიიდან). კონფლიქტის გამო წინაპრები სამეგრელოში (ზუგდიდი / წალენჯიხა) გადასახლდნენ და გვარი კალანდიად დაიწერეს.</div>
+        </div>
       </div>
 
-      <div class="person female direct" id="p-evdokia" style="left: 1765px; top: 815px; width: 235px;">
-        <div class="p-role">★ Прабабка (по матери)</div>
+      <div class="person female direct" id="p-evdokia" style="left: 1765px; top: 800px; width: 235px;">
+        <div class="p-role">★ Прабабка (დიდი ბებია)</div>
         <div class="p-name">Евдокія Павловна Лукава</div>
         <div class="p-geo">ევდოკია პავლეს ასული ლუკავა</div>
-        <div class="p-note">Дочь Павла Лукава и Саломіи Какачія</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ევდოკია პავლეს ასული ლუკავა</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> პავლე ლუკავა და სალომე კაკაჩია.</div>
+          <div class="tt-row"><span class="tt-label">წარმოშობა (ალდონა კალანდიას ცნობით):</span> წარმოშობით სოფელ ობუჯიდან; მე-19 საუკუნის 80-იან წლებში დასახლდნენ აფხაზეთში (ქვემო აბჟაყვა).</div>
+          <div class="tt-row"><span class="tt-label">ღვიძლი დები:</span> პარასკევა, მარინე, ოლღა ლუკავები.</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> მიხეილ (მიხა) კალანდია.</div>
+        </div>
       </div>
 
-      <!-- Братья и сестры бабушки Жени (дети Михи и Евдокии) -->
-      <div class="section-banner" style="left: 2045px; top: 785px; width: 625px;">
-        Боковая Отрасль Каландія (Братья и сестры Бабушки Жени)
+      <!-- Братья и сестры бабушки Жени -->
+      <div class="section-banner" style="left: 2045px; top: 770px; width: 625px;">
+        კალანდიების გვერდითი შტო (ბებია ჟენიას და-ძმები)
       </div>
 
-      <div class="person collateral male" id="p-shalva" style="left: 2045px; top: 815px; width: 195px;">
-        <div class="p-role">Братъ Бабушки Жени</div>
+      <div class="person collateral male" id="p-shalva" style="left: 2045px; top: 800px; width: 195px;">
+        <div class="p-role">Братъ Бабушки</div>
         <div class="p-name">Шалва Каландія</div>
-        <div class="p-geo">შალვა კალანდია</div>
-        <div class="p-note">Дѣти: <strong>Альдона, Медея (сыновья Ираклій и Леванъ), Гія (сынъ Георгій)</strong></div>
+        <div class="p-geo">შალვა მიხას ძე კალანდია</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">შალვა მიხეილის (მიხას) ძე კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> მიხა კალანდია და ევდოკია ლუკავა.</div>
+          <div class="tt-row"><span class="tt-label">შვილები (3):</span><br>
+          1) <strong>ალდონა კალანდია</strong> (ცხოვრობს თბილისში, საგვარეულო ცნობების მთხრობელი);<br>
+          2) <strong>მედეა კალანდია</strong> (ვაჟები: ირაკლი და ლევანი);<br>
+          3) <strong>გია (გიორგი) კალანდია</strong> (გარდაცვლილი, ჰყავს ვაჟი — გიორგი კალანდია).</div>
+        </div>
       </div>
 
-      <div class="person collateral female" id="p-nadezhda" style="left: 2255px; top: 815px; width: 195px;">
-        <div class="p-role">Сестра Бабушки Жени</div>
+      <div class="person collateral female" id="p-nadezhda" style="left: 2255px; top: 800px; width: 195px;">
+        <div class="p-role">Сестра Бабушки</div>
         <div class="p-name">Надежда Каландія</div>
         <div class="p-geo">ნადეჟდა კალანდია</div>
-        <div class="p-note">Пріемная дочь: <strong>Нанули Гигинейшвили</strong></div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ნადეჟდა მიხეილის ასული კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> მიხა კალანდია და ევდოკია ლუკავა. ბებია ჟენიას და.</div>
+          <div class="tt-row"><span class="tt-label">შვილი (აყვანილი):</span> ნანული გიგინეიშვილი.</div>
+        </div>
       </div>
 
-      <div class="person collateral female" id="p-nina" style="left: 2465px; top: 815px; width: 205px;">
-        <div class="p-role">Сестра Бабушки Жени</div>
+      <div class="person collateral female" id="p-nina" style="left: 2465px; top: 800px; width: 205px;">
+        <div class="p-role">Сестра Бабушки</div>
         <div class="p-name">Нина Каландія</div>
         <div class="p-geo">ნინა კალანდია</div>
-        <div class="p-note">Дочь: <strong>Нона</strong> • Внукъ: <strong>Ника</strong></div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ნინა მიხეილის ასული კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> მიხა კალანდია და ევდოკია ლუკავა. ბებია ჟენიას და.</div>
+          <div class="tt-row"><span class="tt-label">ქალიშვილი:</span> ნონა (ცოცხალია). <span class="tt-label">შვილიშვილი:</span> ნიკა.</div>
+        </div>
       </div>
 
-      <!-- Сестры прабабки Евдокии -->
-      <div class="person collateral female" id="p-lukava-sisters" style="left: 2700px; top: 815px; width: 230px;">
+      <div class="person collateral female" id="p-lukava-sisters" style="left: 2700px; top: 800px; width: 230px;">
         <div class="p-role">Сестры Прабабки</div>
         <div class="p-name">Параскева, Марина, Ольга</div>
         <div class="p-geo">პარასკევა, მარინე, ოლღა ლუკავა</div>
-        <div class="p-note">Дочери Павла Лукава и Саломіи Какачія</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">პარასკევა, მარინე და ოლღა ლუკავები</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მშობლები:</span> პავლე ლუკავა და სალომე კაკაჩია.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა (ალდონა კალანდიასგან):</span> პავლე ლუკავას ჰყავდა 4 ქალიშვილი: პარასკევა, ევდოკია, მარინე და ოლღა (წარმოშობით ობუჯიდან, დასახლდნენ აფხაზეთში მე-19 ს. 80-იან წლებში).</div>
+        </div>
       </div>
 
       <!-- ================= IV-е ВОСХОДЯЩЕЕ КОЛѢНО: ПРАПРАДЕДЫ ================= -->
-      <div class="person male direct" id="p-bachu" style="left: 1390px; top: 1005px; width: 225px;">
-        <div class="p-role">★ Прапрадѣдъ (Сынъ Биту)</div>
+      <div class="person male direct" id="p-bachu" style="left: 1390px; top: 985px; width: 225px;">
+        <div class="p-role">★ Прапрадѣдъ</div>
         <div class="p-name">Бачу Битуевичъ Каландія</div>
         <div class="p-geo">ბაჩუ ბითუს ძე კალანდია</div>
-        <div class="p-note">Отецъ Михаила и Эстатэ</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ბაჩუ ბითუს ძე კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown (XIX ს.)</div>
+          <div class="tt-row"><span class="tt-label">მამა:</span> ბითუ კალანდაძე / კალანდია.</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> კესო ქუხილავა.</div>
+          <div class="tt-row"><span class="tt-label">შვილები:</span> მიხეილ (მიხა), ესტატე და სხვა ძმები (ალდონა კალანდიას ცნობით: ევგენიასა და შალვას ბაბუა).</div>
+        </div>
       </div>
 
-      <div class="person female direct" id="p-keso" style="left: 1650px; top: 1005px; width: 215px;">
-        <div class="p-role">★ Прапрабабка (Супруга Бачу)</div>
+      <div class="person female direct" id="p-keso" style="left: 1650px; top: 985px; width: 215px;">
+        <div class="p-role">★ Прапрабабка</div>
         <div class="p-name">Кесо Кухилава</div>
         <div class="p-geo">კესო ქუხილავა</div>
-        <div class="p-note">Мать Михаила и Эстатэ</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">კესო ქუხილავა</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> ბაჩუ ბითუს ძე კალანდია.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა (ალდონა კალანდიასგან):</span> „მიხას, ანუ ჩვენი ბაბუის დედას ერქვა კესო, გვარი ქუხილავა“.</div>
+        </div>
       </div>
 
-      <div class="person male direct" id="p-pavel" style="left: 1900px; top: 1005px; width: 225px;">
-        <div class="p-role">★ Прапрадѣдъ (Отецъ Евдокіи)</div>
+      <div class="person male direct" id="p-pavel" style="left: 1900px; top: 985px; width: 225px;">
+        <div class="p-role">★ Прапрадѣдъ</div>
         <div class="p-name">Павелъ Лукава</div>
         <div class="p-geo">პავლე ლუკავა</div>
-        <div class="p-note">Изъ с. Обуджи въ с. Нижняя Абжаква (1880-е)</div>
+        <div class="p-date unknown">დაბ.: Unknown (XIX ს.)</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">პავლე ლუკავა</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown (XIX საუკუნე).</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> სალომე კაკაჩია.</div>
+          <div class="tt-row"><span class="tt-label">ბიოგრაფია (ალდონა კალანდიას ცნობით):</span> წარმოშობით სოფელ ობუჯიდან (წალენჯიხა). დაახლოებით მე-19 საუკუნის 80-იან წლებში დასახლდა აფხაზეთში, სოხუმის მახლობლად — სოფელ ქვემო აბჟაყვაში. ჰყავდა 4 ქალიშვილი: პარასკევა, ევდოკია, მარინე და ოლღა.</div>
+        </div>
       </div>
 
-      <div class="person female direct" id="p-salome" style="left: 2160px; top: 1005px; width: 215px;">
-        <div class="p-role">★ Прапрабабка (Супруга Павла)</div>
+      <div class="person female direct" id="p-salome" style="left: 2160px; top: 985px; width: 215px;">
+        <div class="p-role">★ Прапрабабка</div>
         <div class="p-name">Саломія (Саломе) Какачія</div>
         <div class="p-geo">სალომე კაკაჩია</div>
-        <div class="p-note">Мать 4 девицъ Лукава</div>
+        <div class="p-date unknown">დაბ.: Unknown</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">სალომე კაკაჩია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown</div>
+          <div class="tt-row"><span class="tt-label">მეუღლე:</span> პავლე ლუკავა.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა (ალდონა კალანდიასგან):</span> „ევდოკიას დედას, ანუ პავლეს ცოლს ერქვა სალომე, გვარი კაკაჩია“. 4 ქალიშვილის (პარასკევა, ევდოკია, მარინე, ოლღა) დედა.</div>
+        </div>
       </div>
 
       <!-- ================= V-е ВОСХОДЯЩЕЕ КОЛѢНО: РОДОНАЧАЛЬНИК ================= -->
-      <div class="person male direct" id="p-bitu" style="left: 1390px; top: 1205px; width: 225px;">
+      <div class="person male direct" id="p-bitu" style="left: 1390px; top: 1170px; width: 225px;">
         <div class="p-role">★ Родоначальникъ Рода</div>
         <div class="p-name">Биту Каландадзе (Каландія)</div>
         <div class="p-geo">ბითუ კალანდაძე / კალანდია</div>
-        <div class="p-note">Прапрапрадѣдъ • Гурійскій корень рода</div>
+        <div class="p-date unknown">დაბ.: Unknown (XVIII–XIX ს.)</div>
+        <div class="geo-tooltip">
+          <div class="tt-title">ბითუ კალანდაძე / კალანდია</div>
+          <div class="tt-row"><span class="tt-label">დაბადების თარიღი:</span> Unknown (დაახლ. XVIII–XIX სს. მიჯნა).</div>
+          <div class="tt-row"><span class="tt-label">შვილი:</span> ბაჩუ კალანდია. <span class="tt-label">შვილიშვილი:</span> მიხა კალანდია.</div>
+          <div class="tt-row"><span class="tt-label">ცნობა (ალდონა კალანდიასგან):</span> ევგენიასა და შალვას დიდი ბაბუა (ალდონას დიდი ბაბუის მამა). გურიიდან სამეგრელოში გადმოსული კალანდაძეების / კალანდიების შტოს უძველესი ცნობილი წინაპარი.</div>
+        </div>
       </div>
 
     </div>
 
     <div class="charter-footer">
       <div>
-        Настоящая Восходящая Поколѣнная Роспись составлена въ даръ Ираклію Важаевичу Бенидзе ко Дню Рожденія 13 Ноября.<br>
-        <em>Соединенныя Вѣтви: Бенидзе — Агумава — Папава — Каландія (Каландадзе) — Лукава.</em>
+        საგვარეულო გენეალოგიური ხე შედგენილია ირაკლი ვაჟას ძე ბენიძის დაბადების დღის (13 ნოემბერი) საჩუქრად.<br>
+        <em>ბენიძე — აგუმავა — პაპავა — კალანდია (კალანდაძე) — ლუკავა — კაკაჩია — ქუხილავა.</em>
       </div>
       <div class="wax-seal">
-        <span>Скрѣплено фамильною печатью:</span>
+        <span>საგვარეულო ბეჭედი:</span>
         <div class="seal-circle">ФАМИЛЬНЫЙ<br>АРХИВЪ<br>БЕНИДЗЕ</div>
       </div>
     </div>
@@ -691,11 +958,11 @@
     function renderTree() {
       svg.innerHTML = '';
 
-      const crimson = '#8b1e1e';   // Главная магистраль
-      const amber = '#b45309';     // Отцовская ветвь Бенидзе
-      const navy = '#162f65';      // Ветвь Каландия и Папава
-      const forest = '#14532d';    // Ветвь Лукава
-      const collateral = '#7c582b';// Боковые линии
+      const crimson = '#8b1e1e';
+      const amber = '#b45309';
+      const navy = '#162f65';
+      const forest = '#14532d';
+      const collateral = '#7c582b';
 
       // 1. БРАК ИРАКЛИЯ И КЕТИ БОЧОРИШВИЛИ
       const mIrakliKeti = drawMarriage('p-irakli', 'p-keti', crimson);
@@ -705,7 +972,7 @@
       const cVazha = box('p-child-vazha');
       const cGiorgi = box('p-child-giorgi');
 
-      const busY_kids = 150;
+      const busY_kids = 148;
       line(mIrakliKeti.x, mIrakliKeti.y, mIrakliKeti.x, busY_kids, crimson, 3);
       line(cLeila.cx, busY_kids, cGiorgi.cx, busY_kids, crimson, 2.8);
 
@@ -714,14 +981,13 @@
         dot(child.cx, child.bottom, crimson, 4.5);
       });
 
-      // 3. БРАК РОДИТЕЛЕЙ (ВАЖА + ЛЕЙЛА) — ЦЕНТРАЛЬНАЯ МАГИСТРАЛЬ
+      // 3. БРАК РОДИТЕЛЕЙ (ВАЖА + ЛЕЙЛА)
       const mVazhaLeila = drawMarriage('p-vazha', 'p-leila', crimson);
 
-      // От союза родителей ВВЕРХ прямая линия к Ираклию и ответвление к брату Темо
       const irakli = box('p-irakli');
       const temo = box('p-temo');
 
-      const busY_brothers = 385;
+      const busY_brothers = 395;
       line(mVazhaLeila.x, mVazhaLeila.y, mVazhaLeila.x, busY_brothers, crimson, 3.2);
       line(temo.cx, busY_brothers, irakli.cx, busY_brothers, crimson, 2.8);
 
@@ -735,20 +1001,20 @@
       const mNestorMinusha = drawMarriage('p-nestor', 'p-minusha', amber);
 
       const vazha = box('p-vazha');
-      const busY_vazha = 580;
+      const busY_vazha = 565;
       line(mNestorMinusha.x, mNestorMinusha.y, mNestorMinusha.x, busY_vazha, amber, 3.2);
       line(mNestorMinusha.x, busY_vazha, vazha.cx, busY_vazha, amber, 3.2);
       line(vazha.cx, busY_vazha, vazha.cx, vazha.bottom, amber, 3.2);
       dot(vazha.cx, vazha.bottom, amber, 5);
 
-      // БОКОВАЯ ОТРАСЛЬ БЕНИДЗЕ (ДЯДИ И ТЕТКИ — ДЕТИ НЕСТОРА И МИНУШИ)
+      // БОКОВАЯ ОТРАСЛЬ БЕНИДЗЕ
       const sharden = box('p-sharden');
       const zhora = box('p-zhora');
       const ilya = box('p-ilya');
       const venera = box('p-venera');
       const inessa = box('p-inessa');
 
-      const busY_collateral = 580;
+      const busY_collateral = 565;
       line(mNestorMinusha.x, busY_collateral, sharden.cx, busY_collateral, collateral, 2.2, true);
 
       [sharden, zhora, ilya, venera].forEach(b => {
@@ -764,13 +1030,13 @@
       const mOrestZhenia = drawMarriage('p-orest', 'p-zhenia', crimson);
 
       const leila = box('p-leila');
-      const busY_leila = 580;
+      const busY_leila = 565;
       line(mOrestZhenia.x, mOrestZhenia.y, mOrestZhenia.x, busY_leila, crimson, 3.2);
       line(mOrestZhenia.x, busY_leila, leila.cx, busY_leila, crimson, 3.2);
       line(leila.cx, busY_leila, leila.cx, leila.bottom, crimson, 3.2);
       dot(leila.cx, leila.bottom, crimson, 5);
 
-      // БОКОВАЯ ОТРАСЛЬ МАТЕРИ: ДЯДЯ РЕВАЗ (ОТЪ ОРЕСТА И ЖЕНИ)
+      // ДЯДЯ РЕВАЗ
       const revaz = box('p-revaz');
       line(mOrestZhenia.x, busY_leila, revaz.cx, busY_leila, collateral, 2.2, true);
       line(revaz.cx, busY_leila, revaz.cx, revaz.top, collateral, 2);
@@ -780,7 +1046,7 @@
       const mMikhaEvdokia = drawMarriage('p-mikha', 'p-evdokia', crimson);
 
       const zhenia = box('p-zhenia');
-      const busY_zhenia = 755;
+      const busY_zhenia = 740;
       line(mMikhaEvdokia.x, mMikhaEvdokia.y, mMikhaEvdokia.x, busY_zhenia, crimson, 3);
       line(mMikhaEvdokia.x, busY_zhenia, zhenia.cx, busY_zhenia, crimson, 3);
       line(zhenia.cx, busY_zhenia, zhenia.cx, zhenia.bottom, crimson, 3);
@@ -791,7 +1057,6 @@
       line(estate.cx, busY_zhenia, estate.cx, estate.top, collateral, 2);
       dot(estate.cx, estate.top, collateral, 4);
 
-      // БОКОВАЯ ОТРАСЛЬ КАЛАНДИЯ: ШАЛВА, НАДЕЖДА, НИНА
       const shalva = box('p-shalva');
       const nadezhda = box('p-nadezhda');
       const nina = box('p-nina');
@@ -810,7 +1075,7 @@
       // 7. БРАК БАЧУ + КЕСО
       const mBachuKeso = drawMarriage('p-bachu', 'p-keso', navy);
       const mikha = box('p-mikha');
-      const busY_bachu = 950;
+      const busY_bachu = 935;
       line(mBachuKeso.x, mBachuKeso.y, mBachuKeso.x, busY_bachu, navy, 3);
       line(mBachuKeso.x, busY_bachu, mikha.cx, busY_bachu, navy, 3);
       line(mikha.cx, busY_bachu, mikha.cx, mikha.bottom, navy, 3);
@@ -819,7 +1084,7 @@
       // 8. БРАК ПАВЕЛ ЛУКАВА + САЛОМЕ КАКАЧИЯ
       const mPavelSalome = drawMarriage('p-pavel', 'p-salome', forest);
       const evdokia = box('p-evdokia');
-      const busY_lukava = 950;
+      const busY_lukava = 935;
       line(mPavelSalome.x, mPavelSalome.y, mPavelSalome.x, busY_lukava, forest, 3);
       line(mPavelSalome.x, busY_lukava, evdokia.cx, busY_lukava, forest, 3);
       line(evdokia.cx, busY_lukava, evdokia.cx, evdokia.bottom, forest, 3);
