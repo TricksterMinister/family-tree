@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Выбор фотографии для Родословного Древа</title>
+  <style>
+    body { background: #14110f; color: #f3ede2; font-family: -apple-system, sans-serif; padding: 40px; text-align: center; }
+    h1 { color: #f59e0b; margin-bottom: 10px; font-size: 26px; }
+    p { color: #cbd5e1; margin-bottom: 30px; font-size: 15px; }
+    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+    .card { background: #1e293b; border: 2px solid #475569; border-radius: 12px; padding: 15px; width: 220px; transition: 0.2s; }
+    .card:hover { border-color: #f59e0b; transform: translateY(-4px); }
+    .img-box { width: 190px; height: 190px; border-radius: 50%; overflow: hidden; margin: 0 auto 12px; border: 3px solid #d97706; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .num { font-size: 18px; font-weight: bold; color: #f59e0b; }
+    .desc { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Выберите фотографию для вашей карточки</h1>
+  <p>Посмотрите варианты ниже и просто напишите мне номер фото (1, 2, 3 и т.д.) или скажите путь к другой фотографии на вашем диске.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="img-box"><img src="photo_options/opt1.png" alt="Вариант 1"></div>
+      <div class="num">Вариант 1</div>
+      <div class="desc">TEMO Headshots 1</div>
+    </div>
+    <div class="card">
+      <div class="img-box"><img src="photo_options/opt2.png" alt="Вариант 2"></div>
+      <div class="num">Вариант 2</div>
+      <div class="desc">TEMO Headshots</div>
+    </div>
+    <div class="card">
+      <div class="img-box"><img src="photo_options/opt3.jpg" alt="Вариант 3"></div>
+      <div class="num">Вариант 3</div>
+      <div class="desc">Паспортный портрет</div>
+    </div>
+    <div class="card">
+      <div class="img-box"><img src="photo_options/opt4.jpg" alt="Вариант 4"></div>
+      <div class="num">Вариант 4</div>
+      <div class="desc">IMG_0955</div>
+    </div>
+    <div class="card">
+      <div class="img-box"><img src="photo_options/opt5.jpg" alt="Вариант 5"></div>
+      <div class="num">Вариант 5</div>
+      <div class="desc">IMG_1807</div>
+    </div>
+    <div class="card">
+      <div class="img-box"><img src="photo_options/opt6.jpg" alt="Вариант 6"></div>
+      <div class="num">Вариант 6</div>
+      <div class="desc">IMG_3266</div>
+    </div>
+  </div>
+</body>
+</html>

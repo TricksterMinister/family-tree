@@ -157,11 +157,21 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.35);
       overflow: hidden;
     }
-    .hero-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
+    .placeholder-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fbf5e6;
+      border: 2px dashed #b45309;
+    }
+    .photo-placeholder-text {
+      font-size: 11px;
+      font-weight: 700;
+      color: #92400e;
+      line-height: 1.25;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .legend-item {
       display: flex;
@@ -381,10 +391,6 @@
       </div>
 
       <div class="legend-bar">
-        <div class="version-switcher">
-          <a href="index.html" class="version-btn">★ ВЕРСІЯ ТЕЙМУРАЗА (ТЕМО)</a>
-          <a href="irakli.html" class="version-btn active">★ ВЕРСІЯ ИРАКЛІЯ</a>
-        </div>
         <div class="legend-item"><span class="legend-line" style="background:#8b1e1e;"></span> Прямая Родословная Линія и Брачные Союзы (═•═)</div>
         <div class="legend-item"><span class="legend-line" style="background:#b45309;"></span> Отцовская Вѣтвь: Родъ Бенидзе и Агумава</div>
         <div class="legend-item"><span class="legend-line" style="background:#162f65;"></span> Вѣтвь Рода Каландія (Каландадзе) и Папава</div>
@@ -654,10 +660,13 @@
         <div class="p-note">Сынъ Важи Бенидзе и Лейлы Папава</div>
       </div>
 
-      <!-- БРАТ: ИРАКЛИЙ (ЗВЕЗДА ШОУ В ЭТОЙ ВЕРСИИ) -->
-      <div class="person male direct star-hero" id="p-irakli" style="left: 1530px; top: 935px;">
-        <div class="p-role" style="color:#b45309; font-size:10.5px;">★ ГЛАВНЫЙ ГЕРОЙ ВЕРСІИ ★</div>
-        <div class="p-name" style="font-size:16.5px;">Ираклій Важаевичъ Бенидзе</div>
+      <!-- БРАТ: ИРАКЛИЙ -->
+      <div class="person male direct star-hero" id="p-irakli" style="left: 1530px; top: 925px;">
+        <div class="hero-photo-wrap placeholder-photo">
+          <div class="photo-placeholder-text">Мѣсто для<br>фотографіи<br>Ираклія</div>
+        </div>
+        <div class="p-role">★ Сынъ Дома Бенидзе</div>
+        <div class="p-name" style="font-size:16px;">Ираклій Важаевичъ Бенидзе</div>
         <div class="p-geo" style="font-size:12.5px;">ირაკლი ვაჟას ძე ბენიძე</div>
         <div class="p-note">Сынъ Важи Бенидзе и Лейлы Папава • Отецъ Лейлы, Важи и Георгія</div>
       </div>
