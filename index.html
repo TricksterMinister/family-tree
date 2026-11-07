@@ -5,7 +5,7 @@
   <title>Родословное древо: Ветка Каландия & Лукава</title>
   <style>
     :root {
-      --bg: #0f172a;
+      --bg: #0b1120;
       --card-bg: #1e293b;
       --card-border: #334155;
       --gold: #f59e0b;
@@ -20,7 +20,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      padding: 30px 20px;
+      padding: 30px 15px 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -30,124 +30,173 @@
       font-size: 26px;
       font-weight: 700;
       color: var(--gold);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       text-align: center;
     }
     .legend-banner {
       background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 10px;
-      padding: 12px 20px;
-      max-width: 950px;
-      margin-bottom: 35px;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 12px;
+      padding: 12px 22px;
+      max-width: 1050px;
+      margin-bottom: 28px;
       font-size: 13.5px;
-      line-height: 1.5;
+      line-height: 1.55;
       color: #fde68a;
       text-align: center;
     }
-    .tree-container {
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1320px;
+      padding: 20px 10px;
+    }
+    #connections-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .tree-grid {
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 32px;
+      gap: 64px;
       width: 100%;
-      max-width: 1250px;
-      position: relative;
     }
-    .level {
+    .generation-row {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
+      justify-content: space-around;
+      align-items: flex-start;
       width: 100%;
       position: relative;
+      padding-left: 110px;
     }
-    .level-label {
+    .gen-badge {
       position: absolute;
       left: 0;
+      top: 14px;
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--subtext);
-      font-weight: 600;
-      border-left: 3px solid var(--gold);
-      padding-left: 8px;
+      letter-spacing: 1.2px;
+      color: var(--gold);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: 700;
     }
-    .node-group {
+    .couple-box {
       display: flex;
-      gap: 16px;
       align-items: center;
-      background: rgba(30, 41, 59, 0.6);
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px dashed var(--card-border);
+      gap: 14px;
+      background: rgba(30, 41, 59, 0.75);
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1.5px solid #475569;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+      position: relative;
+    }
+    .couple-box.highlight-gold {
+      border: 2px solid var(--gold);
+      background: rgba(245, 158, 11, 0.07);
+    }
+    .couple-box.highlight-blue {
+      border: 2px solid var(--blue);
+      background: rgba(56, 189, 248, 0.06);
+    }
+    .couple-box.highlight-emerald {
+      border: 2px solid var(--emerald);
+      background: rgba(16, 185, 129, 0.06);
+    }
+    .marriage-ring {
+      font-size: 18px;
+      background: #0f172a;
+      border: 1px solid #475569;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
     .node {
       background: var(--card-bg);
       border: 1.5px solid var(--card-border);
       border-radius: 12px;
-      padding: 12px 18px;
-      min-width: 190px;
-      max-width: 260px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      padding: 12px 16px;
+      min-width: 195px;
+      max-width: 245px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
       position: relative;
-      transition: all 0.2s ease;
+      transition: transform 0.2s, border-color 0.2s;
     }
     .node:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transform: translateY(-2px);
       border-color: var(--gold);
     }
-    .node.root { border-color: var(--gold); background: linear-gradient(135deg, #1e293b, #2d3748); }
-    .node.kalandia { border-color: var(--blue); }
-    .node.lukava { border-color: var(--emerald); }
-    .node.female { border-left: 4px solid var(--rose); }
     .node.male { border-left: 4px solid var(--blue); }
+    .node.female { border-left: 4px solid var(--rose); }
+    .node.lukava { border-left: 4px solid var(--emerald); }
+    .node.root-person {
+      border: 2px solid var(--gold);
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+    .role-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #cbd5e1;
+      margin-bottom: 4px;
+      display: block;
+    }
     .name {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
     .geo-name {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--gold);
       margin-bottom: 6px;
     }
     .meta {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--subtext);
       line-height: 1.35;
     }
-    .badge {
+    .parent-pill {
       display: inline-block;
-      font-size: 10px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 6px;
       margin-top: 6px;
-      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
     }
-    .badge-origin { background: rgba(56, 189, 248, 0.15); color: var(--blue); }
-    .badge-obudji { background: rgba(16, 185, 129, 0.15); color: var(--emerald); }
-    .badge-guria { background: rgba(244, 63, 94, 0.15); color: var(--rose); }
-    .arrow {
-      color: var(--subtext);
-      font-size: 18px;
-      user-select: none;
+    .pill-blue { background: rgba(56, 189, 248, 0.16); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .pill-emerald { background: rgba(16, 185, 129, 0.16); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .pill-rose { background: rgba(244, 63, 94, 0.16); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.35); }
+    .pill-purple { background: rgba(168, 85, 247, 0.16); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.35); }
+
+    .siblings-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .sisters-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    .sister-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid #334155;
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-size: 12px;
-      text-align: center;
+    .sub-children {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px dashed #334155;
+      font-size: 11.5px;
+      color: #e2e8f0;
     }
   </style>
 </head>
@@ -156,208 +205,339 @@
   <h1>🌳 Родословное древо: Ветка Каландия & Лукава</h1>
   
   <div class="legend-banner">
-    👑 <strong>Семейное предание:</strong> Исконный корень рода — <strong>Каландадзе (Гурия)</strong>. Из-за кровного конфликта предки перешли в Самегрело (Зугдиди/Цаленджиха) и стали <strong>Каландия</strong>.<br>
-    📍 Семья Лукава переселилась в <strong>1880-х годах</strong> из родового села <strong>Обуджи</strong> в <strong>Нижнюю Абжакву</strong> (Сухуми).
+    🔵 <strong>Синие линии</strong> ведут по мужской и женской ветке рода <strong>Каландия (изначально Каландадзе из Гурии)</strong>: Биту → Бачу + Кесо Кухилава → Михаил.<br>
+    🟢 <strong>Зелёные линии</strong> ведут по ветке рода <strong>Лукава (из с. Обуджи в Нижнюю Абжакву, 1880-е гг.)</strong>: Павел Лукава + Саломе Какачия → Евдокия.<br>
+    🟡 <strong>Золотые линии</strong> показывают союз прадеда <strong>Михаила Каландия</strong> и прабабушки <strong>Евдокии Лукава</strong> и их потомков до Вас и брата Ираклия.
   </div>
 
-  <div class="tree-container">
+  <div class="canvas-wrapper" id="canvas">
+    <svg id="connections-svg"></svg>
 
-    <!-- ПОКОЛЕНИЕ 5 (Конец XVIII - нач. XIX века) -->
-    <div class="level">
-      <span class="level-label">Поколение V</span>
-      <div class="node male kalandia">
-        <div class="name">Биту Каландадзе / Каландия</div>
-        <div class="geo-name">ბითუ კალანდია</div>
-        <div class="meta">Прапрапрадед (рубеж XVIII–XIX вв.)</div>
-        <span class="badge badge-guria">Корень из Гурии</span>
-      </div>
-      <div style="width: 200px;"></div>
-      <div class="node male lukava" style="opacity: 0.6; border-style: dashed;">
-        <div class="name">Отец Павла Лукава</div>
-        <div class="geo-name">პავლე ლუკავას მამა</div>
-        <div class="meta">Село Обуджи (Самегрело)</div>
-        <span class="badge badge-obudji">с. Обуджи (ობუჯი)</span>
-      </div>
-    </div>
+    <div class="tree-grid">
 
-    <div class="arrow">⬇️</div>
+      <!-- ПОКОЛЕНИЕ V: ПРАПРАПРАДЕД -->
+      <div class="generation-row">
+        <div class="gen-badge">Поколение V</div>
 
-    <!-- ПОКОЛЕНИЕ 4 (Середина XIX века) -->
-    <div class="level">
-      <span class="level-label">Поколение IV</span>
-      
-      <!-- Бачу + Кесо -->
-      <div class="node-group">
-        <div class="node male kalandia">
-          <div class="name">Бачу Каландия</div>
-          <div class="geo-name">ბაჩუ კალანდია</div>
-          <div class="meta">Сын Биту. Прапрадед</div>
-          <span class="badge badge-origin">Самегрело</span>
+        <div class="node male" id="node-bitu">
+          <span class="role-tag">Прапрапрадед</span>
+          <div class="name">Биту Каландадзе / Каландия</div>
+          <div class="geo-name">ბითუ კალანდაძე / კალანდია</div>
+          <div class="meta">Рубеж XVIII–XIX вв. Выходец из Гурии в Самегрело</div>
+          <span class="parent-pill pill-rose">Корень из Гурии</span>
         </div>
-        <div style="font-weight:bold; color:var(--rose);">❤️</div>
-        <div class="node female">
-          <div class="name">Кесо Кухилава</div>
-          <div class="geo-name">კესო ქუხილავა</div>
-          <div class="meta">Прапрабабушка</div>
+
+        <div class="node lukava" id="node-lukava-root" style="opacity:0.85; border-style:dashed;">
+          <span class="role-tag">Предки Лукава</span>
+          <div class="name">Род Лукава</div>
+          <div class="geo-name">ლუკავების საგვარეულო</div>
+          <div class="meta">Коренное село Обуджи (Самегрело, Цаленджиха)</div>
+          <span class="parent-pill pill-emerald">с. Обуджи (ობუჯი)</span>
         </div>
       </div>
 
-      <div style="width: 40px;"></div>
+      <!-- ПОКОЛЕНИЕ IV: ПРАПРАДЕДЫ И ПРАПРАБАБУШКИ -->
+      <div class="generation-row">
+        <div class="gen-badge">Поколение IV</div>
 
-      <!-- Павел + Саломе -->
-      <div class="node-group">
-        <div class="node male lukava">
-          <div class="name">Павел Лукава</div>
-          <div class="geo-name">პავლე ლუკავა</div>
-          <div class="meta">Родом из Обуджи.<br>Переселился ок. 1880 г. в Абхазию</div>
-          <span class="badge badge-obudji">Нижняя Абжаква</span>
-        </div>
-        <div style="font-weight:bold; color:var(--rose);">❤️</div>
-        <div class="node female">
-          <div class="name">Саломе Какачия</div>
-          <div class="geo-name">სალომე კაკაჩია</div>
-          <div class="meta">Прапрабабушка</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="arrow">⬇️</div>
-
-    <!-- ПОКОЛЕНИЕ 3 (Конец XIX - нач. XX века) -->
-    <div class="level">
-      <span class="level-label">Поколение III</span>
-      <div class="node-group" style="border: 2px solid var(--gold); background: rgba(245, 158, 11, 0.05);">
-        
-        <!-- Миха -->
-        <div class="node male kalandia">
-          <div class="name">Михаил (Миха) Каландия</div>
-          <div class="geo-name">მიხეილ (მიხა) კალანდია</div>
-          <div class="meta">Сын Бачу и Кесо. <strong>Прадед</strong><br>Брат: Эстатэ (ესტატე)</div>
-          <span class="badge badge-origin">Сухуми</span>
-        </div>
-
-        <div style="font-weight:bold; color:var(--rose); font-size: 20px;">❤️</div>
-
-        <!-- Евдокия -->
-        <div class="node female lukava">
-          <div class="name">Евдокия Павловна Лукава</div>
-          <div class="geo-name">ევდოკია ლუკავა</div>
-          <div class="meta">Дочь Павла и Саломе. <strong>Прабабушка</strong></div>
-          <span class="badge badge-obudji">из Абжаквы</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4 сестры Лукава (сноска) -->
-    <div style="margin-top: -15px; margin-bottom: 5px;">
-      <div class="sisters-grid" style="max-width: 600px;">
-        <div class="sister-card" style="border-color: var(--gold); color: #fde68a;">⭐️ <strong>Евдокия</strong></div>
-        <div class="sister-card">Параскева (პარასკევა)</div>
-        <div class="sister-card">Марине (მარინე)</div>
-        <div class="sister-card">Ольга (ოლღა)</div>
-      </div>
-    </div>
-
-    <div class="arrow">⬇️</div>
-
-    <!-- ПОКОЛЕНИЕ 2: ДЕТИ МИХИ И ЕВДОКИИ -->
-    <div class="level">
-      <span class="level-label">Поколение II</span>
-      <div style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;">
-        
-        <!-- Евгения (Женя) + Орест -->
-        <div class="node-group" style="border: 1.5px solid var(--gold);">
-          <div class="node female kalandia" style="min-width: 190px;">
-            <div class="name">Евгения (Женя) Каландия</div>
-            <div class="geo-name">ევგენია (ჟენია) კალანდია</div>
-            <div class="meta"><strong>Бабушка</strong></div>
+        <!-- Пара: Бачу + Кесо -->
+        <div class="couple-box highlight-blue" id="couple-bachu-keso">
+          <div class="node male" id="node-bachu">
+            <span class="role-tag">Прапрадед (Отец Михи)</span>
+            <div class="name">Бачу Битуевич Каландия</div>
+            <div class="geo-name">ბაჩუ ბითუს ძე კალანდია</div>
+            <div class="meta">Сын Биту Каландия</div>
+            <span class="parent-pill pill-blue">Сын Биту</span>
           </div>
-          <div style="font-weight:bold; color:var(--rose);">❤️</div>
-          <div class="node male" style="min-width: 180px;">
-            <div class="name">Орест Папава</div>
-            <div class="geo-name">ორესტ პაპავა</div>
-            <div class="meta"><strong>Дедушка</strong> (НКВД / МВД)</div>
+          <div class="marriage-ring" title="Супруги">💍</div>
+          <div class="node female" id="node-keso">
+            <span class="role-tag">Прапрабабушка (Мать Михи)</span>
+            <div class="name">Кесо Кухилава</div>
+            <div class="geo-name">კესო ქუხილავა</div>
+            <div class="meta">Супруга Бачу, мать Михаила и Эстатэ</div>
           </div>
         </div>
 
-        <!-- Шалва -->
-        <div class="node male kalandia" style="min-width: 160px;">
-          <div class="name">Шалва Каландия</div>
-          <div class="geo-name">შალვა კალანდია</div>
-          <div class="meta">Брат бабушки Жени<br>Дочь: <strong>Альдона</strong></div>
-        </div>
-
-        <!-- Надежда -->
-        <div class="node female kalandia" style="min-width: 170px;">
-          <div class="name">Надежда Каландия</div>
-          <div class="geo-name">ნადეჟდა კალანდია</div>
-          <div class="meta">Сестра бабушки Жени<br>Приёмная дочь: <strong>Нанули</strong></div>
-        </div>
-
-        <!-- Нина -->
-        <div class="node female kalandia" style="min-width: 170px;">
-          <div class="name">Нина Каландия</div>
-          <div class="geo-name">ნინა კალანდია</div>
-          <div class="meta">Сестра бабушки Жени<br>Дочь: <strong>Нона</strong> (жива)<br>Внук: <strong>Ника</strong></div>
-        </div>
-
-        <!-- Отари Боджгуа -->
-        <div class="node male" style="min-width: 170px; border-color: var(--purple);">
-          <div class="name">Отари Боджгуа</div>
-          <div class="geo-name">ოთარ ბოჯგუა</div>
-          <div class="meta">Брат бабушки Жени<br>Жена: <strong>Этери (Нора) Церцвадзе</strong></div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="arrow">⬇️</div>
-
-    <!-- ПОКОЛЕНИЕ 1: МАМА И ОТЕЦ -->
-    <div class="level">
-      <span class="level-label">Поколение I</span>
-      
-      <div class="node-group" style="background: rgba(245, 158, 11, 0.08); border: 1.5px solid var(--gold);">
-        <div class="node female root" style="min-width: 230px;">
-          <div class="name">Лейла Орестовна Папава</div>
-          <div class="geo-name">ლეილა პაპავა</div>
-          <div class="meta"><strong>Ваша Мама</strong> (род. 07.11.1942)<br>Брат: Реваз (род. 21.12.1940)</div>
-        </div>
-
-        <div style="font-weight:bold; color:var(--rose); font-size: 20px;">❤️</div>
-
-        <div class="node male root" style="min-width: 200px;">
-          <div class="name">Важа Бенидзе</div>
-          <div class="geo-name">ვაჟა ბენიძე</div>
-          <div class="meta"><strong>Ваш Отец</strong></div>
+        <!-- Пара: Павел + Саломе -->
+        <div class="couple-box highlight-emerald" id="couple-pavel-salome">
+          <div class="node lukava" id="node-pavel">
+            <span class="role-tag">Прапрадед (Отец Евдокии)</span>
+            <div class="name">Павел Лукава</div>
+            <div class="geo-name">პავლე ლუკავა</div>
+            <div class="meta">В 1880-х переселился из Обуджи в Нижнюю Абжакву</div>
+            <span class="parent-pill pill-emerald">Обуджи → Абжаква</span>
+          </div>
+          <div class="marriage-ring" title="Супруги">💍</div>
+          <div class="node female" id="node-salome">
+            <span class="role-tag">Прапрабабушка (Мать Евдокии)</span>
+            <div class="name">Саломе Какачия</div>
+            <div class="geo-name">სალომე კაკაჩია</div>
+            <div class="meta">Супруга Павла, мать 4 дочерей Лукава</div>
+          </div>
         </div>
       </div>
 
-    </div>
+      <!-- ПОКОЛЕНИЕ III: ПРАДЕД МИХАИЛ + ПРАБАБУШКА ЕВДОКИЯ -->
+      <div class="generation-row">
+        <div class="gen-badge">Поколение III</div>
 
-    <div class="arrow">⬇️</div>
-
-    <!-- ВЫ И ВАШ БРАТ -->
-    <div class="level">
-      <span class="level-label">Сыновья</span>
-      
-      <div style="display: flex; gap: 20px;">
-        <div class="node male root" style="min-width: 240px; border-color: var(--gold); box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);">
-          <div class="name">Теймураз (Темо) Бенидзе</div>
-          <div class="geo-name">თეიმურაზ ბენიძე</div>
-          <div class="meta"><strong>ВЫ</strong></div>
+        <!-- Брат Михи слева -->
+        <div class="node male" id="node-estate" style="min-width:170px;">
+          <span class="role-tag">Брат прадеда</span>
+          <div class="name">Эстатэ Каландия</div>
+          <div class="geo-name">ესტატე კალანდია</div>
+          <div class="meta">Родной брат Михи</div>
+          <span class="parent-pill pill-blue">Сын Бачу и Кесо</span>
         </div>
 
-        <div class="node male root" style="min-width: 240px; border-color: var(--blue);">
-          <div class="name">Ираклий Важаевич Бенидзе</div>
-          <div class="geo-name">ირაკლი ბენიძე</div>
-          <div class="meta"><strong>Родной брат</strong><br>Женат, <strong>трое детей</strong></div>
+        <!-- ГЛАВНАЯ ПАРА: МИХАИЛ + ЕВДОКИЯ -->
+        <div class="couple-box highlight-gold" id="couple-mikha-evdokia">
+          <div class="node male" id="node-mikha">
+            <span class="role-tag" style="color:var(--gold);">★ Ваш Прадедушка</span>
+            <div class="name">Михаил (Миха) Каландия</div>
+            <div class="geo-name">მიხეილ (მიხა) კალანდია</div>
+            <div class="meta">Отец бабушки Жени, Шалвы, Надежды и Нины</div>
+            <span class="parent-pill pill-blue">Сын Бачу Каландия и Кесо Кухилава</span>
+          </div>
+          <div class="marriage-ring" style="border-color:var(--gold);" title="Брак Прадеда и Прабабушки">❤️</div>
+          <div class="node female" id="node-evdokia">
+            <span class="role-tag" style="color:var(--gold);">★ Ваша Прабабушка</span>
+            <div class="name">Евдокия Павловна Лукава</div>
+            <div class="geo-name">ევდოკია პავლეს ასული ლუკავა</div>
+            <div class="meta">Мать бабушки Жени, Шалвы, Надежды и Нины</div>
+            <span class="parent-pill pill-emerald">Дочь Павла Лукава и Саломе Какачия</span>
+          </div>
+        </div>
+
+        <!-- Сёстры Евдокии справа -->
+        <div class="node lukava" id="node-lukava-sisters" style="min-width:190px;">
+          <span class="role-tag">3 сестры прабабушки</span>
+          <div class="name">Сёстры Евдокии Лукава</div>
+          <div class="geo-name">ევდოკიას დები</div>
+          <div class="meta">
+            • <strong>Параскева</strong> (პარასკევა)<br>
+            • <strong>Марине</strong> (მარინე)<br>
+            • <strong>Ольга</strong> (ოლღა)
+          </div>
+          <span class="parent-pill pill-emerald">Дочери Павла и Саломе</span>
+        </div>
+      </div>
+
+      <!-- ПОКОЛЕНИЕ II: БАБУШКА ЖЕНЯ И ЕЁ БРАТЬЯ / СЁСТРЫ -->
+      <div class="generation-row">
+        <div class="gen-badge">Поколение II</div>
+
+        <div class="siblings-row" id="mikha-children-group">
+          
+          <!-- БАБУШКА ЖЕНЯ + ДЕДУШКА ОРЕСТ -->
+          <div class="couple-box highlight-gold" id="couple-zhenia-orest">
+            <div class="node female" id="node-zhenia">
+              <span class="role-tag" style="color:var(--gold);">★ Ваша Бабушка</span>
+              <div class="name">Евгения (Женя) Каландия</div>
+              <div class="geo-name">ევგენია (ჟენია) კალანდია</div>
+              <span class="parent-pill pill-blue">Дочь Михи и Евдокии</span>
+            </div>
+            <div class="marriage-ring" style="border-color:var(--gold);">❤️</div>
+            <div class="node male" id="node-orest">
+              <span class="role-tag" style="color:var(--gold);">★ Ваш Дедушка</span>
+              <div class="name">Орест Георгиевич Папава</div>
+              <div class="geo-name">ორესტ გიორგის ძე პაპავა</div>
+              <div class="meta">Руководство НКВД / МВД Абхазии</div>
+            </div>
+          </div>
+
+          <!-- ШАЛВА -->
+          <div class="node male" id="node-shalva">
+            <span class="role-tag">Брат бабушки Жени</span>
+            <div class="name">Шалва Каландия</div>
+            <div class="geo-name">შალვა კალანდია</div>
+            <span class="parent-pill pill-blue">Сын Михи и Евдокии</span>
+            <div class="sub-children">
+              ↳ Дочь: <strong>Альдона Каландия</strong> (Тбилиси)
+            </div>
+          </div>
+
+          <!-- НАДЕЖДА -->
+          <div class="node female" id="node-nadezhda">
+            <span class="role-tag">Сестра бабушки Жени</span>
+            <div class="name">Надежда Каландия</div>
+            <div class="geo-name">ნადეჟდა კალანდია</div>
+            <span class="parent-pill pill-blue">Дочь Михи и Евдокии</span>
+            <div class="sub-children">
+              ↳ Приёмная дочь: <strong>Нанули</strong> (ნანული)
+            </div>
+          </div>
+
+          <!-- НИНА -->
+          <div class="node female" id="node-nina">
+            <span class="role-tag">Сестра бабушки Жени</span>
+            <div class="name">Нина Каландия</div>
+            <div class="geo-name">ნინა კალანდია</div>
+            <span class="parent-pill pill-blue">Дочь Михи и Евдокии</span>
+            <div class="sub-children">
+              ↳ Дочь: <strong>Нона</strong> (жива)<br>
+              &nbsp;&nbsp;&nbsp;↳ Сын Ноны: <strong>Ника</strong> (ნიკა)
+            </div>
+          </div>
+
+          <!-- ОТАРИ БОДЖГУА -->
+          <div class="node male" id="node-otari" style="border-left-color:var(--purple);">
+            <span class="role-tag">Брат бабушки Жени</span>
+            <div class="name">Отари Боджгуа</div>
+            <div class="geo-name">ოთარ ბოჯგუა</div>
+            <span class="parent-pill pill-purple">Фамилия: Боджгуа</span>
+            <div class="sub-children">
+              💍 Жена: <strong>Этери (Нора) Церцвадзе</strong> (ცერცვაძე)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ПОКОЛЕНИЕ I: МАМА ЛЕЙЛА + ПАПА ВАЖА И ДЯДЯ РЕВАЗ -->
+      <div class="generation-row">
+        <div class="gen-badge">Поколение I</div>
+
+        <div style="display:flex; gap:24px; align-items:center; flex-wrap:wrap; justify-content:center;">
+          
+          <div class="node male" id="node-revaz">
+            <span class="role-tag">Дядя (Брат мамы)</span>
+            <div class="name">Реваз Орестович Папава</div>
+            <div class="geo-name">რევაზ ორესტის ძე პაპავა</div>
+            <div class="meta">Род. 21.12.1940 — погиб в Сухуми (09.1993)</div>
+            <span class="parent-pill pill-blue">Сын Ореста и Жени</span>
+          </div>
+
+          <div class="couple-box highlight-gold" id="couple-leila-vazha">
+            <div class="node female root-person" id="node-leila">
+              <span class="role-tag" style="color:var(--gold);">★ Ваша Мама</span>
+              <div class="name">Лейла Орестовна Папава</div>
+              <div class="geo-name">ლეილა ორესტის ასული პაპავა</div>
+              <div class="meta">Род. 07.11.1942, г. Сухуми</div>
+              <span class="parent-pill pill-blue">Дочь Ореста Папава и Жени Каландия</span>
+            </div>
+            <div class="marriage-ring" style="border-color:var(--gold);">❤️</div>
+            <div class="node male root-person" id="node-vazha">
+              <span class="role-tag" style="color:var(--gold);">★ Ваш Отец</span>
+              <div class="name">Важа Бенидзе</div>
+              <div class="geo-name">ვაჟა ბენიძე</div>
+              <div class="meta">Глава семьи Бенидзе</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ПОКОЛЕНИЕ 0: ВЫ И БРАТ ИРАКЛИЙ -->
+      <div class="generation-row">
+        <div class="gen-badge">Наше время</div>
+
+        <div style="display:flex; gap:30px; justify-content:center; flex-wrap:wrap;">
+          <div class="node male root-person" id="node-temo" style="min-width:250px; box-shadow:0 0 25px rgba(245,158,11,0.3);">
+            <span class="role-tag" style="color:var(--gold);">★ ВЫ</span>
+            <div class="name">Теймураз (Темо) Важаевич Бенидзе</div>
+            <div class="geo-name">თეიმურაზ (თემო) ვაჟას ძე ბენიძე</div>
+            <span class="parent-pill pill-blue">Сын Важи Бенидзе и Лейлы Папава</span>
+          </div>
+
+          <div class="node male root-person" id="node-irakli" style="min-width:250px; border-color:var(--blue);">
+            <span class="role-tag" style="color:var(--blue);">★ Родной Брат</span>
+            <div class="name">Ираклий Важаевич Бенидзе</div>
+            <div class="geo-name">ირაკლი ვაჟას ძე ბენიძე</div>
+            <div class="meta">Женат, <strong>трое детей</strong></div>
+            <span class="parent-pill pill-blue">Сын Важи Бенидзе и Лейлы Папава</span>
+          </div>
         </div>
       </div>
 
     </div>
-
   </div>
 
+  <script>
+    function connectElements(svg, fromEl, toEl, color, dashed = false) {
+      if (!fromEl || !toEl) return;
+      const canvasRect = document.getElementById('canvas').getBoundingClientRect();
+      const r1 = fromEl.getBoundingClientRect();
+      const r2 = toEl.getBoundingClientRect();
+
+      const x1 = r1.left + r1.width / 2 - canvasRect.left;
+      const y1 = r1.bottom - canvasRect.top;
+      const x2 = r2.left + r2.width / 2 - canvasRect.left;
+      const y2 = r2.top - canvasRect.top;
+
+      const midY = y1 + (y2 - y1) * 0.5;
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const d = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', color);
+      path.setAttribute('stroke-width', '2.5');
+      if (dashed) {
+        path.setAttribute('stroke-dasharray', '6,4');
+      }
+      svg.appendChild(path);
+
+      // Точка входа и выхода
+      const c1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c1.setAttribute('cx', x1);
+      c1.setAttribute('cy', y1);
+      c1.setAttribute('r', '4');
+      c1.setAttribute('fill', color);
+      svg.appendChild(c1);
+
+      const c2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c2.setAttribute('cx', x2);
+      c2.setAttribute('cy', y2);
+      c2.setAttribute('r', '4');
+      c2.setAttribute('fill', color);
+      svg.appendChild(c2);
+    }
+
+    function drawAllLines() {
+      const svg = document.getElementById('connections-svg');
+      svg.innerHTML = '';
+
+      const blue = '#38bdf8';
+      const emerald = '#10b981';
+      const gold = '#f59e0b';
+
+      // 1. Биту -> Бачу
+      connectElements(svg, document.getElementById('node-bitu'), document.getElementById('node-bachu'), blue);
+
+      // 2. Род Лукава -> Павел Лукава
+      connectElements(svg, document.getElementById('node-lukava-root'), document.getElementById('node-pavel'), emerald, true);
+
+      // 3. Союз (Бачу + Кесо) -> Михаил (Миха) и его брат Эстатэ
+      connectElements(svg, document.getElementById('couple-bachu-keso'), document.getElementById('node-mikha'), blue);
+      connectElements(svg, document.getElementById('couple-bachu-keso'), document.getElementById('node-estate'), blue, true);
+
+      // 4. Союз (Павел + Саломе) -> Евдокия и её 3 сестры
+      connectElements(svg, document.getElementById('couple-pavel-salome'), document.getElementById('node-evdokia'), emerald);
+      connectElements(svg, document.getElementById('couple-pavel-salome'), document.getElementById('node-lukava-sisters'), emerald, true);
+
+      // 5. Союз (Михаил + Евдокия) -> Бабушка Женя, Шалва, Надежда, Нина
+      const mikhaEvdokia = document.getElementById('couple-mikha-evdokia');
+      connectElements(svg, mikhaEvdokia, document.getElementById('node-zhenia'), gold);
+      connectElements(svg, mikhaEvdokia, document.getElementById('node-shalva'), gold);
+      connectElements(svg, mikhaEvdokia, document.getElementById('node-nadezhda'), gold);
+      connectElements(svg, mikhaEvdokia, document.getElementById('node-nina'), gold);
+
+      // 6. Союз (Женя + Орест Папава) -> Мама Лейла и Дядя Реваз
+      const zheniaOrest = document.getElementById('couple-zhenia-orest');
+      connectElements(svg, zheniaOrest, document.getElementById('node-leila'), gold);
+      connectElements(svg, zheniaOrest, document.getElementById('node-revaz'), gold);
+
+      // 7. Союз (Мама Лейла + Папа Важа) -> Теймураз и Ираклий
+      const leilaVazha = document.getElementById('couple-leila-vazha');
+      connectElements(svg, leilaVazha, document.getElementById('node-temo'), gold);
+      connectElements(svg, leilaVazha, document.getElementById('node-irakli'), gold);
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(drawAllLines, 100);
+    });
+    window.addEventListener('resize', drawAllLines);
+  </script>
 </body>
 </html>
