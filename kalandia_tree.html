@@ -2,16 +2,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Поколѣнная Роспись и Родословное Древо: БЕНИДЗЕ — ПАПАВА — КАЛАНДІЯ — ЛУКАВА</title>
+  <title>Поколѣнная Роспись и Родословное Древо Теймураза Важаевича Бенидзе</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background-color: #120e0a;
       background-image: 
@@ -19,13 +15,13 @@
         repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 8px);
       color: #2b1d0e;
       font-family: 'Old Standard TT', 'Cormorant Garamond', Georgia, serif;
-      padding: 40px 25px 100px;
+      padding: 35px 25px 90px;
       overflow-x: auto;
     }
 
     .imperial-charter {
-      min-width: 2950px;
-      max-width: 2950px;
+      min-width: 2850px;
+      max-width: 2850px;
       margin: 0 auto;
       background: radial-gradient(ellipse at center, #fbf5e6 0%, #efe2c6 65%, #e2cfa9 100%);
       border: 6px double #6e4f26;
@@ -37,7 +33,6 @@
       position: relative;
     }
 
-    /* Угловые орнаменты */
     .corner-ornament {
       position: absolute;
       width: 64px;
@@ -52,10 +47,9 @@
 
     .charter-header {
       text-align: center;
-      padding-bottom: 24px;
-      margin-bottom: 28px;
+      padding-bottom: 22px;
+      margin-bottom: 26px;
       border-bottom: 3px double #7c582b;
-      position: relative;
     }
     .heraldic-crest {
       display: flex;
@@ -74,13 +68,13 @@
     }
     .charter-header h1 {
       font-family: 'Old Standard TT', Georgia, serif;
-      font-size: 40px;
+      font-size: 38px;
       font-weight: 700;
       letter-spacing: 2px;
       color: #1f140a;
       text-transform: uppercase;
       text-shadow: 0 1px 0 rgba(255,255,255,0.7);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .charter-subtitle {
       font-family: 'Cormorant Garamond', Georgia, serif;
@@ -112,74 +106,29 @@
       font-weight: 700;
       color: #2b1d0e;
     }
-    .version-switcher {
-      display: inline-flex;
+    .version-link-btn {
+      padding: 6px 18px;
       background: #2b1d0e;
       border: 2px solid #c59b4e;
-      border-radius: 30px;
-      padding: 3px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .version-btn {
-      padding: 6px 18px;
-      border-radius: 25px;
-      font-family: 'Old Standard TT', serif;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
+      border-radius: 20px;
       color: #fbf5e6;
-      transition: all 0.2s ease;
+      text-decoration: none;
+      font-size: 13px;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 700;
+      transition: all 0.2s;
     }
-    .version-btn.active {
-      background: linear-gradient(180deg, #b91c1c 0%, #7f1d1d 100%);
-      color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    .version-link-btn:hover {
+      background: #7c1d1d;
+      border-color: #f59e0b;
     }
-    .version-btn:hover:not(.active) {
-      background: rgba(197, 155, 78, 0.25);
-    }
+    .legend-item { display: flex; align-items: center; gap: 8px; }
+    .legend-line { width: 28px; height: 4px; display: inline-block; border-radius: 2px; }
 
-    .person.star-hero {
-      border: 3.5px solid #d97706;
-      background: linear-gradient(180deg, #fffef9 0%, #fef3c7 100%);
-      box-shadow: 0 0 35px rgba(217, 119, 6, 0.65), 0 10px 25px rgba(0,0,0,0.4);
-      z-index: 8;
-      width: 235px !important;
-    }
-    .hero-photo-wrap {
-      width: 86px;
-      height: 86px;
-      margin: 0 auto 6px;
-      border-radius: 50%;
-      border: 3px solid #d97706;
-      padding: 2px;
-      background: #fbf5e6;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-      overflow: hidden;
-    }
-    .hero-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .legend-line {
-      width: 28px;
-      height: 4px;
-      display: inline-block;
-      border-radius: 2px;
-    }
-
-    /* Полотно схемы */
     #diagram-canvas {
       position: relative;
-      width: 2880px;
-      height: 1380px;
+      width: 2780px;
+      height: 1420px;
       margin: 0 auto;
     }
 
@@ -222,14 +171,7 @@
       box-shadow: 0 5px 14px rgba(43, 29, 14, 0.25);
       position: absolute;
       z-index: 2;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .person:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(124, 29, 29, 0.35);
-      z-index: 10;
-    }
-
     .person.direct {
       background: linear-gradient(180deg, #fffef9 0%, #f9edd3 100%);
       border: 2px solid #7c1d1d;
@@ -241,6 +183,38 @@
     .person.female { border-top: 5px solid #7c1d1d; }
     .person.direct.male { border-top: 6px solid #162f65; }
     .person.direct.female { border-top: 6px solid #881337; }
+
+    /* ВЕРШИНА ДРЕВА: ТЕЙМУРАЗ С РАСПРОСТЁРТЫМИ РУКАМИ */
+    .hero-crown-box {
+      position: absolute;
+      width: 520px;
+      background: linear-gradient(180deg, #fffef9 0%, #fef3c7 100%);
+      border: 3.5px solid #b45309;
+      outline: 2px solid #d97706;
+      outline-offset: -5px;
+      border-radius: 6px;
+      padding: 14px 16px 16px;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 35px rgba(217, 119, 6, 0.35);
+      z-index: 10;
+    }
+    .hero-photo-panorama {
+      width: 100%;
+      height: 250px;
+      border-radius: 4px;
+      border: 2px solid #b45309;
+      overflow: hidden;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      background: #000;
+    }
+    .hero-photo-panorama img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
 
     .p-role {
       font-size: 9.5px;
@@ -301,11 +275,6 @@
       font-size: 14.5px;
       font-style: italic;
     }
-    .wax-seal {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
     .seal-circle {
       width: 72px;
       height: 72px;
@@ -330,7 +299,6 @@
 
   <div class="imperial-charter">
 
-    <!-- Угловые царские орнаменты -->
     <svg class="corner-ornament corner-tl" viewBox="0 0 100 100">
       <path d="M5,5 L95,5 M5,5 L5,95 M15,15 L75,15 M15,15 L15,75" stroke="#7c582b" stroke-width="3" fill="none"/>
       <circle cx="15" cy="15" r="5" fill="#7c1d1d"/>
@@ -372,366 +340,246 @@
         </svg>
       </div>
 
-      <div class="pre-title">Архивъ Кавказскаго Намѣстничества • Кутаисская Губернія и Сухумскій Округъ</div>
-      <h1>Полная Поколѣнная Роспись и Родословное Древо</h1>
-      <div class="charter-subtitle">Соединенныя Вѣтви Родовъ: Бенидзе, Агумава, Папава, Каландія (Каландадзе) и Лукава</div>
+      <div class="pre-title">Восходящая Поколѣнная Роспись • Кутаисская Губернія и Сухумскій Округъ</div>
+      <h1>Родословное Древо Теймураза Важаевича Бенидзе</h1>
+      <div class="charter-subtitle">Отъ вершины рода къ корнямъ предковъ: Бенидзе, Агумава, Папава, Каландія (Каландадзе) и Лукава</div>
 
       <div class="historical-chronicle">
-        Сводная родословная хартия соединяетъ отцовскую вѣтвь рода <strong>Бенидзе</strong> (дѣдъ <em>Несторъ Бенидзе</em> и бабка <em>Минуша Агумава</em>) и материнскую вѣтвь (дѣдъ <em>Орестъ Георгіевичъ Папава</em> и бабка <em>Евгенія Михайловна Каландія</em>, происходящая отъ <em>Михаила Бачуевича Каландія</em> гурійскаго корня Каландадзе и <em>Евдокіи Павловны Лукава</em> изъ с. Обуджи).
+        Родословная схема выстроена по восходящему канону: во главѣ древа пребываетъ <strong>Теймуразъ (Темо) Бенидзе</strong>, отъ коего вѣтви расходятся вглубь поколѣній къ отцовскому корню <strong>Бенидзе и Агумава</strong> и материнскому корню <strong>Папава, Каландія (изъ Гуріи) и Лукава (изъ с. Обуджи)</strong>.
       </div>
 
       <div class="legend-bar">
-        <div class="version-switcher">
-          <a href="index.html" class="version-btn active">★ ВЕРСІЯ ТЕЙМУРАЗА (ТЕМО)</a>
-          <a href="irakli.html" class="version-btn">★ ВЕРСІЯ ИРАКЛІЯ</a>
-        </div>
-        <div class="legend-item"><span class="legend-line" style="background:#8b1e1e;"></span> Прямая Родословная Линія и Брачные Союзы (═•═)</div>
-        <div class="legend-item"><span class="legend-line" style="background:#b45309;"></span> Отцовская Вѣтвь: Родъ Бенидзе и Агумава</div>
-        <div class="legend-item"><span class="legend-line" style="background:#162f65;"></span> Вѣтвь Рода Каландія (Каландадзе) и Папава</div>
-        <div class="legend-item"><span class="legend-line" style="background:#14532d;"></span> Вѣтвь Рода Лукава и Какачія (изъ с. Обуджи)</div>
+        <a href="irakli.html" class="version-link-btn">★ Родословное Древо Ираклія Бенидзе ➔</a>
+        <div class="legend-item"><span class="legend-line" style="background:#8b1e1e;"></span> Прямая восходящая линія предковъ (═•═)</div>
+        <div class="legend-item"><span class="legend-line" style="background:#b45309;"></span> Отцовскій корень: Родъ Бенидзе и Агумава</div>
+        <div class="legend-item"><span class="legend-line" style="background:#162f65;"></span> Материнскій корень: Родъ Папава и Каландія</div>
+        <div class="legend-item"><span class="legend-line" style="background:#14532d;"></span> Корень рода Лукава и Какачія</div>
       </div>
     </div>
 
-    <!-- ПОЛОТНО ГЕНЕАЛОГИЧЕСКОГО ЧЕРТЕЖА -->
+    <!-- ПОЛОТНО ВОСХОДЯЩЕГО ЧЕРТЕЖА -->
     <div id="diagram-canvas">
       <svg id="ortho-svg"></svg>
 
-      <!-- Колена -->
-      <div class="gen-guideline" style="top: 25px; height: 120px;"><span class="gen-title">Колѣно I-е (Кон. XVIII — нач. XIX в.)</span></div>
-      <div class="gen-guideline" style="top: 195px; height: 130px;"><span class="gen-title">Колѣно II-е (Прапрадѣды и Прапрабабки)</span></div>
-      <div class="gen-guideline" style="top: 380px; height: 130px;"><span class="gen-title">Колѣно III-е (Прадѣды: Каландія и Лукава)</span></div>
-      <div class="gen-guideline" style="top: 575px; height: 130px;"><span class="gen-title">Колѣно IV-е (Дѣдушки и Бабушки: Бенидзе, Агумава, Папава, Каландія)</span></div>
-      <div class="gen-guideline" style="top: 765px; height: 130px;"><span class="gen-title">Колѣно V-е (Родители Важа и Лейла, братья и сестры отца и матери)</span></div>
-      <div class="gen-guideline" style="top: 965px; height: 130px;"><span class="gen-title">Колѣно VI-е (ВЫ, Братъ Ираклій и Двоюродные братья и сестры)</span></div>
-      <div class="gen-guideline" style="top: 1165px; height: 130px;"><span class="gen-title">Колѣно VII-е (Племянники — Отрасль Ираклія Важаевича Бенидзе)</span></div>
+      <!-- Колена сверху вниз -->
+      <div class="gen-guideline" style="top: 20px; height: 360px;"><span class="gen-title">ВЕРШИНА РОСПИСИ: ТЕЙМУРАЗЪ И ЕГО ПОКОЛѢНІЕ</span></div>
+      <div class="gen-guideline" style="top: 420px; height: 135px;"><span class="gen-title">I-е Восходящее Колѣно (Родители, Дяди и Тетки)</span></div>
+      <div class="gen-guideline" style="top: 610px; height: 135px;"><span class="gen-title">II-е Восходящее Колѣно (Дѣдушки и Бабушки)</span></div>
+      <div class="gen-guideline" style="top: 800px; height: 135px;"><span class="gen-title">III-е Восходящее Колѣно (Прадѣды и Прабабушки)</span></div>
+      <div class="gen-guideline" style="top: 1000px; height: 135px;"><span class="gen-title">IV-е Восходящее Колѣно (Прапрадѣды и Прапрабабушки)</span></div>
+      <div class="gen-guideline" style="top: 1200px; height: 135px;"><span class="gen-title">V-е Восходящее Колѣно (Прапрапрадѣдъ Биту Каландадзе)</span></div>
 
-      <!-- ================= КОЛѢНО I-е (Биту) ================= -->
-      <div class="person male direct" id="p-bitu" style="left: 1720px; top: 30px;">
-        <div class="p-role">★ Родоначальникъ Вѣтви</div>
-        <div class="p-name">Биту Каландадзе (Каландія)</div>
-        <div class="p-geo">ბითუ კალანდაძე / კალანდია</div>
-        <div class="p-note">Прапрапрадѣдъ • Гурійскій корень рода</div>
+      <!-- ================= ВЕРШИНА: ТЕЙМУРАЗ (ПАНОРАМА) ================= -->
+      <div class="hero-crown-box" id="p-temo" style="left: 1130px; top: 30px;">
+        <div class="hero-photo-panorama">
+          <img src="temo_clean.jpg" alt="Теймуразъ Бенидзе">
+        </div>
+        <div class="p-role" style="font-size:11px; color:#7c1d1d;">★ Сынъ Дома Бенидзе</div>
+        <div class="p-name" style="font-size:20px; margin-bottom:2px;">Теймуразъ (Темо) Важаевичъ Бенидзе</div>
+        <div class="p-geo" style="font-size:13.5px; margin-bottom:4px;">თეიმურაზ ვაჟას ძე ბენიძე</div>
+        <div class="p-note" style="font-size:12.5px;">Сынъ Важи Бенидзе и Лейлы Папава • Хранитель родовой памяти</div>
       </div>
 
-      <!-- ================= КОЛѢНО II-е (Бачу+Кесо, Павел+Саломе) ================= -->
-      <div class="person male direct" id="p-bachu" style="left: 1720px; top: 195px;">
-        <div class="p-role">★ Прапрадѣдъ (Сынъ Биту)</div>
-        <div class="p-name">Бачу Битуевичъ Каландія</div>
-        <div class="p-geo">ბაჩუ ბითუს ძე კალანდია</div>
-        <div class="p-note">Отецъ Михаила и Эстатэ</div>
+      <!-- Родной брат Ираклий рядом с семьей -->
+      <div class="person male direct" id="p-irakli" style="left: 1720px; top: 120px; width: 220px;">
+        <div class="p-role">★ Родной Братъ</div>
+        <div class="p-name">Ираклій Важаевичъ Бенидзе</div>
+        <div class="p-geo">ირაკლი ვაჟას ძე ბენიძე</div>
+        <div class="p-note">Супруга: <strong>Кети Бочоришвили</strong><br>Чадъ: Лейла, Важа, Георгій</div>
       </div>
 
-      <div class="person female direct" id="p-keso" style="left: 1970px; top: 195px;">
-        <div class="p-role">★ Прапрабабка (Супруга Бачу)</div>
-        <div class="p-name">Кесо Кухилава</div>
-        <div class="p-geo">კესო ქუხილავა</div>
-        <div class="p-note">Мать Михаила и Эстатэ</div>
+      <div class="person female" id="p-keti" style="left: 1980px; top: 120px; width: 195px;">
+        <div class="p-role">Супруга Ираклія (Невестка)</div>
+        <div class="p-name">Кети Бочоришвили</div>
+        <div class="p-geo">ქეთი ბოჭორიშვილი</div>
+        <div class="p-note">Мать Лейлы, Важи и Георгія</div>
       </div>
 
-      <div class="person male direct" id="p-pavel" style="left: 2310px; top: 195px;">
-        <div class="p-role">★ Прапрадѣдъ (Отецъ Евдокіи)</div>
-        <div class="p-name">Павелъ Лукава</div>
-        <div class="p-geo">პავლე ლუკავა</div>
-        <div class="p-note">Изъ с. Обуджи въ с. Нижняя Абжаква (1880-е)</div>
-      </div>
-
-      <div class="person female direct" id="p-salome" style="left: 2560px; top: 195px;">
-        <div class="p-role">★ Прапрабабка (Супруга Павла)</div>
-        <div class="p-name">Саломія (Саломе) Какачія</div>
-        <div class="p-geo">სალომე კაკაჩია</div>
-        <div class="p-note">Мать 4 девицъ Лукава</div>
-      </div>
-
-      <!-- ================= КОЛѢНО III-е (Миха+Евдокия) ================= -->
-      <div class="person male" id="p-estate" style="left: 1610px; top: 380px;">
-        <div class="p-role">Братъ Прадѣда</div>
-        <div class="p-name">Евстафій (Эстатэ) Каландія</div>
-        <div class="p-geo">ესტატე კალანდია</div>
-        <div class="p-note">Сынъ Бачу и Кесо Кухилава</div>
-      </div>
-
-      <div class="person male direct" id="p-mikha" style="left: 1900px; top: 380px;">
-        <div class="p-role">★ Прадѣдъ (со стороны матери)</div>
-        <div class="p-name">Михаилъ (Миха) Каландія</div>
-        <div class="p-geo">მიხეილ (მიხა) კალანდია</div>
-        <div class="p-note">Сынъ Бачу Каландія и Кесо Кухилава</div>
-      </div>
-
-      <div class="person female direct" id="p-evdokia" style="left: 2190px; top: 380px;">
-        <div class="p-role">★ Прабабка (со стороны матери)</div>
-        <div class="p-name">Евдокія Павловна Лукава</div>
-        <div class="p-geo">ევდოკია პავლეს ასული ლუკავა</div>
-        <div class="p-note">Дочь Павла Лукава и Саломіи Какачія</div>
-      </div>
-
-      <div class="person female" id="p-lukava-sisters" style="left: 2490px; top: 380px; width: 220px;">
-        <div class="p-role">Сестры Прабабки</div>
-        <div class="p-name">Параскева, Марина, Ольга</div>
-        <div class="p-geo">პარასკევა, მარინე, ოლღა ლუკავა</div>
-        <div class="p-note">Дочери Павла Лукава</div>
-      </div>
-
-      <!-- ================= КОЛѢНО IV-е (ДЕДЫ И БАБУШКИ С ОБЕИХ СТОРОН) ================= -->
-      <!-- ОТЦОВСКАЯ СТОРОНА: Нестор Бенидзе + Минуша Агумава -->
-      <div class="person male direct" id="p-nestor" style="left: 360px; top: 575px;">
-        <div class="p-role">★ Дѣдушка (по отцу)</div>
-        <div class="p-name">Несторъ Бенидзе</div>
-        <div class="p-geo">ნესტორ ბენიძე</div>
-        <div class="p-note">Отецъ Важи, Шардена, Жоры, Ильи, Венеры и Инессы</div>
-      </div>
-
-      <div class="person female direct" id="p-minusha" style="left: 610px; top: 575px;">
-        <div class="p-role">★ Бабушка (по отцу)</div>
-        <div class="p-name">Минашъ (Минуша) Агумава</div>
-        <div class="p-geo">მინუშ (მინაშ) აგუგავა</div>
-        <div class="p-note">Супруга Нестора Бенидзе</div>
-      </div>
-
-      <!-- МАТЕРИНСКАЯ СТОРОНА: Орест Папава + Женя Каландия + братья/сестры Жени -->
-      <div class="person male direct" id="p-orest" style="left: 1420px; top: 575px;">
-        <div class="p-role">★ Дѣдушка (по матери)</div>
-        <div class="p-name">Орестъ Георгіевичъ Папава</div>
-        <div class="p-geo">ორესტ გიორგის ძე პაპავა</div>
-        <div class="p-note">Воспитанникъ Мингрельскаго дух. уч.; МВД Абхазіи</div>
-      </div>
-
-      <div class="person female direct" id="p-zhenia" style="left: 1670px; top: 575px;">
-        <div class="p-role">★ Бабушка (по матери)</div>
-        <div class="p-name">Евгенія (Женя) Каландія</div>
-        <div class="p-geo">ევგენია (ჟენია) კალანდია</div>
-        <div class="p-note">Дочь Михаила и Евдокіи</div>
-      </div>
-
-      <div class="person male" id="p-shalva" style="left: 2010px; top: 575px;">
-        <div class="p-role">Братъ Бабушки Жени</div>
-        <div class="p-name">Шалва Михайловичъ Каландія</div>
-        <div class="p-geo">შალვა კალანდია</div>
-        <div class="p-note">Отецъ Альдоны и Медеи</div>
-      </div>
-
-      <div class="person female" id="p-nadezhda" style="left: 2420px; top: 575px;">
-        <div class="p-role">Сестра Бабушки Жени</div>
-        <div class="p-name">Надежда Михайловна Каландія</div>
-        <div class="p-geo">ნადეჟდა კალანდია</div>
-        <div class="p-note">Пріемная дочь: Нанули</div>
-      </div>
-
-      <div class="person female" id="p-nina" style="left: 2660px; top: 575px;">
-        <div class="p-role">Сестра Бабушки Жени</div>
-        <div class="p-name">Нина Михайловна Каландія</div>
-        <div class="p-geo">ნინა კალანდია</div>
-        <div class="p-note">Дочь: Нона • Внукъ: Ника</div>
-      </div>
-
-      <!-- ================= КОЛѢНО V-е (РОДИТЕЛИ И ИХ РОДНЫЕ БРАТЬЯ И СЕСТРЫ) ================= -->
-      <!-- Ветка отца Бенидзе: Шарден, Жора/Георгий, Илья, Венера, ВАЖА, Инесса (Мамида) -->
-      <div class="person male" id="p-sharden" style="left: 30px; top: 765px; width: 170px;">
-        <div class="p-role">Дядя (Братъ отца)</div>
-        <div class="p-name">Шарденъ Несторовичъ Бенидзе</div>
-        <div class="p-geo">შარდენ ბენიძე</div>
-        <div class="p-note">Былъ женатъ, дѣтей не было</div>
-      </div>
-
-      <div class="person male" id="p-zhora" style="left: 215px; top: 765px; width: 185px;">
-        <div class="p-role">Дядя (Братъ отца)</div>
-        <div class="p-name">Жора (Георгій) Бенидзе</div>
-        <div class="p-geo">ჟორა (გიორგი) ბენიძე</div>
-        <div class="p-note">Одно лицо • Отецъ Элисо, Наны, Хатуны, Пааты</div>
-      </div>
-
-      <div class="person male" id="p-ilya" style="left: 415px; top: 765px; width: 170px;">
-        <div class="p-role">Дядя (Братъ отца)</div>
-        <div class="p-name">Илья Несторовичъ Бенидзе</div>
-        <div class="p-geo">ილია ბენიძე</div>
-        <div class="p-note">Былъ женатъ, дѣтей не было</div>
-      </div>
-
-      <div class="person female" id="p-venera" style="left: 600px; top: 765px; width: 170px;">
-        <div class="p-role">Тетка (Сестра отца)</div>
-        <div class="p-name">Венера Несторовна Бенидзе</div>
-        <div class="p-geo">ვენერა ბენიძე</div>
-        <div class="p-note">Сестра отца Важи</div>
-      </div>
-
+      <!-- ================= I-е ВОСХОДЯЩЕЕ КОЛѢНО: РОДИТЕЛИ ================= -->
       <!-- ВАЖА БЕНИДЗЕ (ОТЕЦ) -->
-      <div class="person male direct" id="p-vazha" style="left: 790px; top: 765px; width: 200px;">
+      <div class="person male direct" id="p-vazha" style="left: 780px; top: 430px; width: 215px;">
         <div class="p-role">★ Отецъ Вашъ</div>
         <div class="p-name">Важа Несторовичъ Бенидзе</div>
         <div class="p-geo">ვაჟა ნესტორის ძე ბენიძე</div>
-        <div class="p-note">Супругъ Лейлы Орестовны Папава</div>
+        <div class="p-note">Сынъ Нестора Бенидзе и Минуши Агумава</div>
       </div>
 
-      <!-- ИНЕССА БЕНИДЗЕ (МАМИДА) -->
-      <div class="person female" id="p-inessa" style="left: 1010px; top: 765px; width: 190px;">
-        <div class="p-role">Тетка Мамида (Жива)</div>
-        <div class="p-name">Инесса Несторовна Бенидзе</div>
-        <div class="p-geo">ინესა ბენიძე</div>
-        <div class="p-note">Хранительница памяти рода Бенидзе (~80 лѣтъ)</div>
-      </div>
-
-      <!-- Ветка матери: РЕВАЗ и ЛЕЙЛА -->
-      <div class="person male" id="p-revaz" style="left: 1370px; top: 765px; width: 185px;">
-        <div class="p-role">Дядя (Братъ матери)</div>
-        <div class="p-name">Ревазъ (Резо) Папава</div>
-        <div class="p-geo">რევაზ (რეზო) პაპავა</div>
-        <div class="p-note">21.12.1940 — погибъ въ Сухумѣ въ 09.1993</div>
-      </div>
-
-      <div class="person female direct" id="p-leila" style="left: 1585px; top: 765px; width: 200px;">
+      <!-- ЛЕЙЛА ПАПАВА (МАТЬ) -->
+      <div class="person female direct" id="p-leila" style="left: 1480px; top: 430px; width: 215px;">
         <div class="p-role">★ Мать Ваша</div>
         <div class="p-name">Лейла Орестовна Папава</div>
         <div class="p-geo">ლეილა ორესტის ასული პაპავა</div>
         <div class="p-note">Род. 07.11.1942 въ г. Сухумъ</div>
       </div>
 
-      <!-- Ветка Шалвы: Альдона, Медея, Покойный сын -->
-      <div class="person female" id="p-aldona" style="left: 1860px; top: 765px; width: 165px;">
-        <div class="p-role">Дочь Шалвы</div>
-        <div class="p-name">Альдона Каландія</div>
-        <div class="p-geo">ალდონა კალანდია</div>
-        <div class="p-note">Двоюродная сестра матери</div>
+      <!-- Братья и сестры отца: Шарден, Жора, Илья, Венера, Инесса -->
+      <div class="person male" id="p-sharden" style="left: 50px; top: 430px; width: 160px;">
+        <div class="p-role">Дядя (Братъ отца)</div>
+        <div class="p-name">Шарденъ Бенидзе</div>
+        <div class="p-geo">შარდენ ბენიძე</div>
+        <div class="p-note">Былъ женатъ, бездѣтенъ</div>
       </div>
 
-      <div class="person female" id="p-medea" style="left: 2040px; top: 765px; width: 165px;">
-        <div class="p-role">Дочь Шалвы</div>
-        <div class="p-name">Медея Каландія</div>
-        <div class="p-geo">მედეა კალანდია</div>
-        <div class="p-note">Сестра Альдоны (мать Ираклія и Левана)</div>
+      <div class="person male" id="p-zhora" style="left: 230px; top: 430px; width: 175px;">
+        <div class="p-role">Дядя (Братъ отца)</div>
+        <div class="p-name">Жора (Георгій) Бенидзе</div>
+        <div class="p-geo">ჟორა (გიორგი) ბენიძე</div>
+        <div class="p-note">Отецъ Элисо, Наны, Хатуны, Пааты</div>
       </div>
 
-      <div class="person male" id="p-shalva-son" style="left: 2220px; top: 765px; width: 175px;">
-        <div class="p-role">Сынъ Шалвы (Дядя)</div>
-        <div class="p-name">Гія (Георгій) Каландія</div>
-        <div class="p-geo">გია (გიორგი) კალანდია</div>
-        <div class="p-note">Братъ Альдоны и Медеи (почивший)</div>
+      <div class="person male" id="p-ilya" style="left: 425px; top: 430px; width: 160px;">
+        <div class="p-role">Дядя (Братъ отца)</div>
+        <div class="p-name">Илья Бенидзе</div>
+        <div class="p-geo">ილია ბენიძე</div>
+        <div class="p-note">Былъ женатъ, бездѣтенъ</div>
       </div>
 
-      <!-- Приёмная дочь Надежды -->
-      <div class="person female" id="p-nanuli" style="left: 2420px; top: 765px; width: 195px;">
-        <div class="p-role">Воспитанница Надежды</div>
-        <div class="p-name">Нанули Гигинеишвили</div>
-        <div class="p-geo">ნანული გიგინეიშვილი</div>
-        <div class="p-note">Пріемная дочь Надежды</div>
+      <div class="person female" id="p-venera" style="left: 605px; top: 430px; width: 155px;">
+        <div class="p-role">Тетка (Сестра отца)</div>
+        <div class="p-name">Венера Бенидзе</div>
+        <div class="p-geo">ვენერა ბენიძე</div>
+        <div class="p-note">Сестра отца Важи</div>
       </div>
 
-      <!-- Дочь Нины -->
-      <div class="person female" id="p-nona-nina" style="left: 2660px; top: 765px; width: 185px;">
-        <div class="p-role">Дочь Нины (Жива)</div>
-        <div class="p-name">Нона</div>
-        <div class="p-geo">ნონა</div>
-        <div class="p-note">Двоюродная сестра матери</div>
+      <div class="person female" id="p-inessa" style="left: 1015px; top: 430px; width: 185px;">
+        <div class="p-role">Тетка Мамида (Жива)</div>
+        <div class="p-name">Инесса Бенидзе</div>
+        <div class="p-geo">ინესა ბენიძე</div>
+        <div class="p-note">Мать Абессалома, Лексо, Даты, Анзора</div>
       </div>
 
-      <!-- ================= КОЛѢНО VI-е (ДВОЮРОДНЫЕ, ВЫ И БРАТ ИРАКЛИЙ) ================= -->
-      <!-- Дети Жоры (Георгия): Элисо, Нана, Хатуна, Паата -->
-      <div class="person" id="p-zhora-children" style="left: 215px; top: 965px; width: 185px;">
-        <div class="p-role">Чада Жоры (Георгія)</div>
-        <div class="p-name">Элисо, Нана, Хатуна, Паата Бенидзе</div>
-        <div class="p-geo">ელისო, ნანა, ხათუნა, პაატა</div>
-        <div class="p-note">Двоюродные братья и сестры (въ Грузіи)</div>
+      <!-- Брат матери: Реваз -->
+      <div class="person male" id="p-revaz" style="left: 1265px; top: 430px; width: 195px;">
+        <div class="p-role">Дядя (Братъ матери)</div>
+        <div class="p-name">Ревазъ (Резо) Папава</div>
+        <div class="p-geo">რევაზ პაპავა</div>
+        <div class="p-note">21.12.1940 — палъ въ Сухумѣ 09.1993</div>
       </div>
 
-      <!-- Сыновья Инессы (Мамиды): Абессалом, Лексо, Дата, Анзор -->
-      <div class="person male" id="p-abessalom" style="left: 880px; top: 965px; width: 165px; border-top-color:#991b1b;">
-        <div class="p-role">Старшій Сынъ Инессы</div>
-        <div class="p-name">Абессаломъ</div>
-        <div class="p-geo">აბესალომი</div>
-        <div class="p-note">Палъ смертью храбрыхъ на Сухумской войнѣ</div>
+      <!-- ================= II-е ВОСХОДЯЩЕЕ КОЛѢНО: ДЕДУШКИ И БАБУШКИ ================= -->
+      <!-- Дед и Бабушка по отцу: Нестор Бенидзе + Минуша Агумава -->
+      <div class="person male direct" id="p-nestor" style="left: 420px; top: 620px; width: 210px;">
+        <div class="p-role">★ Дѣдушка (по отцу)</div>
+        <div class="p-name">Несторъ Бенидзе</div>
+        <div class="p-geo">ნესტორ ბენიძე</div>
+        <div class="p-note">Отецъ Важи, Шардена, Жоры, Ильи, Венеры, Инессы</div>
       </div>
 
-      <div class="person" id="p-inessa-sons" style="left: 1060px; top: 965px; width: 185px;">
-        <div class="p-role">Младшіе Сыновья Инессы</div>
-        <div class="p-name">Лексо (Алексъ), Дата (Давидъ), Анзоръ (Бачо)</div>
-        <div class="p-geo">ლექსო, დათა, ანზორი</div>
-        <div class="p-note">Двоюродные братья (въ добромъ здравіи)</div>
+      <div class="person female direct" id="p-minusha" style="left: 670px; top: 620px; width: 210px;">
+        <div class="p-role">★ Бабушка (по отцу)</div>
+        <div class="p-name">Минашъ (Минуша) Агумава</div>
+        <div class="p-geo">მინუშ აგუმავა</div>
+        <div class="p-note">Супруга Нестора Бенидзе</div>
       </div>
 
-      <!-- ВЫ: ТЕЙМУРАЗ -->
-      <div class="person male direct star-hero" id="p-temo" style="left: 1290px; top: 925px;">
-        <div class="hero-photo-wrap">
-          <img src="temo.jpg" alt="Теймуразъ Бенидзе">
-        </div>
-        <div class="p-role">★ Сынъ Дома Бенидзе</div>
-        <div class="p-name" style="font-size:16px;">Теймуразъ (Темо) Важаевичъ Бенидзе</div>
-        <div class="p-geo" style="font-size:12.5px;">თეიმურაზ ვაჟას ძე ბენიძე</div>
-        <div class="p-note">Сынъ Важи Бенидзе и Лейлы Папава</div>
+      <!-- Дед и Бабушка по матери: Орест Папава + Женя Каландия -->
+      <div class="person male direct" id="p-orest" style="left: 1350px; top: 620px; width: 215px;">
+        <div class="p-role">★ Дѣдушка (по матери)</div>
+        <div class="p-name">Орестъ Георгіевичъ Папава</div>
+        <div class="p-geo">ორესტ გიორგის ძე პაპავა</div>
+        <div class="p-note">Воспитанникъ Мингрельскаго дух. уч.; МВД Абхазіи</div>
       </div>
 
-      <!-- БРАТ: ИРАКЛИЙ -->
-      <div class="person male direct" id="p-irakli" style="left: 1545px; top: 965px; width: 220px;">
-        <div class="p-role">★ Родной Братъ</div>
-        <div class="p-name">Ираклій Важаевичъ Бенидзе</div>
-        <div class="p-geo">ირაკლი ვაჟას ძე ბენიძე</div>
-        <div class="p-note">Сынъ Важи и Лейлы (въ супружествѣ, трое чадъ)</div>
+      <div class="person female direct" id="p-zhenia" style="left: 1605px; top: 620px; width: 215px;">
+        <div class="p-role">★ Бабушка (по матери)</div>
+        <div class="p-name">Евгенія (Женя) Каландія</div>
+        <div class="p-geo">ევგენია (ჟენია) კალანდია</div>
+        <div class="p-note">Дочь Михаила и Евдокіи</div>
       </div>
 
-      <!-- Дочери Реваза: Нино и Женя -->
-      <div class="person female" id="p-nino-papava" style="left: 1770px; top: 965px; width: 170px;">
-        <div class="p-role">Старшая Дочь Резо</div>
-        <div class="p-name">Нино Ревазовна Папава</div>
-        <div class="p-geo">ნინო პაპავა</div>
-        <div class="p-note">Соученица Теймураза</div>
+      <!-- Братья и сестры бабушки Жени -->
+      <div class="person male" id="p-shalva" style="left: 1870px; top: 620px; width: 190px;">
+        <div class="p-role">Братъ Бабушки Жени</div>
+        <div class="p-name">Шалва Каландія</div>
+        <div class="p-geo">შალვა კალანდია</div>
+        <div class="p-note">Отецъ Альдоны, Медеи, Гіи</div>
       </div>
 
-      <div class="person female" id="p-zhenia-papava" style="left: 1955px; top: 965px; width: 175px;">
-        <div class="p-role">Младшая Дочь Резо</div>
-        <div class="p-name">Евгенія (Женя) Папава</div>
-        <div class="p-geo">ევგენია (ჟენია) პაპავა</div>
-        <div class="p-note">Соученица Ираклія</div>
+      <div class="person female" id="p-nadezhda" style="left: 2085px; top: 620px; width: 185px;">
+        <div class="p-role">Сестра Бабушки Жени</div>
+        <div class="p-name">Надежда Каландія</div>
+        <div class="p-geo">ნადეჟდა კალანდია</div>
+        <div class="p-note">Пріемная дочь: Нанули</div>
       </div>
 
-      <!-- Сыновья Медеи: Ираклий и Леван -->
-      <div class="person" id="p-medea-sons" style="left: 2025px; top: 965px; width: 175px;">
-        <div class="p-role">Сыновья Медеи</div>
-        <div class="p-name">Ираклій и Леванъ</div>
-        <div class="p-geo">ირაკლი და ლევანი</div>
-        <div class="p-note">Племянники Альдоны</div>
+      <div class="person female" id="p-nina" style="left: 2295px; top: 620px; width: 185px;">
+        <div class="p-role">Сестра Бабушки Жени</div>
+        <div class="p-name">Нина Каландія</div>
+        <div class="p-geo">ნინა კალანდია</div>
+        <div class="p-note">Дочь: Нона • Внукъ: Ника</div>
       </div>
 
-      <!-- Сын брата Альдоны: Георгий -->
-      <div class="person male" id="p-giorgi-kalandia" style="left: 2220px; top: 965px; width: 175px;">
-        <div class="p-role">Племянникъ Альдоны</div>
-        <div class="p-name">Георгій Каландія</div>
-        <div class="p-geo">გიორგი კალანდია</div>
-        <div class="p-note">Сынъ почившаго брата Альдоны</div>
+      <!-- ================= III-е ВОСХОДЯЩЕЕ КОЛѢНО: ПРАДЕДЫ ================= -->
+      <div class="person male" id="p-estate" style="left: 1530px; top: 810px; width: 175px;">
+        <div class="p-role">Братъ Прадѣда</div>
+        <div class="p-name">Евстафій (Эстатэ) Каландія</div>
+        <div class="p-geo">ესტატე კალანდია</div>
+        <div class="p-note">Сынъ Бачу и Кесо Кухилава</div>
       </div>
 
-      <!-- Сын Ноны: Ника -->
-      <div class="person male" id="p-nika" style="left: 2660px; top: 965px; width: 185px;">
-        <div class="p-role">Сынъ Ноны (Внукъ Нины)</div>
-        <div class="p-name">Ника</div>
-        <div class="p-geo">ნიკა</div>
-        <div class="p-note">Отрасль Нины Михайловны</div>
+      <div class="person male direct" id="p-mikha" style="left: 1735px; top: 810px; width: 215px;">
+        <div class="p-role">★ Прадѣдъ (по матери)</div>
+        <div class="p-name">Михаилъ (Миха) Каландія</div>
+        <div class="p-geo">მიხეილ (მიხა) კალანდია</div>
+        <div class="p-note">Сынъ Бачу Каландія и Кесо Кухилава</div>
       </div>
 
-      <!-- ================= КОЛѢНО VII-е (ПЛЕМЯННИКИ — ЧАДА ИРАКЛИЯ) ================= -->
-      <div class="person female direct" id="p-leila-jr" style="left: 1300px; top: 1165px; width: 200px;">
-        <div class="p-role">Племянница (Дочь Ираклія)</div>
-        <div class="p-name">Лейла Иракліевна Бенидзе</div>
-        <div class="p-geo">ლეილა ირაკლის ასული ბენიძე</div>
-        <div class="p-note">Наречена въ память бабки Лейлы</div>
+      <div class="person female direct" id="p-evdokia" style="left: 1990px; top: 810px; width: 215px;">
+        <div class="p-role">★ Прабабка (по матери)</div>
+        <div class="p-name">Евдокія Павловна Лукава</div>
+        <div class="p-geo">ევდოკია პავლეს ასული ლუკავა</div>
+        <div class="p-note">Дочь Павла Лукава и Саломіи Какачія</div>
       </div>
 
-      <div class="person male direct" id="p-vazha-jr" style="left: 1535px; top: 1165px; width: 200px;">
-        <div class="p-role">Племянникъ (Сынъ Ираклія)</div>
-        <div class="p-name">Важа Иракліевичъ Бенидзе</div>
-        <div class="p-geo">ვაჟა ირაკლის ძე ბენიძე</div>
-        <div class="p-note">Нареченъ въ честь дѣда Важи</div>
+      <div class="person female" id="p-lukava-sisters" style="left: 2235px; top: 810px; width: 220px;">
+        <div class="p-role">Сестры Прабабки</div>
+        <div class="p-name">Параскева, Марина, Ольга</div>
+        <div class="p-geo">პარასკევა, მარინე, ოლღა ლუკავა</div>
+        <div class="p-note">Дочери Павла Лукава</div>
       </div>
 
-      <div class="person male direct" id="p-giorgi-benidze" style="left: 1770px; top: 1165px; width: 200px;">
-        <div class="p-role">Племянникъ (Сынъ Ираклія)</div>
-        <div class="p-name">Георгій Иракліевичъ Бенидзе</div>
-        <div class="p-geo">გიორგი ირაკლის ძე ბენიძე</div>
-        <div class="p-note">Младшій сынъ Ираклія Важаевича</div>
+      <!-- ================= IV-е ВОСХОДЯЩЕЕ КОЛѢНО: ПРАПРАДЕДЫ ================= -->
+      <div class="person male direct" id="p-bachu" style="left: 1610px; top: 1010px; width: 210px;">
+        <div class="p-role">★ Прапрадѣдъ (Сынъ Биту)</div>
+        <div class="p-name">Бачу Битуевичъ Каландія</div>
+        <div class="p-geo">ბაჩუ ბითუს ძე კალანდია</div>
+        <div class="p-note">Отецъ Михаила и Эстатэ</div>
+      </div>
+
+      <div class="person female direct" id="p-keso" style="left: 1855px; top: 1010px; width: 200px;">
+        <div class="p-role">★ Прапрабабка (Супруга Бачу)</div>
+        <div class="p-name">Кесо Кухилава</div>
+        <div class="p-geo">კესო ქუხილავა</div>
+        <div class="p-note">Мать Михаила и Эстатэ</div>
+      </div>
+
+      <div class="person male direct" id="p-pavel" style="left: 2110px; top: 1010px; width: 210px;">
+        <div class="p-role">★ Прапрадѣдъ (Отецъ Евдокіи)</div>
+        <div class="p-name">Павелъ Лукава</div>
+        <div class="p-geo">პავლე ლუკავა</div>
+        <div class="p-note">Изъ с. Обуджи въ с. Нижняя Абжаква (1880-е)</div>
+      </div>
+
+      <div class="person female direct" id="p-salome" style="left: 2350px; top: 1010px; width: 200px;">
+        <div class="p-role">★ Прапрабабка (Супруга Павла)</div>
+        <div class="p-name">Саломія (Саломе) Какачія</div>
+        <div class="p-geo">სალომე კაკაჩია</div>
+        <div class="p-note">Мать 4 девицъ Лукава</div>
+      </div>
+
+      <!-- ================= V-е ВОСХОДЯЩЕЕ КОЛѢНО: РОДОНАЧАЛЬНИК ================= -->
+      <div class="person male direct" id="p-bitu" style="left: 1610px; top: 1210px; width: 210px;">
+        <div class="p-role">★ Родоначальникъ Рода</div>
+        <div class="p-name">Биту Каландадзе (Каландія)</div>
+        <div class="p-geo">ბითუ კალანდაძე / კალანდია</div>
+        <div class="p-note">Прапрапрадѣдъ • Гурійскій корень рода</div>
       </div>
 
     </div>
 
-    <!-- ПОДВАЛ ГРАМОТЫ С СУРГУЧНОЙ ПЕЧАТЬЮ -->
     <div class="charter-footer">
       <div>
-        Настоящая Поколѣнная Роспись составлена по фамильнымъ преданіямъ, метрическимъ вѣдомостямъ и архивнымъ изысканіямъ.<br>
+        Настоящая Восходящая Поколѣнная Роспись составлена по фамильнымъ преданіямъ, метрическимъ вѣдомостямъ и архивнымъ изысканіямъ.<br>
         <em>Соединенныя Вѣтви: Бенидзе — Агумава — Папава — Каландія (Каландадзе) — Лукава.</em>
       </div>
       <div class="wax-seal">
@@ -792,109 +640,116 @@
       return { x: mx, y: y };
     }
 
-    function drawChildrenBus(originX, originY, busY, childIds, color = '#8b1e1e', width = 2.8) {
-      line(originX, originY, originX, busY, color, width);
-      dot(originX, busY, color, 4.5);
-
-      const childBoxes = childIds.map(id => box(id));
-      const minX = Math.min(originX, ...childBoxes.map(b => b.cx));
-      const maxX = Math.max(originX, ...childBoxes.map(b => b.cx));
-
-      line(minX, busY, maxX, busY, color, width);
-
-      childBoxes.forEach(b => {
-        line(b.cx, busY, b.cx, b.top, color, width);
-        dot(b.cx, b.top, color, 4.5);
-      });
-    }
-
     function renderTree() {
       svg.innerHTML = '';
 
-      const crimson = '#8b1e1e';   // Главная линия и браки
+      const crimson = '#8b1e1e';   // Главная восходящая линия
       const amber = '#b45309';     // Отцовская ветвь Бенидзе
       const navy = '#162f65';      // Ветвь Каландия и Папава
       const forest = '#14532d';    // Ветвь Лукава
       const bronze = '#6e4f26';    // Боковые ветви
 
-      // 1. Биту -> Бачу
+      // 1. Брак родителей Важа + Лейла
+      const mVazhaLeila = drawMarriage('p-vazha', 'p-leila', crimson);
+
+      // 2. От родителей ВВЕРХ идёт связь к Теймуразу
+      const temo = box('p-temo');
+      line(mVazhaLeila.x, mVazhaLeila.y, mVazhaLeila.x, temo.bottom + 20, crimson, 3.2);
+      line(mVazhaLeila.x, temo.bottom + 20, temo.cx, temo.bottom + 20, crimson, 3.2);
+      line(temo.cx, temo.bottom + 20, temo.cx, temo.bottom, crimson, 3.2);
+      dot(temo.cx, temo.bottom, crimson, 6);
+
+      // 3. От родителей связь к брату Ираклию
+      const irakli = box('p-irakli');
+      line(mVazhaLeila.x, temo.bottom + 20, irakli.cx, temo.bottom + 20, crimson, 2.5);
+      line(irakli.cx, temo.bottom + 20, irakli.cx, irakli.top, crimson, 2.5);
+      dot(irakli.cx, irakli.top, crimson);
+
+      // 4. Брак Ираклия и Кети Бочоришвили
+      drawMarriage('p-irakli', 'p-keti', crimson);
+
+      // 5. Брак дедушки и бабушки по отцу: Нестор + Минуша
+      const mNestorMinusha = drawMarriage('p-nestor', 'p-minusha', amber);
+
+      // От союза Нестора и Минуши вверх шина к Важе и его братьям/сестрам
+      const vazha = box('p-vazha');
+      const sharden = box('p-sharden');
+      const zhora = box('p-zhora');
+      const ilya = box('p-ilya');
+      const venera = box('p-venera');
+      const inessa = box('p-inessa');
+
+      const busY_benidze = mNestorMinusha.y - 45;
+      line(mNestorMinusha.x, mNestorMinusha.y, mNestorMinusha.x, busY_benidze, amber, 3);
+      line(sharden.cx, busY_benidze, inessa.cx, busY_benidze, amber, 2.5);
+
+      [sharden, zhora, ilya, venera, vazha, inessa].forEach(b => {
+        line(b.cx, busY_benidze, b.cx, b.bottom, amber, 2.5);
+        dot(b.cx, b.bottom, amber);
+      });
+
+      // 6. Брак дедушки и бабушки по матери: Орест + Женя
+      const mOrestZhenia = drawMarriage('p-orest', 'p-zhenia', crimson);
+
+      // От Ореста и Жени вверх шина к Лейле и Ревазу
+      const leila = box('p-leila');
+      const revaz = box('p-revaz');
+      const busY_papava = mOrestZhenia.y - 45;
+      line(mOrestZhenia.x, mOrestZhenia.y, mOrestZhenia.x, busY_papava, crimson, 3);
+      line(revaz.cx, busY_papava, leila.cx, busY_papava, crimson, 2.8);
+      line(revaz.cx, busY_papava, revaz.cx, revaz.bottom, crimson, 2.5);
+      line(leila.cx, busY_papava, leila.cx, leila.bottom, crimson, 3);
+      dot(revaz.cx, revaz.bottom, crimson);
+      dot(leila.cx, leila.bottom, crimson);
+
+      // 7. Брак прадеда Михи и прабабушки Евдокии
+      const mMikhaEvdokia = drawMarriage('p-mikha', 'p-evdokia', crimson);
+
+      // От Михи и Евдокии вверх шина к Жене, Шалве, Надежде, Нине
+      const zhenia = box('p-zhenia');
+      const shalva = box('p-shalva');
+      const nadezhda = box('p-nadezhda');
+      const nina = box('p-nina');
+      const busY_kalandia = mMikhaEvdokia.y - 45;
+
+      line(mMikhaEvdokia.x, mMikhaEvdokia.y, mMikhaEvdokia.x, busY_kalandia, crimson, 3);
+      line(zhenia.cx, busY_kalandia, nina.cx, busY_kalandia, crimson, 2.5);
+
+      [zhenia, shalva, nadezhda, nina].forEach(b => {
+        line(b.cx, busY_kalandia, b.cx, b.bottom, crimson, 2.5);
+        dot(b.cx, b.bottom, crimson);
+      });
+
+      // 8. Брак Бачу + Кесо
+      const mBachuKeso = drawMarriage('p-bachu', 'p-keso', navy);
+      const estate = box('p-estate');
+      const mikha = box('p-mikha');
+      const busY_bachu = mBachuKeso.y - 45;
+      line(mBachuKeso.x, mBachuKeso.y, mBachuKeso.x, busY_bachu, navy, 3);
+      line(estate.cx, busY_bachu, mikha.cx, busY_bachu, navy, 2.5);
+      line(estate.cx, busY_bachu, estate.cx, estate.bottom, navy, 2.5);
+      line(mikha.cx, busY_bachu, mikha.cx, mikha.bottom, navy, 2.8);
+      dot(estate.cx, estate.bottom, navy);
+      dot(mikha.cx, mikha.bottom, navy);
+
+      // 9. Брак Павел Лукава + Саломе Какачия
+      const mPavelSalome = drawMarriage('p-pavel', 'p-salome', forest);
+      const evdokia = box('p-evdokia');
+      const sisters = box('p-lukava-sisters');
+      const busY_lukava = mPavelSalome.y - 45;
+      line(mPavelSalome.x, mPavelSalome.y, mPavelSalome.x, busY_lukava, forest, 3);
+      line(evdokia.cx, busY_lukava, sisters.cx, busY_lukava, forest, 2.5);
+      line(evdokia.cx, busY_lukava, evdokia.cx, evdokia.bottom, forest, 2.8);
+      line(sisters.cx, busY_lukava, sisters.cx, sisters.bottom, forest, 2.5);
+      dot(evdokia.cx, evdokia.bottom, forest);
+      dot(sisters.cx, sisters.bottom, forest);
+
+      // 10. Биту -> Бачу (вертикаль вглубь веков)
       const bitu = box('p-bitu');
       const bachu = box('p-bachu');
-      line(bitu.cx, bitu.bottom, bachu.cx, bachu.top, navy, 3.2);
-      dot(bitu.cx, bitu.bottom, navy);
-      dot(bachu.cx, bachu.top, navy);
-
-      // 2. Брак Бачу + Кесо -> Эстатэ и Миха
-      const mBachuKeso = drawMarriage('p-bachu', 'p-keso', navy);
-      drawChildrenBus(mBachuKeso.x, mBachuKeso.y, 342, ['p-estate', 'p-mikha'], navy, 3);
-
-      // 3. Брак Павел Лукава + Саломе Какачия -> Евдокия и сестры
-      const mPavelSalome = drawMarriage('p-pavel', 'p-salome', forest);
-      drawChildrenBus(mPavelSalome.x, mPavelSalome.y, 342, ['p-evdokia', 'p-lukava-sisters'], forest, 3);
-
-      // 4. Брак Миха Каландия + Евдокия Лукава -> Женя, Шалва, Надежда, Нина
-      const mMikhaEvdokia = drawMarriage('p-mikha', 'p-evdokia', crimson);
-      drawChildrenBus(mMikhaEvdokia.x, mMikhaEvdokia.y, 535, ['p-zhenia', 'p-shalva', 'p-nadezhda', 'p-nina'], crimson, 3.2);
-
-      // 5. БРАК ДЕДУШКИ И БАБУШКИ ПО ОТЦУ: Нестор Бенидзе + Минуша Агумава -> Важа, Шарден, Жора, Илья, Венера, Инесса
-      const mNestorMinusha = drawMarriage('p-nestor', 'p-minusha', amber);
-      drawChildrenBus(mNestorMinusha.x, mNestorMinusha.y, 725, ['p-sharden', 'p-zhora', 'p-ilya', 'p-venera', 'p-vazha', 'p-inessa'], amber, 3.2);
-
-      // 6. БРАК ДЕДУШКИ И БАБУШКИ ПО МАТЕРИ: Орест Папава + Женя Каландия -> Реваз и Лейла
-      const mOrestZhenia = drawMarriage('p-orest', 'p-zhenia', crimson);
-      drawChildrenBus(mOrestZhenia.x, mOrestZhenia.y, 725, ['p-revaz', 'p-leila'], crimson, 3.2);
-
-      // 7. Жора (Георгий) Бенидзе -> дети: Исо, Нана, Атуна, Паата
-      const zhora = box('p-zhora');
-      const zhoraChildren = box('p-zhora-children');
-      line(zhora.cx, zhora.bottom, zhoraChildren.cx, zhoraChildren.top, amber, 2.5);
-      dot(zhoraChildren.cx, zhoraChildren.top, amber);
-
-      // 8. Инесса (Мамида) -> сыновья Абессалом, Лексо, Дата, Анзор
-      const inessa = box('p-inessa');
-      drawChildrenBus(inessa.cx, inessa.bottom, 915, ['p-abessalom', 'p-inessa-sons'], amber, 2.5);
-
-      // 9. БРАК РОДИТЕЛЕЙ: Важа Бенидзе + Лейла Папава -> Теймураз и Ираклий
-      const mVazhaLeila = drawMarriage('p-vazha', 'p-leila', crimson);
-      drawChildrenBus(mVazhaLeila.x, mVazhaLeila.y, 915, ['p-temo', 'p-irakli'], crimson, 3.5);
-
-      // 10. Дядя Реваз (Резо) Папава -> дочери Нино и Женя
-      const revaz = box('p-revaz');
-      drawChildrenBus(revaz.cx, revaz.bottom, 915, ['p-nino-papava', 'p-zhenia-papava'], navy, 2.5);
-
-      // 11. Шалва Каландия -> Альдона, Медея, покойный сын
-      const shalva = box('p-shalva');
-      drawChildrenBus(shalva.cx, shalva.bottom, 725, ['p-aldona', 'p-medea', 'p-shalva-son'], bronze, 2.4);
-
-      // 12. Покойный сын Шалвы -> Георгий Каландия
-      const medea = box('p-medea');
-      const medeaSons = box('p-medea-sons');
-      line(medea.cx, medea.bottom, medeaSons.cx, medeaSons.top, bronze, 2.4);
-      dot(medeaSons.cx, medeaSons.top, bronze);
-
-      const shalvaSon = box('p-shalva-son');
-      const giorgiK = box('p-giorgi-kalandia');
-      line(shalvaSon.cx, shalvaSon.bottom, giorgiK.cx, giorgiK.top, bronze, 2.4);
-      dot(giorgiK.cx, giorgiK.top, bronze);
-
-      // 13. Надежда Каландия -> Нанули Гигинеишвили
-      const nadezhda = box('p-nadezhda');
-      const nanuli = box('p-nanuli');
-      line(nadezhda.cx, nadezhda.bottom, nanuli.cx, nanuli.top, bronze, 2.4, true);
-      dot(nanuli.cx, nanuli.top, bronze);
-
-      // 14. Нина Каландия -> Нона -> Ника
-      const nina = box('p-nina');
-      const nona = box('p-nona-nina');
-      const nika = box('p-nika');
-      line(nina.cx, nina.bottom, nona.cx, nona.top, bronze, 2.4);
-      dot(nona.cx, nona.top, bronze);
-      line(nona.cx, nona.bottom, nika.cx, nika.top, bronze, 2.4);
-      dot(nika.cx, nika.top, bronze);
-
-      // 15. Ираклий Важаевич Бенидзе -> трое чад: Лейла, Важа, Георгий
-      const irakli = box('p-irakli');
-      drawChildrenBus(irakli.cx, irakli.bottom, 1120, ['p-leila-jr', 'p-vazha-jr', 'p-giorgi-benidze'], crimson, 3);
+      line(bachu.cx, bachu.bottom, bitu.cx, bitu.top, navy, 3);
+      dot(bachu.cx, bachu.bottom, navy);
+      dot(bitu.cx, bitu.top, navy);
     }
 
     window.addEventListener('load', renderTree);
