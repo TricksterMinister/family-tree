@@ -105,11 +105,63 @@
     .legend-bar {
       display: flex;
       justify-content: center;
-      gap: 36px;
+      align-items: center;
+      gap: 32px;
       margin-top: 14px;
       font-size: 13.5px;
       font-weight: 700;
       color: #2b1d0e;
+    }
+    .version-switcher {
+      display: inline-flex;
+      background: #2b1d0e;
+      border: 2px solid #c59b4e;
+      border-radius: 30px;
+      padding: 3px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .version-btn {
+      padding: 6px 18px;
+      border-radius: 25px;
+      font-family: 'Old Standard TT', serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fbf5e6;
+      transition: all 0.2s ease;
+    }
+    .version-btn.active {
+      background: linear-gradient(180deg, #b91c1c 0%, #7f1d1d 100%);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    .version-btn:hover:not(.active) {
+      background: rgba(197, 155, 78, 0.25);
+    }
+
+    .person.star-hero {
+      border: 3.5px solid #d97706;
+      background: linear-gradient(180deg, #fffef9 0%, #fef3c7 100%);
+      box-shadow: 0 0 35px rgba(217, 119, 6, 0.65), 0 10px 25px rgba(0,0,0,0.4);
+      z-index: 8;
+      width: 235px !important;
+    }
+    .hero-photo-wrap {
+      width: 86px;
+      height: 86px;
+      margin: 0 auto 6px;
+      border-radius: 50%;
+      border: 3px solid #d97706;
+      padding: 2px;
+      background: #fbf5e6;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
     .legend-item {
       display: flex;
@@ -329,6 +381,10 @@
       </div>
 
       <div class="legend-bar">
+        <div class="version-switcher">
+          <a href="index.html" class="version-btn active">★ ВЕРСІЯ ТЕЙМУРАЗА (ТЕМО)</a>
+          <a href="irakli.html" class="version-btn">★ ВЕРСІЯ ИРАКЛІЯ</a>
+        </div>
         <div class="legend-item"><span class="legend-line" style="background:#8b1e1e;"></span> Прямая Родословная Линія и Брачные Союзы (═•═)</div>
         <div class="legend-item"><span class="legend-line" style="background:#b45309;"></span> Отцовская Вѣтвь: Родъ Бенидзе и Агумава</div>
         <div class="legend-item"><span class="legend-line" style="background:#162f65;"></span> Вѣтвь Рода Каландія (Каландадзе) и Папава</div>
@@ -590,16 +646,19 @@
         <div class="p-note">Двоюродные братья (въ добромъ здравіи)</div>
       </div>
 
-      <!-- ВЫ: ТЕЙМУРАЗ -->
-      <div class="person male direct" id="p-temo" style="left: 1300px; top: 965px; width: 210px;">
-        <div class="p-role">★ Составитель Росписи</div>
-        <div class="p-name">Теймуразъ (Темо) Важаевичъ Бенидзе</div>
-        <div class="p-geo">თეიმურაზ ვაჟას ძე ბენიძე</div>
-        <div class="p-note">Сынъ Важи Бенидзе и Лейлы Папава</div>
+      <!-- ВЫ: ТЕЙМУРАЗ (ЗВЕЗДА ШОУ) -->
+      <div class="person male direct star-hero" id="p-temo" style="left: 1290px; top: 925px;">
+        <div class="hero-photo-wrap">
+          <img src="temo.png" alt="Теймуразъ Бенидзе">
+        </div>
+        <div class="p-role" style="color:#b45309; font-size:10.5px;">★ ГЛАВНЫЙ ГЕРОЙ РОСПИСИ ★</div>
+        <div class="p-name" style="font-size:16.5px;">Теймуразъ (Темо) Важаевичъ Бенидзе</div>
+        <div class="p-geo" style="font-size:12.5px;">თეიმურაზ ვაჟას ძე ბენიძე</div>
+        <div class="p-note">Сынъ Важи Бенидзе и Лейлы Папава • Составитель древа</div>
       </div>
 
       <!-- БРАТ: ИРАКЛИЙ -->
-      <div class="person male direct" id="p-irakli" style="left: 1530px; top: 965px; width: 210px;">
+      <div class="person male direct" id="p-irakli" style="left: 1545px; top: 965px; width: 220px;">
         <div class="p-role">★ Родной Братъ</div>
         <div class="p-name">Ираклій Важаевичъ Бенидзе</div>
         <div class="p-geo">ირაკლი ვაჟას ძე ბენიძე</div>
