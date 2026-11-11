@@ -66,8 +66,8 @@ body.has-focus #sukhumi-bg {
 #sukhumi-bg .sk-layer {
   position: absolute;
   inset: 0;
-  -webkit-mask-image: url('sukhumi_contours.webp');
-  mask-image: url('sukhumi_contours.webp');
+  -webkit-mask-image: url('sukhumi_contours.webp?v=7');
+  mask-image: url('sukhumi_contours.webp?v=7');
   -webkit-mask-size: cover;
   mask-size: cover;
   -webkit-mask-position: center;
