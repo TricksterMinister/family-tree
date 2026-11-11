@@ -259,6 +259,12 @@
     rail.appendChild(e); return e;
   });
 
+  const LIGHT_LABELS = {
+    sunset: ['☀️ მზის ჩასვლა', '☀️ Sunset', '☀️ Закат'],
+    opal: ['💎 ოპალი', '💎 Opal', '💎 Опал'],
+    promenade: ['🏮 სოხუმის ჩირაღდნები', '🏮 Promenade', '🏮 Огни']
+  };
+
   function paintText() {
     const i = li();
     N.forEach(n => {
@@ -272,6 +278,10 @@
     genEls.forEach((e, k) => { $('span', e).textContent = tr(GENS[k][1]); });
     wingEls.forEach((e, k) => { e.textContent = tr(WINGS[k].key); });
     document.querySelectorAll('#lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+    document.querySelectorAll('#light-switcher button').forEach(b => {
+      const k = b.dataset.light;
+      if (LIGHT_LABELS[k]) b.textContent = LIGHT_LABELS[k][i];
+    });
     document.documentElement.lang = lang;
     document.title = tr('title');
   }
@@ -556,13 +566,60 @@
   const heroImg = $('.hero .photo img');
   if (heroImg && !heroImg.complete) heroImg.addEventListener('load', () => { if (started) buildEdgesInstant(); });
 
+  /* Light mode switcher (sunset | opal | promenade) */
+  let lightMode = 'sunset';
+  try {
+    const savedLight = localStorage.getItem('atlas-light');
+    if (['sunset', 'opal', 'promenade'].includes(savedLight)) lightMode = savedLight;
+  } catch (e) {}
+  document.body.dataset.light = lightMode;
+
+  function setLightMode(m) {
+    lightMode = m;
+    document.body.dataset.light = m;
+    try { localStorage.setItem('atlas-light', m); } catch (e) {}
+    document.querySelectorAll('#light-switcher button').forEach(b => {
+      b.classList.toggle('on', b.dataset.light === m);
+    });
+  }
+  setLightMode(lightMode);
+
+  const lightSwitcher = $('#light-switcher');
+  if (lightSwitcher) {
+    lightSwitcher.addEventListener('click', e => {
+      const b = e.target.closest('button[data-light]');
+      if (b) setLightMode(b.dataset.light);
+    });
+  }
+
   /* Interactive specular glint & subtle parallax for the frameless Sukhumi engraving */
   const rootStyle = document.documentElement.style;
   addEventListener('pointermove', e => {
-    rootStyle.setProperty('--mx', e.clientX + 'px');
-    rootStyle.setProperty('--my', e.clientY + 'px');
-    rootStyle.setProperty('--px', ((0.5 - e.clientX / innerWidth) * 14).toFixed(1) + 'px');
-    rootStyle.setProperty('--py', ((0.5 - e.clientY / innerHeight) * 10).toFixed(1) + 'px');
+    const x = e.clientX, y = e.clientY;
+    rootStyle.setProperty('--mx', x + 'px');
+    rootStyle.setProperty('--my', y + 'px');
+    rootStyle.setProperty('--px', ((0.5 - x / innerWidth) * 14).toFixed(1) + 'px');
+    rootStyle.setProperty('--py', ((0.5 - y / innerHeight) * 10).toFixed(1) + 'px');
+
+    if (lightMode === 'promenade') {
+      const r = Math.max(0, Math.min(1, x / innerWidth));
+      if (r < 0.45) {
+        rootStyle.setProperty('--prom-c1', 'rgba(167, 243, 208, 0.95)');
+        rootStyle.setProperty('--prom-c2', 'rgba(45, 212, 191, 0.92)');
+        rootStyle.setProperty('--prom-c3', 'rgba(59, 130, 246, 0.75)');
+        rootStyle.setProperty('--prom-drop', 'rgba(45, 212, 191, 0.65)');
+      } else if (r > 0.55) {
+        rootStyle.setProperty('--prom-c1', 'rgba(254, 215, 170, 0.95)');
+        rootStyle.setProperty('--prom-c2', 'rgba(249, 115, 22, 0.92)');
+        rootStyle.setProperty('--prom-c3', 'rgba(225, 29, 72, 0.75)');
+        rootStyle.setProperty('--prom-drop', 'rgba(249, 115, 22, 0.7)');
+      } else {
+        rootStyle.setProperty('--prom-c1', 'rgba(254, 240, 138, 0.95)');
+        rootStyle.setProperty('--prom-c2', 'rgba(251, 146, 60, 0.92)');
+        rootStyle.setProperty('--prom-c3', 'rgba(168, 85, 247, 0.72)');
+        rootStyle.setProperty('--prom-drop', 'rgba(251, 146, 60, 0.65)');
+      }
+    }
   }, { passive: true });
 
   window.__atlas = { select, flyRect, BOUNDS, HOME, N, BIO, cam };

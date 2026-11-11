@@ -107,21 +107,77 @@ body.has-focus #sukhumi-bg {
 }
 /* 3. Interactive mouse-reactive specular glint along the contours */
 #sukhumi-bg .sk-glint {
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+/* Режим 1: «Закатный луч» (Солнечный янтарь + Тёплый оранж + Платина) */
+body[data-light="sunset"] #sukhumi-bg .sk-glint,
+body:not([data-light]) #sukhumi-bg .sk-glint {
   background:
     radial-gradient(
-      460px circle at var(--mx, 50%) var(--my, 50%),
+      520px circle at var(--mx, 50%) var(--my, 50%),
       rgba(255, 255, 255, 1) 0%,
-      rgba(111, 168, 199, 0.85) 28%,
-      rgba(163, 148, 224, 0.8) 54%,
+      rgba(254, 215, 170, 0.95) 15%,
+      rgba(249, 115, 22, 0.92) 34%,
+      rgba(225, 29, 72, 0.55) 56%,
+      rgba(163, 148, 224, 0.3) 76%,
       transparent 100%
     ),
     radial-gradient(
-      220px circle at var(--mx, 50%) var(--my, 50%),
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      #ffffff 0%,
+      rgba(253, 186, 116, 0.85) 45%,
+      transparent 100%
+    );
+  filter: drop-shadow(0 0 14px rgba(249, 115, 22, 0.75));
+}
+
+/* Режим 2: «Ювелирный опал» (Многослойный призматический перелив) */
+body[data-light="opal"] #sukhumi-bg .sk-glint {
+  background:
+    radial-gradient(
+      560px circle at var(--mx, 50%) var(--my, 50%),
+      #ffffff 0%,
+      rgba(254, 240, 138, 0.95) 12%,
+      rgba(249, 115, 22, 0.88) 25%,
+      rgba(236, 72, 153, 0.82) 42%,
+      rgba(168, 85, 247, 0.78) 60%,
+      rgba(6, 182, 212, 0.65) 78%,
+      transparent 100%
+    ),
+    radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      transparent 100%
+    );
+  filter: drop-shadow(0 0 14px rgba(236, 72, 153, 0.65));
+}
+
+/* Режим 3: «Огни вечернего Сухуми» (Морская лазурь слева и янтарные фонари справа) */
+body[data-light="promenade"] #sukhumi-bg .sk-glint {
+  background:
+    radial-gradient(
+      520px circle at var(--mx, 50%) var(--my, 50%),
+      #ffffff 0%,
+      var(--prom-c1, rgba(254, 215, 170, 0.95)) 16%,
+      var(--prom-c2, rgba(249, 115, 22, 0.9)) 38%,
+      var(--prom-c3, rgba(225, 29, 72, 0.75)) 62%,
+      transparent 100%
+    ),
+    radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
       #ffffff 0%,
       transparent 100%
     );
-  filter: drop-shadow(0 0 7px rgba(223, 230, 240, 0.55));
-  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 14px var(--prom-drop, rgba(249, 115, 22, 0.7)));
+}
+
+#light-switcher button {
+  padding: 7px 12px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
 }
 
 .grain {
