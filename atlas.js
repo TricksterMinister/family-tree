@@ -58,7 +58,11 @@
     'nanuli': ['Nanuli Gigeneishvili', 'Нанули Гигенеишвили', 'f', 'maternalAunt'],
     'irakli-medea': ['Irakli', 'Ираклий', 'm', 'cousin2'],
     'levan-medea': ['Levan', 'Леван', 'm', 'cousin2'],
-    'giorgi-giya': ['Giorgi Kalandia', 'Георгий Каландия', 'm', 'cousin2']
+    'giorgi-giya': ['Giorgi Kalandia', 'Георгий Каландия', 'm', 'cousin2'],
+    'eliso': ['Eliso Benidze', 'Элисо Георгиевна Бенидзе', 'f', 'cousin'],
+    'nana-benidze': ['Nana Benidze', 'Нана Георгиевна Бенидзе', 'f', 'cousin'],
+    'khatuna': ['Khatuna Benidze', 'Хатуна Георгиевна Бенидзе', 'f', 'cousin'],
+    'paata': ['Paata Benidze', 'Паата Георгиевич Бенидзе', 'm', 'cousin']
   };
 
   const ROLE = {
@@ -156,8 +160,9 @@
     bachu: ['bitu'],
     'child-leila': ['irakli', 'keti'], 'child-vazha': ['irakli', 'keti'], 'child-giorgi': ['irakli', 'keti'],
     abessalom: ['inessa'], lekso: ['inessa'], data: ['inessa'], 'anzor-bacho': ['inessa'],
+    eliso: ['zhora'], 'nana-benidze': ['zhora'], khatuna: ['zhora'], paata: ['zhora'],
     'nino-papava': ['revaz'], 'zhenia-papava': ['revaz'],
-    aldona: ['shalva'], medea: ['shalva'], 'giya-kalandia': ['shalva'], nanuli: ['shalva'],
+    aldona: ['shalva'], medea: ['shalva'], 'giya-kalandia': ['shalva'], nanuli: ['nadezhda'],
     'irakli-medea': ['medea'], 'levan-medea': ['medea'], 'giorgi-giya': ['giya-kalandia']
   };
   const COUPLES = [['irakli', 'keti'], ['vazha', 'leila'], ['nestor', 'minusha'], ['orest', 'zhenia'], ['mikha', 'evdokia'], ['bachu', 'keso'], ['pavel', 'salome']];
@@ -202,11 +207,16 @@
     add('temo', 0, Y0, 580, 'bottom', 'direct', 0, { hero: 'photo' });
     add('irakli', 455, Y0, 230, 'bottom', 'direct', 0.4);
     add('keti', 735, Y0, 230, 'bottom', 'kin', 0.6);
+    // Zhora's children (paternal first cousins, Gen 0 on far left):
+    add('eliso', -1590, Y0, 160, 'bottom', 'collateral', 0.3);
+    add('nana-benidze', -1420, Y0, 160, 'bottom', 'collateral', 0.4);
+    add('khatuna', -1250, Y0, 160, 'bottom', 'collateral', 0.5);
+    add('paata', -1080, Y0, 160, 'bottom', 'collateral', 0.6);
     // Inessa's sons (paternal first cousins, Gen 0 on left):
-    add('abessalom', -1040, Y0, 180, 'bottom', 'collateral', 0.5);
-    add('lekso', -830, Y0, 175, 'bottom', 'collateral', 0.6);
-    add('data', -630, Y0, 175, 'bottom', 'collateral', 0.7);
-    add('anzor-bacho', -430, Y0, 175, 'bottom', 'collateral', 0.8);
+    add('abessalom', -900, Y0, 170, 'bottom', 'collateral', 0.5);
+    add('lekso', -730, Y0, 165, 'bottom', 'collateral', 0.6);
+    add('data', -560, Y0, 165, 'bottom', 'collateral', 0.7);
+    add('anzor-bacho', -390, Y0, 165, 'bottom', 'collateral', 0.8);
     // Revaz's daughters (maternal first cousins, Gen 0 on right):
     add('nino-papava', 980, Y0, 190, 'bottom', 'collateral', 0.5);
     add('zhenia-papava', 1195, Y0, 190, 'bottom', 'collateral', 0.6);
@@ -221,11 +231,16 @@
     add('irakli', -190, Y0, 310, 'bottom', 'direct', 0.5, { hero: 'portrait' });
     add('keti', 165, Y0, 260, 'bottom', 'kin', 0.7);
     add('temo', -560, Y0, 240, 'bottom', 'direct', 0.8);
+    // Zhora's children:
+    add('eliso', -1920, Y0, 160, 'bottom', 'collateral', 0.3);
+    add('nana-benidze', -1750, Y0, 160, 'bottom', 'collateral', 0.4);
+    add('khatuna', -1580, Y0, 160, 'bottom', 'collateral', 0.5);
+    add('paata', -1410, Y0, 160, 'bottom', 'collateral', 0.6);
     // Inessa's sons (paternal first cousins, Gen 0 on left):
-    add('abessalom', -1360, Y0, 180, 'bottom', 'collateral', 0.5);
-    add('lekso', -1160, Y0, 175, 'bottom', 'collateral', 0.6);
-    add('data', -960, Y0, 175, 'bottom', 'collateral', 0.7);
-    add('anzor-bacho', -770, Y0, 175, 'bottom', 'collateral', 0.8);
+    add('abessalom', -1230, Y0, 170, 'bottom', 'collateral', 0.5);
+    add('lekso', -1060, Y0, 165, 'bottom', 'collateral', 0.6);
+    add('data', -890, Y0, 165, 'bottom', 'collateral', 0.7);
+    add('anzor-bacho', -720, Y0, 165, 'bottom', 'collateral', 0.8);
     // Revaz's daughters:
     add('nino-papava', 430, Y0, 190, 'bottom', 'collateral', 0.5);
     add('zhenia-papava', 645, Y0, 190, 'bottom', 'collateral', 0.6);
@@ -239,10 +254,10 @@
   add('orest', 530, R(2), 250, 'top', 'direct', 2.4); add('zhenia', 870, R(2), 250, 'top', 'direct', 2.5);
   ['sharden', 'zhora', 'ilya', 'venera', 'inessa'].forEach((id, i) => add(id, -1584 + i * 206, MZ(1), 190, 'bottom', 'collateral', 3 + i * 0.08));
   add('revaz', 1100, MZ(1), 200, 'bottom', 'collateral', 3);
-  add('aldona', 1330, MZ(1), 195, 'bottom', 'collateral', 3.1);
-  add('medea', 1545, MZ(1), 185, 'bottom', 'collateral', 3.2);
-  add('giya-kalandia', 1750, MZ(1), 185, 'bottom', 'collateral', 3.3);
-  add('nanuli', 1955, MZ(1), 185, 'bottom', 'collateral', 3.4);
+  add('aldona', 1300, MZ(1), 185, 'bottom', 'collateral', 3.1);
+  add('medea', 1490, MZ(1), 180, 'bottom', 'collateral', 3.2);
+  add('giya-kalandia', 1680, MZ(1), 180, 'bottom', 'collateral', 3.3);
+  add('nanuli', 1880, MZ(1), 185, 'bottom', 'collateral', 3.4);
   add('mikha', 700, R(3), 250, 'top', 'direct', 3.6); add('evdokia', 1040, R(3), 250, 'top', 'direct', 3.7);
   ['shalva', 'otar', 'nina', 'nadezhda'].forEach((id, i) => add(id, 1262 + i * 206, MZ(2), 190, 'bottom', 'collateral', 4.2 + i * 0.08));
   add('bachu', 330, R(4), 250, 'top', 'direct', 4.8); add('keso', 670, R(4), 250, 'top', 'direct', 4.9);
@@ -259,7 +274,7 @@
     { key: 'wMik', ids: ['ana', 'tatusha', 'konstantine', 'estate'] },
     { key: 'wLuk', ids: ['lukava-sisters'] }
   ];
-  const BOUNDS = { x0: -1800, x1: 2150, y0: V === 'temo' ? -60 : -30, y1: R(5) + 470 };
+  const BOUNDS = { x0: -2050, x1: 2150, y0: V === 'temo' ? -60 : -30, y1: R(5) + 470 };
   const HOME = V === 'temo' ? { x0: -1100, x1: 1300, y0: -200, y1: R(1) + 200 } : { x0: -1200, x1: 1200, y0: -190, y1: R(1) + 190 };
   const GENS = [
     ['', 'g0', Y0 - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
@@ -370,6 +385,7 @@
     const house = {
       'irakli': 'main', 'vazha': 'main', 'nestor': 'paternal', 'sharden': 'paternal', 'zhora': 'paternal', 'ilya': 'paternal', 'venera': 'paternal', 'inessa': 'paternal',
       'abessalom': 'paternal', 'lekso': 'paternal', 'data': 'paternal', 'anzor-bacho': 'paternal',
+      'eliso': 'paternal', 'nana-benidze': 'paternal', 'khatuna': 'paternal', 'paata': 'paternal',
       'orest': 'main', 'revaz': 'main', 'zhenia': 'kalandia', 'shalva': 'kalandia', 'otar': 'kalandia', 'nina': 'kalandia', 'nadezhda': 'kalandia',
       'aldona': 'kalandia', 'medea': 'kalandia', 'giya-kalandia': 'kalandia', 'nanuli': 'kalandia',
       'nino-papava': 'main', 'zhenia-papava': 'main',
