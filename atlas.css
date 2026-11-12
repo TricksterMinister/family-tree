@@ -367,7 +367,7 @@ body.direct-only .edge.side, body.direct-only .wing { opacity: 0 !important; }
 
 /* soft scrims so fixed chrome never sits on top of cards */
 body::before, body::after { content: ''; position: fixed; left: 0; right: 0; z-index: 6; pointer-events: none; }
-body::before { top: 0; height: 190px; background: linear-gradient(180deg, rgba(10, 12, 15, 0.94) 0%, rgba(10, 12, 15, 0.7) 50%, transparent 100%); }
+body::before { top: 0; height: 110px; background: linear-gradient(180deg, rgba(10, 12, 15, 0.72) 0%, rgba(10, 12, 15, 0.22) 60%, transparent 100%); }
 body::after { bottom: 0; height: 200px; background: linear-gradient(0deg, rgba(10, 12, 15, 0.92) 0%, rgba(10, 12, 15, 0.55) 55%, transparent 100%); }
 
 /* ---------- chrome ---------- */
