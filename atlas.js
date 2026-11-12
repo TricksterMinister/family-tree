@@ -204,8 +204,10 @@
   }
 
   /* ---------------- layout ---------------- */
-  const Y0 = V === 'temo' ? 480 : 680;
-  const yI = Y0 + 120, PITCH = 420;
+  const Y0 = V === 'temo' ? 420 : 620;
+  const Y_COUSINS = Y0 + 170;
+  const yI = Y_COUSINS + 140; // parents level R(1) = 730
+  const PITCH = 440;
   const R = n => yI + (n - 1) * PITCH;
   const MZ = n => R(n) + 355;
   const BUS = n => R(n) - 36;
@@ -214,58 +216,60 @@
   const add = (id, cx, y, w, anchor, kind, gen, extra) => N.push(Object.assign({ id, cx, y, w, anchor, kind, gen }, extra || {}));
 
   if (V === 'temo') {
+    // Teimuraz is the sole Apex at the summit:
     add('temo', 0, Y0, 580, 'bottom', 'direct', 0, { hero: 'photo' });
-    add('irakli', 455, Y0, 230, 'bottom', 'direct', 0.4);
-    add('keti', 735, Y0, 230, 'bottom', 'kin', 0.6);
-    // Zhora's children (paternal first cousins, Gen 0 on far left):
-    add('eliso', -1880, Y0, 155, 'bottom', 'collateral', 0.3);
-    add('nana-benidze', -1715, Y0, 155, 'bottom', 'collateral', 0.4);
-    add('khatuna', -1550, Y0, 155, 'bottom', 'collateral', 0.5);
-    add('paata', -1385, Y0, 155, 'bottom', 'collateral', 0.6);
-    // Venera's children (paternal first cousins):
-    add('mzia-djidjilava', -1220, Y0, 155, 'bottom', 'collateral', 0.5);
-    add('ioseb-djidjilava', -1055, Y0, 155, 'bottom', 'collateral', 0.6);
-    // Inessa's sons (paternal first cousins, Gen 0 on left):
-    add('abessalom', -890, Y0, 155, 'bottom', 'collateral', 0.5);
-    add('lekso', -725, Y0, 155, 'bottom', 'collateral', 0.6);
-    add('data', -560, Y0, 155, 'bottom', 'collateral', 0.7);
-    add('anzor-bacho', -395, Y0, 155, 'bottom', 'collateral', 0.8);
-    // Revaz's daughters (maternal first cousins, Gen 0 on right):
-    add('nino-papava', 980, Y0, 190, 'bottom', 'collateral', 0.5);
-    add('zhenia-papava', 1195, Y0, 190, 'bottom', 'collateral', 0.6);
-    // Medea's & Giya's sons (Gen 0 on far right):
-    add('irakli-medea', 1410, Y0, 160, 'bottom', 'collateral', 0.7);
-    add('levan-medea', 1590, Y0, 160, 'bottom', 'collateral', 0.8);
-    add('giorgi-giya', 1770, Y0, 170, 'bottom', 'collateral', 0.9);
-    add('nika-natsivlishvili', 2270, Y0, 155, 'bottom', 'collateral', 0.9);
+    // Brother and wife stepped down to side terrace:
+    add('irakli', 455, Y_COUSINS, 230, 'bottom', 'direct', 0.4);
+    add('keti', 735, Y_COUSINS, 230, 'bottom', 'kin', 0.6);
+    // Zhora's children (paternal first cousins, on lateral terrace below Teimuraz):
+    add('eliso', -1880, Y_COUSINS, 155, 'bottom', 'collateral', 0.3);
+    add('nana-benidze', -1715, Y_COUSINS, 155, 'bottom', 'collateral', 0.4);
+    add('khatuna', -1550, Y_COUSINS, 155, 'bottom', 'collateral', 0.5);
+    add('paata', -1385, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
+    // Venera's children:
+    add('mzia-djidjilava', -1220, Y_COUSINS, 155, 'bottom', 'collateral', 0.5);
+    add('ioseb-djidjilava', -1055, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
+    // Inessa's sons:
+    add('abessalom', -890, Y_COUSINS, 155, 'bottom', 'collateral', 0.5);
+    add('lekso', -725, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
+    add('data', -560, Y_COUSINS, 155, 'bottom', 'collateral', 0.7);
+    add('anzor-bacho', -395, Y_COUSINS, 155, 'bottom', 'collateral', 0.8);
+    // Revaz's daughters (maternal first cousins):
+    add('nino-papava', 980, Y_COUSINS, 190, 'bottom', 'collateral', 0.5);
+    add('zhenia-papava', 1195, Y_COUSINS, 190, 'bottom', 'collateral', 0.6);
+    // Medea's & Giya's sons:
+    add('irakli-medea', 1410, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
+    add('levan-medea', 1590, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
+    add('giorgi-giya', 1770, Y_COUSINS, 170, 'bottom', 'collateral', 0.9);
+    add('nika-natsivlishvili', 2270, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
   } else {
     add('child-leila', -225, 170, 200, 'bottom', 'kin', 0, { child: 1 });
     add('child-vazha', 0, 170, 200, 'bottom', 'kin', 0.1, { child: 1 });
     add('child-giorgi', 225, 170, 200, 'bottom', 'kin', 0.2, { child: 1 });
     add('irakli', -190, Y0, 310, 'bottom', 'direct', 0.5, { hero: 'portrait' });
-    add('keti', 165, Y0, 260, 'bottom', 'kin', 0.7);
-    add('temo', -560, Y0, 240, 'bottom', 'direct', 0.8);
+    add('keti', 165, Y_COUSINS, 260, 'bottom', 'kin', 0.7);
+    add('temo', -560, Y_COUSINS, 240, 'bottom', 'direct', 0.8);
     // Zhora's children:
-    add('eliso', -2275, Y0, 155, 'bottom', 'collateral', 0.3);
-    add('nana-benidze', -2110, Y0, 155, 'bottom', 'collateral', 0.4);
-    add('khatuna', -1945, Y0, 155, 'bottom', 'collateral', 0.5);
-    add('paata', -1780, Y0, 155, 'bottom', 'collateral', 0.6);
+    add('eliso', -2275, Y_COUSINS, 155, 'bottom', 'collateral', 0.3);
+    add('nana-benidze', -2110, Y_COUSINS, 155, 'bottom', 'collateral', 0.4);
+    add('khatuna', -1945, Y_COUSINS, 155, 'bottom', 'collateral', 0.5);
+    add('paata', -1780, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
     // Venera's children:
-    add('mzia-djidjilava', -1615, Y0, 155, 'bottom', 'collateral', 0.5);
-    add('ioseb-djidjilava', -1450, Y0, 155, 'bottom', 'collateral', 0.6);
-    // Inessa's sons (paternal first cousins, Gen 0 on left):
-    add('abessalom', -1285, Y0, 155, 'bottom', 'collateral', 0.5);
-    add('lekso', -1120, Y0, 155, 'bottom', 'collateral', 0.6);
-    add('data', -955, Y0, 155, 'bottom', 'collateral', 0.7);
-    add('anzor-bacho', -790, Y0, 155, 'bottom', 'collateral', 0.8);
+    add('mzia-djidjilava', -1615, Y_COUSINS, 155, 'bottom', 'collateral', 0.5);
+    add('ioseb-djidjilava', -1450, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
+    // Inessa's sons:
+    add('abessalom', -1285, Y_COUSINS, 155, 'bottom', 'collateral', 0.5);
+    add('lekso', -1120, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
+    add('data', -955, Y_COUSINS, 155, 'bottom', 'collateral', 0.7);
+    add('anzor-bacho', -790, Y_COUSINS, 155, 'bottom', 'collateral', 0.8);
     // Revaz's daughters:
-    add('nino-papava', 430, Y0, 190, 'bottom', 'collateral', 0.5);
-    add('zhenia-papava', 645, Y0, 190, 'bottom', 'collateral', 0.6);
+    add('nino-papava', 430, Y_COUSINS, 190, 'bottom', 'collateral', 0.5);
+    add('zhenia-papava', 645, Y_COUSINS, 190, 'bottom', 'collateral', 0.6);
     // Medea's & Giya's sons:
-    add('irakli-medea', 860, Y0, 160, 'bottom', 'collateral', 0.7);
-    add('levan-medea', 1040, Y0, 160, 'bottom', 'collateral', 0.8);
-    add('giorgi-giya', 1220, Y0, 170, 'bottom', 'collateral', 0.9);
-    add('nika-natsivlishvili', 2270, Y0, 155, 'bottom', 'collateral', 0.9);
+    add('irakli-medea', 860, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
+    add('levan-medea', 1040, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
+    add('giorgi-giya', 1220, Y_COUSINS, 170, 'bottom', 'collateral', 0.9);
+    add('nika-natsivlishvili', 2270, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
   }
   add('vazha', -170, R(1), 250, 'top', 'direct', 1.4); add('leila', 170, R(1), 250, 'top', 'direct', 1.5);
   add('nestor', -870, R(2), 250, 'top', 'direct', 2.4); add('minusha', -530, R(2), 250, 'top', 'direct', 2.5);
@@ -299,10 +303,10 @@
     { key: 'wMik', ids: ['ana', 'tatusha', 'konstantine', 'estate'] },
     { key: 'wLuk', ids: ['lukava-sisters'] }
   ];
-  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 2620, y0: V === 'temo' ? -60 : -30, y1: R(5) + 470 };
-  const HOME = V === 'temo' ? { x0: -1250, x1: 1450, y0: -200, y1: R(1) + 200 } : { x0: -1400, x1: 1350, y0: -190, y1: R(1) + 190 };
+  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 2620, y0: -100, y1: R(5) + 470 };
+  const HOME = V === 'temo' ? { x0: -1100, x1: 1300, y0: -100, y1: R(1) + 180 } : { x0: -1200, x1: 1200, y0: -100, y1: R(1) + 180 };
   const GENS = [
-    ['', 'g0', Y0 - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
+    ['', 'g0', Y_COUSINS - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
   ];
 
   /* ---------------- DOM ---------------- */
@@ -374,6 +378,7 @@
     });
     document.documentElement.lang = lang;
     document.title = tr('title');
+    if (selected) openDossier(selected);
   }
 
   /* ---------------- edges ---------------- */
@@ -423,7 +428,7 @@
     COUPLES.forEach(([a, b]) => {
       if (!has(a) || !has(b)) return;
       const A = box(a), B = box(b);
-      const y = unionRows[a] ? UY(unionRows[a]) : Y0 - (V === 'temo' ? 66 : 72);
+      const y = unionRows[a] ? UY(unionRows[a]) : (NODE[a].y - (V === 'temo' ? 66 : 72));
       const x = (A.r + B.l) / 2, g = NODE[a].gen;
       mk('path', 'edge union h-' + house[a], { d: 'M' + A.r + ' ' + y + ' L' + B.l + ' ' + y }, g * 170 + 250, [a, b], 'all');
       mk('circle', 'ring h-' + house[a], { cx: x, cy: y, r: 5.5 }, g * 170 + 500, [a, b], 'all');
@@ -474,33 +479,108 @@
     });
   }
 
+  const ROW_LABELS = {
+    en: [
+      ['დაბადების თარიღი', 'Date of birth'],
+      ['დაბადების წელი', 'Year of birth'],
+      ['დაბადების დღე', 'Birthday'],
+      ['მშობლები', 'Parents'],
+      ['დედა', 'Mother'],
+      ['მამა', 'Father'],
+      ['მეუღლე', 'Spouse'],
+      ['შვილები', 'Children'],
+      ['შვილი', 'Child'],
+      ['ვაჟები', 'Sons'],
+      ['ვაჟი', 'Son'],
+      ['ქალიშვილი', 'Daughter'],
+      ['დები', 'Sisters'],
+      ['და-ძმები', 'Siblings'],
+      ['მამიდები', 'Paternal aunts'],
+      ['ნათესაობა', 'Kinship'],
+      ['შთამომავლობა', 'Descendants'],
+      ['სტატუსი', 'Status'],
+      ['საცხოვრებელი ადგილი', 'Residence'],
+      ['საცხოვრებელი', 'Residence'],
+      ['ცნობა', 'Note'],
+      ['ისტორიული ხსოვნა', 'Historical memory'],
+      ['საგვარეულო გადმოცემა', 'Family legend']
+    ],
+    ru: [
+      ['დაბადების თარიღი', 'Дата рождения'],
+      ['დაბადების წელი', 'Год рождения'],
+      ['დაბადების დღე', 'День рождения'],
+      ['მშობლები', 'Родители'],
+      ['დედა', 'Мать'],
+      ['მამა', 'Отец'],
+      ['მეუღლე', 'Супруг(а)'],
+      ['შვილები', 'Дети'],
+      ['შვილი', 'Ребёнок'],
+      ['ვაჟები', 'Сыновья'],
+      ['ვაჟი', 'Сын'],
+      ['ქალიშვილი', 'Дочь'],
+      ['დები', 'Сёстры'],
+      ['და-ძმები', 'Братья и сёстры'],
+      ['მამიდები', 'Тёти (по отцу)'],
+      ['ნათესაობა', 'Родство'],
+      ['შთამომავლობა', 'Потомство'],
+      ['სტატუსი', 'Статус'],
+      ['საცხოვრებელი ადგილი', 'Место жительства'],
+      ['საცხოვრებელი', 'Место жительства'],
+      ['ცნობა', 'Справка'],
+      ['ისტორიული ხსოვნა', 'Историческая память'],
+      ['საგვარეულო გადმოცემა', 'Семейное предание']
+    ]
+  };
+
   /* ---------------- dossier ---------------- */
   const dScroll = $('#drawer .scroll');
-  const chip = id => '<button class="chip" data-go="' + id + '">' + BIO[id].geo + '</button>';
   function openDossier(id) {
     const b = BIO[id], m = META[id];
+    const lIdx = lang === 'en' ? 1 : (lang === 'ru' ? 2 : 0);
+    const chip = cid => '<button class="chip" data-go="' + cid + '">' + (lIdx === 1 ? META[cid][0] : (lIdx === 2 ? META[cid][1] : BIO[cid].geo)) + '</button>';
     let i = 0; const st = () => ' style="--i:' + (i++) + '"';
     let h = '<div class="d-in">';
     if (id === 'temo' && V === 'temo') h += '<div class="d-photo"' + st() + '><img src="temo_clean.jpg" alt=""></div>';
-    h += '<div class="d-role"' + st() + '>' + ROLE[m[3]][0] + '</div>';
-    h += '<h3 class="d-name"' + st() + '>' + b.title + '</h3>';
-    h += '<div class="d-alt"' + st() + '>' + m[0] + ' · ' + m[1] + '</div>';
-    h += '<div class="d-badge"' + st() + '><span class="badge' + (b.unk ? ' unk' : '') + '">' + dash(b.date) + '</span></div>';
+    h += '<div class="d-role"' + st() + '>' + ROLE[m[3]][lIdx] + '</div>';
+    const mainTitle = lIdx === 2 ? (b.ruOld || m[1]) : (lIdx === 1 ? m[0] : b.title);
+    h += '<h3 class="d-name"' + st() + '>' + mainTitle + '</h3>';
+    const subTitle = lIdx === 0 ? (m[0] + ' · ' + m[1]) : (lIdx === 2 ? (b.geo + ' · ' + m[0]) : (b.geo + ' · ' + m[1]));
+    h += '<div class="d-alt"' + st() + '>' + subTitle + '</div>';
+    h += '<div class="d-badge"' + st() + '><span class="badge' + (b.unk ? ' unk' : '') + '">' + badgeText(b.date) + '</span></div>';
     h += '<div class="d-rule"' + st() + '></div>';
     b.rows.forEach(r => {
-      const mm = r.match(/^<span class="tt-label">(.*?)<\/span>\s*([\s\S]*)$/);
+      let rowHtml = r;
+      if (lIdx > 0 && ROW_LABELS[lang]) {
+        ROW_LABELS[lang].forEach(([orig, repl]) => {
+          rowHtml = rowHtml.split(orig + ':').join(repl + ':');
+          rowHtml = rowHtml.split(orig).join(repl);
+        });
+      }
+      const mm = rowHtml.match(/^<span class="tt-label">(.*?)<\/span>\s*([\s\S]*)$/);
       if (mm && mm[2].indexOf('tt-label') < 0) {
-        const story = /გადმოცემა|საინტერესო|ბიოგრაფია|ალდონა|წარმოშობა/.test(mm[1]);
+        const story = /გადმოცემა|საინტერესო|ბიოგრაფია|ალდონა|წარმოშობა|предание|память|legend/.test(mm[1]);
         h += '<div class="d-row' + (story ? ' story' : '') + '"' + st() + '><span class="lbl">' + mm[1].replace(/:\s*$/, '') + '</span>' + mm[2] + '</div>';
-      } else h += '<div class="d-row"' + st() + '>' + r + '</div>';
+      } else h += '<div class="d-row"' + st() + '>' + rowHtml + '</div>';
     });
+    const kinHeadings = {
+      line: ['ნათესაური ხაზი', 'Line of descent', 'Линия родства'],
+      parents: ['მშობლები', 'Parents', 'Родители'],
+      spouse: ['მეუღლე', 'Spouse', 'Супруг(а)'],
+      children: ['შვილები', 'Children', 'Дети'],
+      siblings: ['და-ძმები', 'Siblings', 'Братья и сёстры']
+    };
     const sp = spouseOf(id);
-    const kin = [['მშობლები', parentsOf(id)], ['მეუღლე', sp && has(sp) ? [sp] : []], ['შვილები', childrenOf(id)], ['და-ძმები', siblingsOf(id)]].filter(k => k[1].length);
+    const kin = [
+      [kinHeadings.parents[lIdx], parentsOf(id)],
+      [kinHeadings.spouse[lIdx], sp && has(sp) ? [sp] : []],
+      [kinHeadings.children[lIdx], childrenOf(id)],
+      [kinHeadings.siblings[lIdx], siblingsOf(id)]
+    ].filter(k => k[1].length);
     const link = linkOf(id);
     const chain = link && id !== PROTO ? (chainTo(link) || []).concat(link === id ? [] : [id]) : [];
     if (kin.length || chain.length > 1) {
       h += '<div class="d-kin"' + st() + '>';
-      if (chain.length > 1) h += '<h4>ნათესაური ხაზი</h4><div class="d-line">' + chain.map(chip).join('<span class="arrow">→</span>') + '</div>';
+      if (chain.length > 1) h += '<h4>' + kinHeadings.line[lIdx] + '</h4><div class="d-line">' + chain.map(chip).join('<span class="arrow">→</span>') + '</div>';
       kin.forEach(k => { h += '<h4>' + k[0] + '</h4><div class="chips">' + k[1].map(chip).join('') + '</div>'; });
       h += '</div>';
     }
@@ -668,10 +748,10 @@
     buildEdges();
     curtain.classList.add('gone');
     requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('revealed')));
-    setTimeout(() => { if (!touched && !selected) flyRect(HOME, 2200); }, quick ? 0 : 3000);
-    setTimeout(() => { document.body.classList.add('settled'); buildEdgesInstant(); }, quick ? 300 : 5200);
+    setTimeout(() => { if (!touched && !selected) flyRect(HOME, 2000); }, quick ? 0 : 1200);
+    setTimeout(() => { document.body.classList.add('settled'); buildEdgesInstant(); }, quick ? 300 : 3400);
   }
-  fontsReady.then(() => { setTimeout(start, quick ? 0 : 2300); });
+  fontsReady.then(() => { setTimeout(start, quick ? 0 : 800); });
   curtain.addEventListener('click', () => fontsReady.then(start));
   const heroImg = $('.hero .photo img');
   if (heroImg && !heroImg.complete) heroImg.addEventListener('load', () => { if (started) buildEdgesInstant(); });
