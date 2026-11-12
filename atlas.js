@@ -922,14 +922,34 @@
     fly({ k, x: w - (w - cam.x) * r, y: h - (h - cam.y) * r }, 450);
   }
 
-  /* pointer: drag to pan, pinch to zoom, tap to open */
+  /* pointer: drag to pan, pinch to zoom, tap to open (two-stage / long-press on mobile) */
   const ptrs = new Map(); let moved = 0, downCard = null, pinch0 = 0, touched = false;
+  let longPressT = 0, longPressed = false;
+  const clearLongPress = () => { clearTimeout(longPressT); longPressT = 0; };
   viewport.addEventListener('pointerdown', e => {
     if (e.button > 0) return;
     touched = true; cancelAnimationFrame(raf);
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (ptrs.size === 1) { moved = 0; downCard = e.target.closest('.card'); }
-    if (ptrs.size === 2) { const a = Array.from(ptrs.values()); pinch0 = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y); }
+    if (ptrs.size === 1) {
+      moved = 0; longPressed = false;
+      downCard = e.target.closest('.card');
+      clearLongPress();
+      if (isMobile() && downCard) {
+        const id = downCard.closest('.node').dataset.id;
+        longPressT = setTimeout(() => {
+          if (ptrs.size === 1 && moved <= 6) {
+            longPressed = true;
+            if (navigator.vibrate) navigator.vibrate(12);
+            select(id);
+          }
+        }, 380);
+      }
+    }
+    if (ptrs.size === 2) {
+      clearLongPress();
+      const a = Array.from(ptrs.values());
+      pinch0 = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
+    }
     viewport.setPointerCapture(e.pointerId);
   });
   viewport.addEventListener('pointermove', e => {
@@ -938,8 +958,9 @@
     p.x = e.clientX; p.y = e.clientY;
     if (ptrs.size === 1) {
       moved += Math.abs(dx) + Math.abs(dy);
-      if (moved > 6) { viewport.classList.add('dragging'); document.body.classList.add('used'); cam.x += dx; cam.y += dy; apply(); }
+      if (moved > 6) { clearLongPress(); viewport.classList.add('dragging'); document.body.classList.add('used'); cam.x += dx; cam.y += dy; apply(); }
     } else if (ptrs.size === 2) {
+      clearLongPress();
       const a = Array.from(ptrs.values()), d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
       if (pinch0) zoomAt((a[0].x + a[1].x) / 2, (a[0].y + a[1].y) / 2, d / pinch0);
       pinch0 = d; moved = 99;
@@ -947,11 +968,23 @@
   });
   const up = e => {
     if (!ptrs.has(e.pointerId)) return;
+    clearLongPress();
     ptrs.delete(e.pointerId); viewport.classList.remove('dragging');
     if (ptrs.size < 2) pinch0 = 0;
-    if (ptrs.size === 0 && moved <= 6 && e.type === 'pointerup') {
-      if (downCard) select(downCard.closest('.node').dataset.id);
-      else if (selected) select(null);
+    if (ptrs.size === 0 && moved <= 6 && !longPressed && e.type === 'pointerup') {
+      if (isMobile()) {
+        if (downCard) {
+          const id = downCard.closest('.node').dataset.id;
+          if (hovered === id && !selected) select(id);
+          else { hovered = id; selected = null; paintFocus(); }
+        } else {
+          if (selected) select(null);
+          else if (hovered) { hovered = null; paintFocus(); }
+        }
+      } else {
+        if (downCard) select(downCard.closest('.node').dataset.id);
+        else if (selected) select(null);
+      }
     }
   };
   viewport.addEventListener('pointerup', up); viewport.addEventListener('pointercancel', up);
@@ -1051,8 +1084,7 @@
 
   /* Interactive specular glint & subtle parallax for the frameless Sukhumi engraving */
   const rootStyle = document.documentElement.style;
-  addEventListener('pointermove', e => {
-    const x = e.clientX, y = e.clientY;
+  const updateGlint = (x, y) => {
     rootStyle.setProperty('--mx', x + 'px');
     rootStyle.setProperty('--my', y + 'px');
     rootStyle.setProperty('--px', ((0.5 - x / innerWidth) * 14).toFixed(1) + 'px');
@@ -1077,7 +1109,11 @@
         rootStyle.setProperty('--prom-drop', 'rgba(251, 146, 60, 0.65)');
       }
     }
-  }, { passive: true });
+  };
+  addEventListener('pointerdown', e => updateGlint(e.clientX, e.clientY), { passive: true });
+  addEventListener('pointermove', e => updateGlint(e.clientX, e.clientY), { passive: true });
+  addEventListener('touchstart', e => { if (e.touches[0]) updateGlint(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  addEventListener('touchmove', e => { if (e.touches[0]) updateGlint(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
 
   window.__atlas = { select, flyRect, BOUNDS, HOME, N, BIO, cam };
 })();

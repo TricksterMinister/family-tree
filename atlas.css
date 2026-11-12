@@ -673,6 +673,55 @@ body.has-drawer #drawer { transform: none; opacity: 1; }
 @media (max-width: 900px) {
   :root { --drawer-w: 100vw; }
   .mobile-only { display: inline-flex !important; }
+  #sukhumi-bg .sk-layer {
+    -webkit-mask-size: 160% auto;
+    mask-size: 160% auto;
+    -webkit-mask-position: center 44%;
+    mask-position: center 44%;
+  }
+  #sukhumi-bg .sk-base { filter: brightness(1.35); }
+  body[data-light="sunset"] #sukhumi-bg .sk-glint,
+  body:not([data-light]) #sukhumi-bg .sk-glint {
+    background:
+      radial-gradient(
+        340px circle at var(--mx, 50%) var(--my, 44%),
+        rgba(255, 255, 255, 1) 0%,
+        rgba(254, 215, 170, 0.95) 18%,
+        rgba(249, 115, 22, 0.92) 40%,
+        rgba(225, 29, 72, 0.55) 64%,
+        transparent 100%
+      ),
+      radial-gradient(
+        150px circle at var(--mx, 50%) var(--my, 44%),
+        #ffffff 0%,
+        rgba(253, 186, 116, 0.9) 48%,
+        transparent 100%
+      );
+  }
+  body[data-light="opal"] #sukhumi-bg .sk-glint {
+    background:
+      radial-gradient(
+        360px circle at var(--mx, 50%) var(--my, 44%),
+        #ffffff 0%,
+        rgba(254, 240, 138, 0.95) 14%,
+        rgba(249, 115, 22, 0.88) 28%,
+        rgba(236, 72, 153, 0.84) 46%,
+        rgba(168, 85, 247, 0.8) 65%,
+        rgba(6, 182, 212, 0.68) 84%,
+        transparent 100%
+      );
+  }
+  body[data-light="promenade"] #sukhumi-bg .sk-glint {
+    background:
+      radial-gradient(
+        340px circle at var(--mx, 50%) var(--my, 44%),
+        #ffffff 0%,
+        var(--prom-c1, rgba(254, 215, 170, 0.95)) 18%,
+        var(--prom-c2, rgba(249, 115, 22, 0.9)) 42%,
+        var(--prom-c3, rgba(225, 29, 72, 0.75)) 68%,
+        transparent 100%
+      );
+  }
   #masthead {
     left: 50%;
     transform: translateX(-50%);
