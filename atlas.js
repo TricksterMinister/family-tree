@@ -503,6 +503,9 @@
   ];
   const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 3300, y0: -100, y1: R(5) + 720 };
   const HOME = V === 'temo' ? { x0: -1100, x1: 1300, y0: -100, y1: R(1) + 180 } : { x0: -1200, x1: 1200, y0: -100, y1: R(1) + 180 };
+  const HOME_MOBILE = V === 'temo' ? { x0: -330, x1: 330, y0: 40, y1: 860 } : { x0: -380, x1: 380, y0: 20, y1: 880 };
+  const isMobile = () => innerWidth <= 900;
+  const homeRect = () => isMobile() ? HOME_MOBILE : HOME;
   const GENS = [
     ['', 'g0', Y_COUSINS - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
   ];
@@ -553,9 +556,9 @@
   });
 
   const LIGHT_LABELS = {
-    sunset: ['☀️ ჩასვლა', '☀️ Sunset', '☀️ Закат'],
-    opal: ['💎 ოპალი', '💎 Opal', '💎 Опал'],
-    promenade: ['🏮 ჩირაღდნები', '🏮 Promenade', '🏮 Огни']
+    sunset: ['☀️ <span class="l-txt">ჩასვლა</span>', '☀️ <span class="l-txt">Sunset</span>', '☀️ <span class="l-txt">Закат</span>'],
+    opal: ['💎 <span class="l-txt">ოპალი</span>', '💎 <span class="l-txt">Opal</span>', '💎 <span class="l-txt">Опал</span>'],
+    promenade: ['🏮 <span class="l-txt">ჩირაღდნები</span>', '🏮 <span class="l-txt">Promenade</span>', '🏮 <span class="l-txt">Огни</span>']
   };
 
   function paintText() {
@@ -574,7 +577,7 @@
     document.querySelectorAll('#lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
     document.querySelectorAll('#light-switcher button').forEach(b => {
       const k = b.dataset.light;
-      if (LIGHT_LABELS[k]) b.textContent = LIGHT_LABELS[k][i];
+      if (LIGHT_LABELS[k]) b.innerHTML = LIGHT_LABELS[k][i];
     });
     document.documentElement.lang = lang;
     document.title = tr('title');
@@ -832,6 +835,30 @@
   }
   dScroll.addEventListener('click', e => { const c = e.target.closest('[data-go]'); if (c) select(c.dataset.go); });
   $('#drawer .close').addEventListener('click', () => select(null));
+  {
+    let drY0 = 0, drDrag = false;
+    const drawerEl = $('#drawer');
+    drawerEl.addEventListener('touchstart', e => {
+      if (!isMobile() || dScroll.scrollTop > 2 || e.touches.length !== 1) return;
+      drY0 = e.touches[0].clientY; drDrag = true;
+    }, { passive: true });
+    drawerEl.addEventListener('touchmove', e => {
+      if (!drDrag || e.touches.length !== 1) return;
+      const dy = e.touches[0].clientY - drY0;
+      if (dy > 0) {
+        drawerEl.style.transition = 'none';
+        drawerEl.style.transform = 'translateY(' + dy + 'px)';
+      }
+    }, { passive: true });
+    drawerEl.addEventListener('touchend', e => {
+      if (!drDrag) return;
+      drDrag = false;
+      drawerEl.style.transition = '';
+      const dy = e.changedTouches[0].clientY - drY0;
+      drawerEl.style.transform = '';
+      if (dy > 75) select(null);
+    });
+  }
 
   /* ---------------- camera ---------------- */
   const cam = { x: 0, y: 0, k: 1 };
@@ -855,7 +882,7 @@
     });
   }
   function rectCam(r, pad) {
-    const w = availW(), h = innerHeight; pad = pad == null ? 70 : pad;
+    const w = availW(), h = innerHeight; pad = pad == null ? (isMobile() ? 22 : 70) : pad;
     const k = Math.max(KMIN, Math.min(KMAX, Math.min((w - pad * 2) / (r.x1 - r.x0), (h - pad * 2) / (r.y1 - r.y0))));
     return { k, x: w / 2 - (r.x0 + r.x1) / 2 * k, y: h / 2 - (r.y0 + r.y1) / 2 * k };
   }
@@ -879,8 +906,9 @@
   const flyRect = (r, dur, pad) => fly(rectCam(r, pad), dur);
   function centerOn(id) {
     requestAnimationFrame(() => {
-      const b = box(id), k = Math.min(1.05, Math.max(cam.k, 0.82));
-      const cy = innerWidth <= 860 ? innerHeight * 0.13 : innerHeight / 2;
+      const b = box(id), mob = isMobile();
+      const k = mob ? Math.min(0.85, Math.max(cam.k, 0.58)) : Math.min(1.05, Math.max(cam.k, 0.82));
+      const cy = mob ? innerHeight * 0.20 : innerHeight / 2;
       fly({ k, x: availW() / 2 - b.cx * k, y: cy - (b.top + b.bottom) / 2 * k }, 1000);
     });
   }
@@ -920,6 +948,7 @@
   const up = e => {
     if (!ptrs.has(e.pointerId)) return;
     ptrs.delete(e.pointerId); viewport.classList.remove('dragging');
+    if (ptrs.size < 2) pinch0 = 0;
     if (ptrs.size === 0 && moved <= 6 && e.type === 'pointerup') {
       if (downCard) select(downCard.closest('.node').dataset.id);
       else if (selected) select(null);
@@ -955,7 +984,9 @@
   $('#z-in').addEventListener('click', () => zoomStep(1.35));
   $('#z-out').addEventListener('click', () => zoomStep(1 / 1.35));
   $('#z-fit').addEventListener('click', () => flyRect(BOUNDS));
-  $('#z-home').addEventListener('click', () => flyRect(HOME));
+  $('#z-home').addEventListener('click', () => flyRect(homeRect()));
+  const mHome = $('#m-home');
+  if (mHome) mHome.addEventListener('click', () => flyRect(homeRect()));
   addEventListener('keydown', e => {
     if (e.key === 'Escape') select(null);
     else if (e.key === '+' || e.key === '=') zoomStep(1.35);
@@ -984,7 +1015,7 @@
     buildEdges();
     curtain.classList.add('gone');
     requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('revealed')));
-    setTimeout(() => { if (!touched && !selected) flyRect(HOME, 2000); }, quick ? 0 : 1200);
+    setTimeout(() => { if (!touched && !selected) flyRect(homeRect(), 2000); }, quick ? 0 : 1200);
     setTimeout(() => { document.body.classList.add('settled'); buildEdgesInstant(); }, quick ? 300 : 3400);
   }
   fontsReady.then(() => { setTimeout(start, quick ? 0 : 800); });
