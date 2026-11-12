@@ -41,6 +41,8 @@
     'maiko-bodjgua': ['Maiko Bodjgua', 'Майко Боджгуа', 'f', 'maternalAunt'],
     'dodo-bodjgua': ['Dodo Bodjgua', 'Додо Боджгуа', 'f', 'maternalAunt'],
     'vakhtang-bodjgua': ['Vakhtang (Vakho) Bodjgua', 'Вахтанг (Вахо) Боджгуа', 'm', 'maternalUncle'],
+    'nona-natsivlishvili': ['Nona Natsivlishvili', 'Нонна Нацивлишвили', 'f', 'maternalAunt'],
+    'nika-natsivlishvili': ['Nika Natsivlishvili', 'Ника Нацивлишвили', 'm', 'cousin2'],
     'mzia-djidjilava': ['Mzia Djidjilava', 'Мзия Джиджилава', 'f', 'cousin'],
     'ioseb-djidjilava': ['Ioseb (Soso) Djidjilava', 'Иосиф (Сосо) Джиджилава', 'm', 'cousin'],
     'nina': ['Nina Kalandia', 'Нина Каландия', 'f', 'gmSis'],
@@ -170,6 +172,7 @@
     'nino-papava': ['revaz'], 'zhenia-papava': ['revaz'],
     aldona: ['shalva'], medea: ['shalva'], 'giya-kalandia': ['shalva'], nanuli: ['nadezhda'],
     'maiko-bodjgua': ['otar'], 'dodo-bodjgua': ['otar'], 'vakhtang-bodjgua': ['otar'],
+    'nona-natsivlishvili': ['nina'], 'nika-natsivlishvili': ['nona-natsivlishvili'],
     'irakli-medea': ['medea'], 'levan-medea': ['medea'], 'giorgi-giya': ['giya-kalandia']
   };
   const COUPLES = [['irakli', 'keti'], ['vazha', 'leila'], ['nestor', 'minusha'], ['orest', 'zhenia'], ['mikha', 'evdokia'], ['bachu', 'keso'], ['pavel', 'salome']];
@@ -234,6 +237,7 @@
     add('irakli-medea', 1410, Y0, 160, 'bottom', 'collateral', 0.7);
     add('levan-medea', 1590, Y0, 160, 'bottom', 'collateral', 0.8);
     add('giorgi-giya', 1770, Y0, 170, 'bottom', 'collateral', 0.9);
+    add('nika-natsivlishvili', 2270, Y0, 155, 'bottom', 'collateral', 0.9);
   } else {
     add('child-leila', -225, 170, 200, 'bottom', 'kin', 0, { child: 1 });
     add('child-vazha', 0, 170, 200, 'bottom', 'kin', 0.1, { child: 1 });
@@ -261,24 +265,26 @@
     add('irakli-medea', 860, Y0, 160, 'bottom', 'collateral', 0.7);
     add('levan-medea', 1040, Y0, 160, 'bottom', 'collateral', 0.8);
     add('giorgi-giya', 1220, Y0, 170, 'bottom', 'collateral', 0.9);
+    add('nika-natsivlishvili', 2270, Y0, 155, 'bottom', 'collateral', 0.9);
   }
   add('vazha', -170, R(1), 250, 'top', 'direct', 1.4); add('leila', 170, R(1), 250, 'top', 'direct', 1.5);
   add('nestor', -870, R(2), 250, 'top', 'direct', 2.4); add('minusha', -530, R(2), 250, 'top', 'direct', 2.5);
   add('orest', 530, R(2), 250, 'top', 'direct', 2.4); add('zhenia', 870, R(2), 250, 'top', 'direct', 2.5);
   ['sharden', 'zhora', 'ilya', 'venera', 'inessa'].forEach((id, i) => add(id, -1584 + i * 206, MZ(1), 190, 'bottom', 'collateral', 3 + i * 0.08));
   add('revaz', 1100, MZ(1), 200, 'bottom', 'collateral', 3);
-  add('aldona', 1290, MZ(1), 170, 'bottom', 'collateral', 3.1);
-  add('medea', 1465, MZ(1), 170, 'bottom', 'collateral', 3.2);
-  add('giya-kalandia', 1640, MZ(1), 170, 'bottom', 'collateral', 3.3);
-  add('maiko-bodjgua', 1815, MZ(1), 170, 'bottom', 'collateral', 3.4);
-  add('dodo-bodjgua', 1985, MZ(1), 165, 'bottom', 'collateral', 3.5);
-  add('vakhtang-bodjgua', 2155, MZ(1), 170, 'bottom', 'collateral', 3.6);
-  add('nanuli', 2335, MZ(1), 170, 'bottom', 'collateral', 3.7);
+  add('aldona', 1280, MZ(1), 155, 'bottom', 'collateral', 3.1);
+  add('medea', 1445, MZ(1), 155, 'bottom', 'collateral', 3.2);
+  add('giya-kalandia', 1610, MZ(1), 155, 'bottom', 'collateral', 3.3);
+  add('maiko-bodjgua', 1775, MZ(1), 155, 'bottom', 'collateral', 3.4);
+  add('dodo-bodjgua', 1940, MZ(1), 155, 'bottom', 'collateral', 3.5);
+  add('vakhtang-bodjgua', 2105, MZ(1), 155, 'bottom', 'collateral', 3.6);
+  add('nona-natsivlishvili', 2270, MZ(1), 155, 'bottom', 'collateral', 3.7);
+  add('nanuli', 2435, MZ(1), 155, 'bottom', 'collateral', 3.8);
   add('mikha', 700, R(3), 250, 'top', 'direct', 3.6); add('evdokia', 1040, R(3), 250, 'top', 'direct', 3.7);
-  add('shalva', 1465, MZ(2), 190, 'bottom', 'collateral', 4.2);
-  add('otar', 1985, MZ(2), 190, 'bottom', 'collateral', 4.3);
-  add('nina', 2165, MZ(2), 170, 'bottom', 'collateral', 4.4);
-  add('nadezhda', 2335, MZ(2), 175, 'bottom', 'collateral', 4.5);
+  add('shalva', 1445, MZ(2), 190, 'bottom', 'collateral', 4.2);
+  add('otar', 1940, MZ(2), 190, 'bottom', 'collateral', 4.3);
+  add('nina', 2270, MZ(2), 170, 'bottom', 'collateral', 4.4);
+  add('nadezhda', 2435, MZ(2), 170, 'bottom', 'collateral', 4.5);
   add('bachu', 330, R(4), 250, 'top', 'direct', 4.8); add('keso', 670, R(4), 250, 'top', 'direct', 4.9);
   add('pavel', 1070, R(4), 250, 'top', 'direct', 4.8); add('salome', 1410, R(4), 250, 'top', 'direct', 4.9);
   ['ana', 'tatusha', 'konstantine', 'estate'].forEach((id, i) => add(id, -328 + i * 206, MZ(3), 190, 'bottom', 'collateral', 5.4 + i * 0.08));
@@ -288,12 +294,12 @@
 
   const WINGS = [
     { key: 'wBen', ids: ['sharden', 'zhora', 'ilya', 'venera', 'inessa'] },
-    { key: 'wPap', ids: ['revaz', 'aldona', 'medea', 'giya-kalandia', 'maiko-bodjgua', 'dodo-bodjgua', 'vakhtang-bodjgua', 'nanuli'] },
+    { key: 'wPap', ids: ['revaz', 'aldona', 'medea', 'giya-kalandia', 'maiko-bodjgua', 'dodo-bodjgua', 'vakhtang-bodjgua', 'nona-natsivlishvili', 'nanuli'] },
     { key: 'wKal', ids: ['shalva', 'otar', 'nina', 'nadezhda'] },
     { key: 'wMik', ids: ['ana', 'tatusha', 'konstantine', 'estate'] },
     { key: 'wLuk', ids: ['lukava-sisters'] }
   ];
-  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 2550, y0: V === 'temo' ? -60 : -30, y1: R(5) + 470 };
+  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 2620, y0: V === 'temo' ? -60 : -30, y1: R(5) + 470 };
   const HOME = V === 'temo' ? { x0: -1250, x1: 1450, y0: -200, y1: R(1) + 200 } : { x0: -1400, x1: 1350, y0: -190, y1: R(1) + 190 };
   const GENS = [
     ['', 'g0', Y0 - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
@@ -409,6 +415,7 @@
       'orest': 'main', 'revaz': 'main', 'zhenia': 'kalandia', 'shalva': 'kalandia', 'otar': 'kalandia', 'nina': 'kalandia', 'nadezhda': 'kalandia',
       'aldona': 'kalandia', 'medea': 'kalandia', 'giya-kalandia': 'kalandia', 'nanuli': 'kalandia',
       'maiko-bodjgua': 'kalandia', 'dodo-bodjgua': 'kalandia', 'vakhtang-bodjgua': 'kalandia',
+      'nona-natsivlishvili': 'kalandia', 'nika-natsivlishvili': 'kalandia',
       'nino-papava': 'main', 'zhenia-papava': 'main',
       'irakli-medea': 'kalandia', 'levan-medea': 'kalandia', 'giorgi-giya': 'kalandia',
       'mikha': 'main', 'bachu': 'kalandia', 'pavel': 'lukava'
