@@ -504,8 +504,17 @@
   const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 3300, y0: -100, y1: R(5) + 720 };
   const HOME = V === 'temo' ? { x0: -1100, x1: 1300, y0: -100, y1: R(1) + 180 } : { x0: -1200, x1: 1200, y0: -100, y1: R(1) + 180 };
   const HOME_MOBILE = V === 'temo' ? { x0: -330, x1: 330, y0: 40, y1: 860 } : { x0: -380, x1: 380, y0: 20, y1: 880 };
+  const urlMe = new URLSearchParams(location.search).get('me') || new URLSearchParams(location.search).get('owner');
+  const ownerId = (urlMe && BY[urlMe]) ? urlMe : V;
   const isMobile = () => innerWidth <= 900;
-  const homeRect = () => isMobile() ? HOME_MOBILE : HOME;
+  const homeRect = () => {
+    if (!isMobile()) return HOME;
+    if (urlMe && BY[urlMe]) {
+      const n = BY[urlMe];
+      return { x0: n.x - 330, x1: n.x + 330, y0: n.y - 380, y1: n.y + 440 };
+    }
+    return HOME_MOBILE;
+  };
   const GENS = [
     ['', 'g0', Y_COUSINS - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
   ];
@@ -912,6 +921,15 @@
       fly({ k, x: availW() / 2 - b.cx * k, y: cy - (b.top + b.bottom) / 2 * k }, 1000);
     });
   }
+  function glideToOwner(fromId) {
+    if (!fromId || fromId === ownerId || !BY[ownerId]) return;
+    const bOwner = box(ownerId), bFrom = box(fromId);
+    const dist = Math.hypot(bOwner.cx - bFrom.cx, bOwner.cy - bFrom.cy);
+    if (dist < 260) return;
+    const k = Math.min(0.62, Math.max(0.38, cam.k * 0.85));
+    const dur = Math.min(2600, Math.max(1400, Math.round(dist * 0.9)));
+    fly({ k, x: availW() / 2 - bOwner.cx * k, y: innerHeight * 0.48 - (bOwner.top + bOwner.bottom) / 2 * k }, dur);
+  }
   function zoomAt(px, py, f) {
     cancelAnimationFrame(raf);
     const k = Math.max(KMIN, Math.min(KMAX, cam.k * f)), r = k / cam.k;
@@ -976,7 +994,7 @@
         if (downCard) {
           const id = downCard.closest('.node').dataset.id;
           if (hovered === id && !selected) select(id);
-          else { hovered = id; selected = null; paintFocus(); }
+          else { hovered = id; selected = null; paintFocus(); glideToOwner(id); }
         } else {
           if (selected) select(null);
           else if (hovered) { hovered = null; paintFocus(); }
