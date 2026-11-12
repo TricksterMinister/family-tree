@@ -1,0 +1,11 @@
+{
+  "name": "family-atlas",
+  "private": true,
+  "scripts": {
+    "dev": "python3 -m http.server 8765",
+    "test": "node tests/atlas.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

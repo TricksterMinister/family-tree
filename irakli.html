@@ -1,85 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ka">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ირაკლი ვაჟას ძე ბენიძის საგვარეულო ხე</title>
-  <meta name="theme-color" content="#0a0c0f">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+Georgian:wght@300;400;500;600&family=Noto+Sans+Georgian:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="atlas.css?v=10">
-</head>
-<body>
-  <div id="curtain">
-    <div class="in">
-      <div class="c-eyebrow" data-t="eyebrow"></div>
-      <div class="c-rule"></div>
-      <h2 data-t="title"></h2>
-      <div class="c-sub" data-t="houses"></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b1015" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="საგვარეულო ატლასი" />
+    <title>თეიმურაზ ბენიძის საგვარეულო ატლასი</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+Georgian:wght@400;500;600&family=Noto+Sans+Georgian:wght@400;500&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="atlas.css?v=apex1" />
+    <script defer src="atlas-data.js?v=apex1"></script>
+    <script defer src="atlas.js?v=apex1"></script>
+  </head>
+  <body class="loading" data-edition="irakli">
+    <div class="scenery" aria-hidden="true"></div>
+    <div class="ambient" aria-hidden="true"></div>
+    <header id="masthead">
+      <p id="edition"></p>
+      <h1 data-t="title"></h1>
+      <div class="header-rule" aria-hidden="true"></div>
+    </header>
+    <main id="viewport" data-label="canvas">
+      <div id="world"><svg id="edges" aria-hidden="true"></svg></div>
+    </main>
+    <p id="status" role="status" data-t="loading">ატლასი იტვირთება</p>
+    <button id="skip-intro" data-t="skip" hidden></button>
+    <p id="hint" data-t="hint"></p>
+    <nav class="dock" data-label="canvas">
+      <button id="nav-home">
+        <span aria-hidden="true">⌂</span><span data-t="home"></span>
+      </button>
+      <button id="nav-ancestors">
+        <span aria-hidden="true">♧</span><span data-t="ancestors"></span>
+      </button>
+      <button id="nav-overview">
+        <span aria-hidden="true">⊞</span><span data-t="overview"></span>
+      </button>
+      <button id="nav-menu" aria-haspopup="dialog" aria-controls="menu">
+        <span aria-hidden="true">⚙</span><span data-t="menu"></span>
+      </button>
+    </nav>
+    <div class="zoom">
+      <button id="zoom-out" data-label="zoomOut">−</button
+      ><output id="zoom-value"></output
+      ><button id="zoom-in" data-label="zoomIn">+</button>
     </div>
-  </div>
-
-  <main id="viewport" aria-label="Family tree canvas">
-    <div id="sukhumi-bg" aria-hidden="true">
-      <div class="sk-layer sk-base"></div>
-      <div class="sk-layer sk-wave"></div>
-      <div class="sk-layer sk-glint"></div>
-    </div>
-    <div id="world"><svg id="edges" aria-hidden="true"></svg></div>
-  </main>
-  <div class="vignette"></div>
-  <div class="grain"></div>
-
-  <header id="masthead" class="chrome">
-    <div class="eyebrow" data-t="eyebrow"></div>
-    <h1 data-t="title"></h1>
-    <div class="houses" data-t="houses"></div>
-  </header>
-
-  <div id="rail" class="chrome"></div>
-
-  <nav id="toolbar" class="chrome">
-    <div class="pill gift-badge"><span class="badge-icon">✦</span> <span class="long" data-t="giftBadge">13 ნოემბერი · საჩუქარი</span></div>
-    <span class="tb-sep" aria-hidden="true"></span>
-    <div id="light-switcher" class="seg" role="group" aria-label="Свет гравюры">
-      <button data-light="sunset" class="on" title="1. Закатный луч">☀️ Закат</button>
-      <button data-light="opal" title="2. Опал">💎 Опал</button>
-      <button data-light="promenade" title="3. Огни">🏮 Огни</button>
-    </div>
-    <span class="tb-sep" aria-hidden="true"></span>
-    <button id="btn-direct" class="pill"><span class="dot"></span><span class="txt" data-t="direct"></span></button>
-    <span class="tb-sep" aria-hidden="true"></span>
-    <div id="lang" class="seg" role="group" aria-label="Language">
-      <button data-lang="ka">KA</button><button data-lang="en">EN</button><button data-lang="ru">RU</button>
-    </div>
-  </nav>
-
-  <div id="legend" class="chrome">
-    <div><i style="background:var(--c-main)"></i><span data-t="lgMain"></span></div>
-    <div><i style="background:var(--c-paternal)"></i><span data-t="lgPat"></span></div>
-    <div><i style="background:var(--c-kalandia)"></i><span data-t="lgKal"></span></div>
-    <div><i style="background:var(--c-lukava)"></i><span data-t="lgLuk"></span></div>
-    <div class="shapes"><em data-t="male"></em><em class="fe" data-t="female"></em></div>
-  </div>
-
-  <div id="hint" class="chrome" data-t="hint"></div>
-
-  <div id="zoom" class="chrome glass">
-    <button id="z-out" aria-label="Zoom out"><svg viewBox="0 0 16 16"><path d="M3 8h10"/></svg></button>
-    <output>100%</output>
-    <button id="z-in" aria-label="Zoom in"><svg viewBox="0 0 16 16"><path d="M3 8h10M8 3v10"/></svg></button>
-    <button id="z-home" aria-label="Back to top"><svg viewBox="0 0 16 16"><path d="M2.5 7.5 8 3l5.5 4.5M4 6.5V13h8V6.5"/></svg></button>
-    <button id="z-fit" aria-label="Whole tree"><svg viewBox="0 0 16 16"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg></button>
-  </div>
-
-  <aside id="drawer" aria-live="polite">
-    <button class="close" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 2l10 10M12 2 2 12"/></svg></button>
-    <div class="scroll" lang="ka"></div>
-  </aside>
-
-  <script>window.ATLAS_VARIANT = 'irakli';</script>
-  <script src="atlas-data.js?v=16"></script>
-  <script src="atlas.js?v=16"></script>
-</body>
+    <dialog id="menu" aria-labelledby="menu-title">
+      <header class="dialog-head">
+        <h2 id="menu-title" data-t="menu"></h2>
+        <button id="menu-close" class="close" data-label="close">×</button>
+      </header>
+      <label for="language" data-t="language"></label
+      ><select id="language"></select>
+      <label for="lighting" data-t="light"></label
+      ><select id="lighting"></select>
+      <button id="replay" class="menu-action" data-t="replay"></button>
+      <a id="edition-link" class="menu-action" href="index.html"></a>
+    </dialog>
+    <dialog id="drawer" aria-labelledby="d-name">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-controls">
+        <button id="sheet-size" data-t="expand"></button
+        ><button id="sheet-close" class="close" data-label="close">×</button>
+      </div>
+      <div class="sheet-scroll">
+        <p id="d-role"></p>
+        <h2 id="d-name"></h2>
+        <p id="d-date"></p>
+        <hr />
+        <h3 data-t="biography"></h3>
+        <div id="d-rows"></div>
+        <div id="d-kin"></div>
+      </div>
+    </dialog>
+    <noscript
+      ><p class="no-script">
+        გთხოვთ, ჩართოთ ბრაუზერში სცენარების შესრულება.
+      </p></noscript
+    >
+  </body>
 </html>
