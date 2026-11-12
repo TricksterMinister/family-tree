@@ -45,7 +45,20 @@
     'keso': ['Keso Kukhilava', 'Кесо Кухилава', 'f', 'gggmK'],
     'pavel': ['Pavle Lukava', 'Павел Лукава', 'm', 'gggfL'],
     'salome': ['Salome Kakachia', 'Саломе Какачия', 'f', 'gggmL'],
-    'bitu': ['Bitu Kalandadze (Kalandia)', 'Биту Каландадзе (Каландия)', 'm', 'founder']
+    'bitu': ['Bitu Kalandadze (Kalandia)', 'Биту Каландадзе (Каландия)', 'm', 'founder'],
+    'abessalom': ['Abessalom', 'Абессалом', 'm', 'cousin'],
+    'lekso': ['Lekso (Alex)', 'Лексо (Алексей)', 'm', 'cousin'],
+    'data': ['Data (David)', 'Дата (Давид)', 'm', 'cousin'],
+    'anzor-bacho': ['Anzor (Bacho)', 'Анзор (Бачо)', 'm', 'cousin'],
+    'nino-papava': ['Nino Papava', 'Нино Ревазовна Папава', 'f', 'cousin'],
+    'zhenia-papava': ['Evgenia (Zhenia) Papava', 'Евгения (Женя) Ревазовна Папава', 'f', 'cousin'],
+    'aldona': ['Aldona Kalandia', 'Альдона Шалвовна Каландия', 'f', 'maternalAunt'],
+    'medea': ['Medea Kalandia', 'Медея Шалвовна Каландия', 'f', 'maternalAunt'],
+    'giya-kalandia': ['Giorgi (Giya) Kalandia', 'Георгий (Гия) Шалвович Каландия', 'm', 'maternalUncle'],
+    'nanuli': ['Nanuli Gigeneishvili', 'Нанули Гигенеишвили', 'f', 'maternalAunt'],
+    'irakli-medea': ['Irakli', 'Ираклий', 'm', 'cousin2'],
+    'levan-medea': ['Levan', 'Леван', 'm', 'cousin2'],
+    'giorgi-giya': ['Giorgi Kalandia', 'Георгий Каландия', 'm', 'cousin2']
   };
 
   const ROLE = {
@@ -65,6 +78,10 @@
     uncle: ['ბიძა', 'Uncle', 'Дядя'],
     aunt: ['მამიდა', 'Aunt', 'Тётя · мамида'],
     uncleM: ['ბიძა · დედის ძმა', 'Uncle · mother' + AP + 's brother', 'Дядя · брат матери'],
+    cousin: ['ბიძაშვილი / დეიდაშვილი', 'Cousin', 'Двоюродный брат / сестра'],
+    maternalAunt: ['დეიდა', 'Maternal Aunt', 'Тётя (по матери)'],
+    maternalUncle: ['ბიძა', 'Maternal Uncle', 'Дядя (по матери)'],
+    cousin2: ['ნათესავი', 'Relative', 'Родственник'],
     ggSis: ['დიდი პაპის და', 'Great-grandfather' + AP + 's sister', 'Сестра прадеда'],
     ggBro: ['დიდი პაპის ძმა', 'Great-grandfather' + AP + 's brother', 'Брат прадеда'],
     ggf: ['დიდი პაპა', 'Great-grandfather', 'Прадед'],
@@ -137,7 +154,11 @@
     mikha: ['bachu', 'keso'], ana: ['bachu', 'keso'], tatusha: ['bachu', 'keso'], konstantine: ['bachu', 'keso'], estate: ['bachu', 'keso'],
     evdokia: ['pavel', 'salome'], 'lukava-sisters': ['pavel', 'salome'],
     bachu: ['bitu'],
-    'child-leila': ['irakli', 'keti'], 'child-vazha': ['irakli', 'keti'], 'child-giorgi': ['irakli', 'keti']
+    'child-leila': ['irakli', 'keti'], 'child-vazha': ['irakli', 'keti'], 'child-giorgi': ['irakli', 'keti'],
+    abessalom: ['inessa'], lekso: ['inessa'], data: ['inessa'], 'anzor-bacho': ['inessa'],
+    'nino-papava': ['revaz'], 'zhenia-papava': ['revaz'],
+    aldona: ['shalva'], medea: ['shalva'], 'giya-kalandia': ['shalva'], nanuli: ['shalva'],
+    'irakli-medea': ['medea'], 'levan-medea': ['medea'], 'giorgi-giya': ['giya-kalandia']
   };
   const COUPLES = [['irakli', 'keti'], ['vazha', 'leila'], ['nestor', 'minusha'], ['orest', 'zhenia'], ['mikha', 'evdokia'], ['bachu', 'keso'], ['pavel', 'salome']];
   const has = id => !!BIO[id];
@@ -181,6 +202,18 @@
     add('temo', 0, Y0, 580, 'bottom', 'direct', 0, { hero: 'photo' });
     add('irakli', 455, Y0, 230, 'bottom', 'direct', 0.4);
     add('keti', 735, Y0, 230, 'bottom', 'kin', 0.6);
+    // Inessa's sons (paternal first cousins, Gen 0 on left):
+    add('abessalom', -1040, Y0, 180, 'bottom', 'collateral', 0.5);
+    add('lekso', -830, Y0, 175, 'bottom', 'collateral', 0.6);
+    add('data', -630, Y0, 175, 'bottom', 'collateral', 0.7);
+    add('anzor-bacho', -430, Y0, 175, 'bottom', 'collateral', 0.8);
+    // Revaz's daughters (maternal first cousins, Gen 0 on right):
+    add('nino-papava', 980, Y0, 190, 'bottom', 'collateral', 0.5);
+    add('zhenia-papava', 1195, Y0, 190, 'bottom', 'collateral', 0.6);
+    // Medea's & Giya's sons (Gen 0 on far right):
+    add('irakli-medea', 1410, Y0, 160, 'bottom', 'collateral', 0.7);
+    add('levan-medea', 1590, Y0, 160, 'bottom', 'collateral', 0.8);
+    add('giorgi-giya', 1770, Y0, 170, 'bottom', 'collateral', 0.9);
   } else {
     add('child-leila', -225, 170, 200, 'bottom', 'kin', 0, { child: 1 });
     add('child-vazha', 0, 170, 200, 'bottom', 'kin', 0.1, { child: 1 });
@@ -188,12 +221,28 @@
     add('irakli', -190, Y0, 310, 'bottom', 'direct', 0.5, { hero: 'portrait' });
     add('keti', 165, Y0, 260, 'bottom', 'kin', 0.7);
     add('temo', -560, Y0, 240, 'bottom', 'direct', 0.8);
+    // Inessa's sons (paternal first cousins, Gen 0 on left):
+    add('abessalom', -1360, Y0, 180, 'bottom', 'collateral', 0.5);
+    add('lekso', -1160, Y0, 175, 'bottom', 'collateral', 0.6);
+    add('data', -960, Y0, 175, 'bottom', 'collateral', 0.7);
+    add('anzor-bacho', -770, Y0, 175, 'bottom', 'collateral', 0.8);
+    // Revaz's daughters:
+    add('nino-papava', 430, Y0, 190, 'bottom', 'collateral', 0.5);
+    add('zhenia-papava', 645, Y0, 190, 'bottom', 'collateral', 0.6);
+    // Medea's & Giya's sons:
+    add('irakli-medea', 860, Y0, 160, 'bottom', 'collateral', 0.7);
+    add('levan-medea', 1040, Y0, 160, 'bottom', 'collateral', 0.8);
+    add('giorgi-giya', 1220, Y0, 170, 'bottom', 'collateral', 0.9);
   }
   add('vazha', -170, R(1), 250, 'top', 'direct', 1.4); add('leila', 170, R(1), 250, 'top', 'direct', 1.5);
   add('nestor', -870, R(2), 250, 'top', 'direct', 2.4); add('minusha', -530, R(2), 250, 'top', 'direct', 2.5);
   add('orest', 530, R(2), 250, 'top', 'direct', 2.4); add('zhenia', 870, R(2), 250, 'top', 'direct', 2.5);
   ['sharden', 'zhora', 'ilya', 'venera', 'inessa'].forEach((id, i) => add(id, -1584 + i * 206, MZ(1), 190, 'bottom', 'collateral', 3 + i * 0.08));
   add('revaz', 1100, MZ(1), 200, 'bottom', 'collateral', 3);
+  add('aldona', 1330, MZ(1), 195, 'bottom', 'collateral', 3.1);
+  add('medea', 1545, MZ(1), 185, 'bottom', 'collateral', 3.2);
+  add('giya-kalandia', 1750, MZ(1), 185, 'bottom', 'collateral', 3.3);
+  add('nanuli', 1955, MZ(1), 185, 'bottom', 'collateral', 3.4);
   add('mikha', 700, R(3), 250, 'top', 'direct', 3.6); add('evdokia', 1040, R(3), 250, 'top', 'direct', 3.7);
   ['shalva', 'otar', 'nina', 'nadezhda'].forEach((id, i) => add(id, 1262 + i * 206, MZ(2), 190, 'bottom', 'collateral', 4.2 + i * 0.08));
   add('bachu', 330, R(4), 250, 'top', 'direct', 4.8); add('keso', 670, R(4), 250, 'top', 'direct', 4.9);
@@ -205,13 +254,13 @@
 
   const WINGS = [
     { key: 'wBen', ids: ['sharden', 'zhora', 'ilya', 'venera', 'inessa'] },
-    { key: 'wPap', ids: ['revaz'] },
+    { key: 'wPap', ids: ['revaz', 'aldona', 'medea', 'giya-kalandia', 'nanuli'] },
     { key: 'wKal', ids: ['shalva', 'otar', 'nina', 'nadezhda'] },
     { key: 'wMik', ids: ['ana', 'tatusha', 'konstantine', 'estate'] },
     { key: 'wLuk', ids: ['lukava-sisters'] }
   ];
-  const BOUNDS = { x0: -1760, x1: 2050, y0: V === 'temo' ? -60 : -30, y1: R(5) + 470 };
-  const HOME = V === 'temo' ? { x0: -700, x1: 900, y0: -230, y1: R(1) + 190 } : { x0: -760, x1: 540, y0: -190, y1: R(1) + 190 };
+  const BOUNDS = { x0: -1800, x1: 2150, y0: V === 'temo' ? -60 : -30, y1: R(5) + 470 };
+  const HOME = V === 'temo' ? { x0: -1100, x1: 1300, y0: -200, y1: R(1) + 200 } : { x0: -1200, x1: 1200, y0: -190, y1: R(1) + 190 };
   const GENS = [
     ['', 'g0', Y0 - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
   ];
@@ -318,7 +367,15 @@
     svg.innerHTML = ''; EDGES = [];
     const U = {};
     const unionRows = { 'vazha': 1, 'nestor': 2, 'orest': 2, 'mikha': 3, 'bachu': 4, 'pavel': 4 };
-    const house = { 'irakli': 'main', 'vazha': 'main', 'nestor': 'paternal', 'orest': 'main', 'mikha': 'main', 'bachu': 'kalandia', 'pavel': 'lukava' };
+    const house = {
+      'irakli': 'main', 'vazha': 'main', 'nestor': 'paternal', 'sharden': 'paternal', 'zhora': 'paternal', 'ilya': 'paternal', 'venera': 'paternal', 'inessa': 'paternal',
+      'abessalom': 'paternal', 'lekso': 'paternal', 'data': 'paternal', 'anzor-bacho': 'paternal',
+      'orest': 'main', 'revaz': 'main', 'zhenia': 'kalandia', 'shalva': 'kalandia', 'otar': 'kalandia', 'nina': 'kalandia', 'nadezhda': 'kalandia',
+      'aldona': 'kalandia', 'medea': 'kalandia', 'giya-kalandia': 'kalandia', 'nanuli': 'kalandia',
+      'nino-papava': 'main', 'zhenia-papava': 'main',
+      'irakli-medea': 'kalandia', 'levan-medea': 'kalandia', 'giorgi-giya': 'kalandia',
+      'mikha': 'main', 'bachu': 'kalandia', 'pavel': 'lukava'
+    };
     COUPLES.forEach(([a, b]) => {
       if (!has(a) || !has(b)) return;
       const A = box(a), B = box(b);
@@ -334,7 +391,15 @@
       const p = PARENTS[c], C = box(c), n = NODE[c];
       if (p.length === 1) {
         const Pb = box(p[0]);
-        mk('path', 'edge h-kalandia', { d: 'M' + C.cx + ' ' + C.bottom + ' L' + Pb.cx + ' ' + Pb.top }, n.gen * 170 + 500, [c, p[0]], 'all');
+        const side = n.kind === 'collateral';
+        const hs = childHouse[c] || (side ? (house[p[0]] || 'kalandia') : 'main');
+        if (Math.abs(C.cx - Pb.cx) < 2) {
+          mk('path', 'edge h-' + hs + (side ? ' side' : ''), { d: 'M' + C.cx + ' ' + C.bottom + ' L' + Pb.cx + ' ' + Pb.top }, n.gen * 170 + 500, [c, p[0]], 'all');
+        } else {
+          const midY = (C.bottom + Pb.top) / 2;
+          const pts = [[C.cx, C.bottom], [C.cx, midY], [Pb.cx, midY], [Pb.cx, Pb.top]];
+          mk('path', 'edge h-' + hs + (side ? ' side' : ''), { d: rpath(pts, 18) }, n.gen * 170 + 500, [c, p[0]], 'all');
+        }
         return;
       }
       const u = U[p[0]];
