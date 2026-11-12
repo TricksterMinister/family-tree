@@ -148,10 +148,50 @@
 
   function badgeText(s) {
     s = dash(s);
-    if (lang === 'ka') return s;
-    const map = lang === 'en'
-      ? [['საგვარეულო ხის ავტორი', 'Author of the family tree'], ['დაბ.:', 'b.'], ['წელი:', 'year:'], ['სოხუმი', 'Sukhumi'], ['ნოემბერი', 'November'], [' წ.', ''], [' ს.', ' c.']]
-      : [['საგვარეულო ხის ავტორი', 'Автор родословного древа'], ['დაბ.:', 'род.'], ['წელი:', 'год:'], ['სოხუმი', 'Сухуми'], ['ნოემბერი', 'ноября'], [' წ.', ' г.'], [' ს.', ' в.']];
+    if (lang === 'ka') {
+      return s.replace(/Unknown/gi, 'უცნობია');
+    }
+    const mapEn = [
+      ['საგვარეულო ხის ავტორი', 'Author of the family tree'],
+      ['დაბ.:', 'b.'],
+      ['წელი:', 'year:'],
+      ['სოხუმი', 'Sukhumi'],
+      ['ნოემბერი', 'November'],
+      ['საქართველო', 'Georgia'],
+      ['ავსტრია', 'Austria'],
+      ['გარდ. თბილისში', 'd. in Tbilisi'],
+      ['1992–1993 წწ.', '1992–1993'],
+      ['ნადეჟდა კალანდიას ასული', 'Nadezhda\'s daughter'],
+      ['ვენერა ბენიძის ასული', 'Venera\'s daughter'],
+      ['ვენერა ბენიძის ვაჟი', 'Venera\'s son'],
+      ['თეიმურაზის თანაკლასელი', 'Teimuraz\'s classmate'],
+      ['ირაკლის თანაკლასელი', 'Irakli\'s classmate'],
+      ['დაიღუპა აფხაზეთის ომში', 'Fallen in Abkhazia war'],
+      [' წ.', ''],
+      [' ს.', ' c.'],
+      ['Unknown', 'unknown'], ['უცნობია', 'unknown']
+    ];
+    const mapRu = [
+      ['საგვარეულო ხის ავტორი', 'Автор родословного древа'],
+      ['დაბ.:', 'род.'],
+      ['წელი:', 'год:'],
+      ['სოხუმი', 'Сухуми'],
+      ['ნოემბერი', 'ноября'],
+      ['საქართველო', 'Грузия'],
+      ['ავსტრია', 'Австрия'],
+      ['გარდ. თბილისში', 'скнч. в Тбилиси'],
+      ['1992–1993 წწ.', '1992–1993 гг.'],
+      ['ნადეჟდა კალანდიას ასული', 'дочь Надежды Каландия'],
+      ['ვენერა ბენიძის ასული', 'дочь Венеры Бенидзе'],
+      ['ვენერა ბენიძის ვაჟი', 'сын Венеры Бенидзе'],
+      ['თეიმურაზის თანაკლასელი', 'одноклассница Теймураза'],
+      ['ირაკლის თანაკლასელი', 'одноклассница Ираклия'],
+      ['დაიღუპა აფხაზეთის ომში', 'погиб в войне в Абхазии'],
+      [' წ.', ' г.'],
+      [' ს.', ' в.'],
+      ['Unknown', 'неизвестно'], ['უცნობია', 'неизвестно']
+    ];
+    const map = lang === 'en' ? mapEn : mapRu;
     map.forEach(([a, b]) => { s = s.split(a).join(b); });
     return s;
   }
@@ -334,7 +374,7 @@
   const wingEls = WINGS.map(() => { const e = el('div', 'wing'); world.appendChild(e); return e; });
 
   const quote = el('div', 'legend-quote');
-  quote.style.left = '-1660px'; quote.style.top = (R(3) + 30) + 'px';
+  quote.style.left = '-1820px'; quote.style.top = (R(3) + 30) + 'px';
   quote.innerHTML = '<div class="eyebrow">საგვარეულო გადმოცემა · ნონა ბიცოლას (ნორა ცერცვაძის) ნაამბობით</div><blockquote>მიხა კალანდიას თქმით, გვარის თავდაპირველი ფორმა იყო <strong>კალანდაძე</strong> (წარმოშობით გურიიდან). კონფლიქტის გამო წინაპრები სამეგრელოში (ზუგდიდი / წალენჯიხა) გადასახლდნენ და გვარი კალანდიად დაიწერეს.</blockquote>';
   world.appendChild(quote);
 
@@ -365,7 +405,8 @@
       const b = BIO[n.id], m = META[n.id], c = n.card;
       $('.role', c).textContent = ROLE[m[3]][i];
       $('.nm', c).textContent = i === 0 ? b.geo : m[i - 1];
-      $('.sub', c).textContent = i === 0 ? m[0] : b.geo;
+      // Monolingual purity: no foreign script subtitles on cards!
+      $('.sub', c).textContent = '';
       $('.badge', c).textContent = badgeText(b.date);
     });
     document.querySelectorAll('[data-t]').forEach(e => { e.textContent = tr(e.dataset.t); });
@@ -378,6 +419,41 @@
     });
     document.documentElement.lang = lang;
     document.title = tr('title');
+    // Dynamically localize canvas quote
+    const QUOTE_TEXT = {
+      ka: {
+        eyebrow: 'საგვარეულო გადმოცემა · ნონა ბიცოლას (ნორა ცერცვაძის) ნაამბობით',
+        body: 'მიხა კალანდიას თქმით, გვარის თავდაპირველი ფორმა იყო <strong>კალანდაძე</strong> (წარმოშობით გურიიდან). კონფლიქტის გამო წინაპრები სამეგრელოში (ზუგდიდი / წალენჯიხა) გადასახლდნენ და გვარი კალანდიად დაიწერეს.'
+      },
+      ru: {
+        eyebrow: 'Семейное предание · Со слов тёти Ноны (Норы Церцвадзе)',
+        body: 'По словам Михи Каландия, изначальная фамилия рода — <strong>Каландадзе</strong> (родом из Гурии). Из-за конфликта предки переселились в Мегрелию (Зугдиди / Цаленджиха) и стали записываться как Каландия.'
+      },
+      en: {
+        eyebrow: 'Family Legend · As told by Aunt Nona (Nora Tsertsvadze)',
+        body: 'According to Mikha Kalandia, the original surname was <strong>Kalandadze</strong> (originating from Guria). Due to a conflict, ancestors relocated to Samegrelo (Zugdidi / Tsalenjikha) and recorded the family name as Kalandia.'
+      }
+    };
+    const q = QUOTE_TEXT[lang] || QUOTE_TEXT.ka;
+    quote.innerHTML = '<div class="eyebrow">' + q.eyebrow + '</div><blockquote>' + q.body + '</blockquote>';
+
+    // Dynamically localize colophon
+    const COLOPHON_TEXT = {
+      ka: {
+        desc: V === 'temo' ? 'საგვარეულო გენეალოგიური ხე შედგენილია საოჯახო გადმოცემებისა და საარქივო ცნობების მიხედვით.' : 'საგვარეულო გენეალოგიური ხე შედგენილია ირაკლი ვაჟას ძე ბენიძის დაბადების დღის (13 ნოემბერი) საჩუქრად.',
+        houses: 'ბენიძე · აგუმავა · პაპავა · კალანდია (კალანდაძე) · ლუკავა · კაკაჩია · ქუხილავა'
+      },
+      ru: {
+        desc: V === 'temo' ? 'Родословное генеалогическое древо составлено по семейным преданиям и архивным данным.' : 'Родословное генеалогическое древо составлено в подарок Ираклию Важаевичу Бенидзе ко дню рождения (13 ноября).',
+        houses: 'Бенидзе · Агумава · Папава · Каландия (Каландадзе) · Лукава · Какачия · Кухилава'
+      },
+      en: {
+        desc: V === 'temo' ? 'The family genealogical tree is compiled from family oral history and archival records.' : 'The family genealogical tree is compiled as a birthday gift (November 13) for Irakli Benidze.',
+        houses: 'Benidze · Agumava · Papava · Kalandia (Kalandadze) · Lukava · Kakachia · Kukhilava'
+      }
+    };
+    const col = COLOPHON_TEXT[lang] || COLOPHON_TEXT.ka;
+    colophon.innerHTML = '<div class="mark"></div><p>' + col.desc + '</p><p class="houses">' + col.houses + '</p>';
     if (selected) openDossier(selected);
   }
 
