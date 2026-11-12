@@ -926,9 +926,13 @@
     const bOwner = box(ownerId), bFrom = box(fromId);
     const dist = Math.hypot(bOwner.cx - bFrom.cx, bOwner.cy - bFrom.cy);
     if (dist < 260) return;
-    const k = Math.min(0.62, Math.max(0.38, cam.k * 0.85));
-    const dur = Math.min(2600, Math.max(1400, Math.round(dist * 0.9)));
-    fly({ k, x: availW() / 2 - bOwner.cx * k, y: innerHeight * 0.48 - (bOwner.top + bOwner.bottom) / 2 * k }, dur);
+    const k = Math.min(0.56, Math.max(0.32, cam.k * 0.78));
+    const dur = Math.min(2800, Math.max(1600, Math.round(dist * 0.95)));
+    setTimeout(() => {
+      if (hovered === fromId && !selected && !ptrs.size) {
+        fly({ k, x: availW() / 2 - bOwner.cx * k, y: innerHeight * 0.48 - (bOwner.top + bOwner.bottom) / 2 * k }, dur);
+      }
+    }, 240);
   }
   function zoomAt(px, py, f) {
     cancelAnimationFrame(raf);
@@ -947,6 +951,7 @@
   viewport.addEventListener('pointerdown', e => {
     if (e.button > 0) return;
     touched = true; cancelAnimationFrame(raf);
+    if (e.pointerType === 'touch') document.body.classList.add('touch-active');
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (ptrs.size === 1) {
       moved = 0; longPressed = false;
@@ -955,7 +960,7 @@
       if (isMobile() && downCard) {
         const id = downCard.closest('.node').dataset.id;
         longPressT = setTimeout(() => {
-          if (ptrs.size === 1 && moved <= 6) {
+          if (ptrs.size === 1 && moved <= 16) {
             longPressed = true;
             if (navigator.vibrate) navigator.vibrate(12);
             select(id);
@@ -976,7 +981,8 @@
     p.x = e.clientX; p.y = e.clientY;
     if (ptrs.size === 1) {
       moved += Math.abs(dx) + Math.abs(dy);
-      if (moved > 6) { clearLongPress(); viewport.classList.add('dragging'); document.body.classList.add('used'); cam.x += dx; cam.y += dy; apply(); }
+      const tapSlop = e.pointerType === 'touch' ? 14 : 6;
+      if (moved > tapSlop) { clearLongPress(); viewport.classList.add('dragging'); document.body.classList.add('used'); cam.x += dx; cam.y += dy; apply(); }
     } else if (ptrs.size === 2) {
       clearLongPress();
       const a = Array.from(ptrs.values()), d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
@@ -988,8 +994,10 @@
     if (!ptrs.has(e.pointerId)) return;
     clearLongPress();
     ptrs.delete(e.pointerId); viewport.classList.remove('dragging');
+    if (ptrs.size === 0) document.body.classList.remove('touch-active');
     if (ptrs.size < 2) pinch0 = 0;
-    if (ptrs.size === 0 && moved <= 6 && !longPressed && e.type === 'pointerup') {
+    const tapSlop = e.pointerType === 'touch' ? 16 : 6;
+    if (ptrs.size === 0 && moved <= tapSlop && !longPressed && e.type === 'pointerup') {
       if (isMobile()) {
         if (downCard) {
           const id = downCard.closest('.node').dataset.id;

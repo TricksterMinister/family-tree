@@ -673,13 +673,50 @@ body.has-drawer #drawer { transform: none; opacity: 1; }
 @media (max-width: 900px) {
   :root { --drawer-w: 100vw; }
   .mobile-only { display: inline-flex !important; }
+  #sukhumi-bg {
+    -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 24%, #000 76%, transparent 94%);
+    mask-image: linear-gradient(180deg, transparent 6%, #000 24%, #000 76%, transparent 94%);
+  }
   #sukhumi-bg .sk-layer {
-    -webkit-mask-size: 160% auto;
-    mask-size: 160% auto;
-    -webkit-mask-position: center 44%;
-    mask-position: center 44%;
+    -webkit-mask-size: 165% auto;
+    mask-size: 165% auto;
+    -webkit-mask-position: center 45%;
+    mask-position: center 45%;
   }
   #sukhumi-bg .sk-base { filter: brightness(1.35); }
+  #viewport::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    background: radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(254, 215, 170, 0.24) 0%,
+      rgba(249, 115, 22, 0.11) 44%,
+      transparent 76%
+    );
+    mix-blend-mode: screen;
+  }
+  body[data-light="opal"] #viewport::after {
+    background: radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(236, 72, 153, 0.22) 0%,
+      rgba(168, 85, 247, 0.12) 44%,
+      transparent 76%
+    );
+  }
+  body[data-light="promenade"] #viewport::after {
+    background: radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      var(--prom-c1, rgba(254, 215, 170, 0.24)) 0%,
+      var(--prom-c2, rgba(249, 115, 22, 0.11)) 44%,
+      transparent 76%
+    );
+  }
+  body.touch-active #viewport::after { opacity: 1; }
   body[data-light="sunset"] #sukhumi-bg .sk-glint,
   body:not([data-light]) #sukhumi-bg .sk-glint {
     background:
