@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+Georgian:wght@300;400;500;600&family=Noto+Sans+Georgian:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="atlas.css?v=9">
+  <link rel="stylesheet" href="atlas.css?v=10">
 </head>
 <body>
   <div id="curtain">
@@ -40,14 +40,16 @@
   <div id="rail" class="chrome"></div>
 
   <nav id="toolbar" class="chrome">
-    <!--GIFT--><a class="pill gift" href="irakli.html">★ <span class="long" data-t="gift"></span> <span aria-hidden="true">→</span></a><!--/GIFT-->
-    <div id="light-switcher" class="seg glass" role="group" aria-label="Свет гравюры">
-      <button data-light="sunset" class="on" title="1. Закатный луч (Оранж и янтарь)">☀️ Закат</button>
-      <button data-light="opal" title="2. Опал (Ювелирный перламутр)">💎 Опал</button>
-      <button data-light="promenade" title="3. Огни (Адаптивный)">🏮 Огни</button>
+    <!--GIFT--><a class="pill gift" href="irakli.html"><span class="gift-star">★</span> <span class="long" data-t="gift"></span> <span class="gift-arrow" aria-hidden="true">→</span></a><span class="tb-sep" aria-hidden="true"></span><!--/GIFT-->
+    <div id="light-switcher" class="seg" role="group" aria-label="Свет гравюры">
+      <button data-light="sunset" class="on" title="1. Закатный луч">☀️ Закат</button>
+      <button data-light="opal" title="2. Опал">💎 Опал</button>
+      <button data-light="promenade" title="3. Огни">🏮 Огни</button>
     </div>
-    <button id="btn-direct" class="pill glass"><span class="dot"></span><span class="txt" data-t="direct"></span></button>
-    <div id="lang" class="seg glass" role="group" aria-label="Language">
+    <span class="tb-sep" aria-hidden="true"></span>
+    <button id="btn-direct" class="pill"><span class="dot"></span><span class="txt" data-t="direct"></span></button>
+    <span class="tb-sep" aria-hidden="true"></span>
+    <div id="lang" class="seg" role="group" aria-label="Language">
       <button data-lang="ka">KA</button><button data-lang="en">EN</button><button data-lang="ru">RU</button>
     </div>
   </nav>
@@ -76,7 +78,7 @@
   </aside>
 
   <script>window.ATLAS_VARIANT = 'temo';</script>
-  <script src="atlas-data.js?v=9"></script>
-  <script src="atlas.js?v=9"></script>
+  <script src="atlas-data.js?v=10"></script>
+  <script src="atlas.js?v=10"></script>
 </body>
 </html>
