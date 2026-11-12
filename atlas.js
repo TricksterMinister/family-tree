@@ -38,7 +38,7 @@
     'evdokia': ['Evdokia Lukava', 'Евдокия Павловна Лукава', 'f', 'ggm'],
     'shalva': ['Shalva Kalandia', 'Шалва Каландия', 'm', 'gmBro'],
     'otar': ['Otar Bodjgua (Kalandia)', 'Отар Боджгуа (Каландия)', 'm', 'gmBro'],
-    'maiko-bodjgua': ['Maiko Bodjgua (Pochgua)', 'Майко Боджгуа (Почгуа)', 'f', 'maternalAunt'],
+    'maiko-bodjgua': ['Maiko Bodjgua', 'Майко Боджгуа', 'f', 'maternalAunt'],
     'dodo-bodjgua': ['Dodo Bodjgua', 'Додо Боджгуа', 'f', 'maternalAunt'],
     'vakhtang-bodjgua': ['Vakhtang (Vakho) Bodjgua', 'Вахтанг (Вахо) Боджгуа', 'm', 'maternalUncle'],
     'mzia-djidjilava': ['Mzia Djidjilava', 'Мзия Джиджилава', 'f', 'cousin'],
