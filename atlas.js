@@ -314,6 +314,54 @@
     return s;
   }
 
+  function chainTo(a, from) {
+    from = from || PROTO;
+    if (from === a) return [from];
+    for (const p of parentsOf(from)) { const c = chainTo(a, p); if (c) return [from].concat(c); }
+    return null;
+  }
+  function linkOf(id) {
+    if (id === PROTO || PROTO_ANC.has(id)) return id;
+    if (id === 'keti' && V === 'irakli') return 'irakli';
+    return parentsOf(id).find(p => PROTO_ANC.has(p) || p === PROTO) || null;
+  }
+  function kinshipChain(id) {
+    if (!id || id === PROTO) return [];
+    if (id === 'keti') return [PROTO, 'vazha', 'irakli', 'keti'];
+    if (id.startsWith('child-')) return [PROTO, 'vazha', 'irakli', id];
+    if (PROTO_ANC.has(id)) {
+      const p = pathToAncestor(PROTO, id);
+      return p ? p : [PROTO, id];
+    }
+    function findConnecting(curr) {
+      for (const p of parentsOf(curr)) {
+        if (p === PROTO || PROTO_ANC.has(p)) return p;
+      }
+      for (const p of parentsOf(curr)) {
+        const found = findConnecting(p);
+        if (found) return found;
+      }
+      return null;
+    }
+    const common = findConnecting(id);
+    if (!common) return [];
+    function pathToCommon(curr, com) {
+      if (curr === com) return [curr];
+      for (const p of parentsOf(curr)) {
+        const sub = pathToCommon(p, com);
+        if (sub) return [curr].concat(sub);
+      }
+      return null;
+    }
+    const downFromProto = pathToAncestor(PROTO, common);
+    const upFromId = pathToCommon(id, common);
+    if (downFromProto && upFromId) {
+      const up = upFromId.slice(0, -1).reverse();
+      return downFromProto.concat(up);
+    }
+    return [];
+  }
+
   /* ---------------- layout ---------------- */
   const Y0 = V === 'temo' ? 420 : 620;
   const Y_COUSINS = Y0 + 170;
@@ -414,7 +462,7 @@
     { key: 'wMik', ids: ['ana', 'tatusha', 'konstantine', 'estate'] },
     { key: 'wLuk', ids: ['lukava-sisters'] }
   ];
-  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 2620, y0: -100, y1: R(5) + 470 };
+  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 2620, y0: -100, y1: R(5) + 720 };
   const HOME = V === 'temo' ? { x0: -1100, x1: 1300, y0: -100, y1: R(1) + 180 } : { x0: -1200, x1: 1200, y0: -100, y1: R(1) + 180 };
   const GENS = [
     ['', 'g0', Y_COUSINS - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
@@ -445,12 +493,13 @@
   const wingEls = WINGS.map(() => { const e = el('div', 'wing'); world.appendChild(e); return e; });
 
   const quote = el('div', 'legend-quote');
-  quote.style.left = '-760px'; quote.style.top = (R(3) + 40) + 'px';
+  quote.style.left = '330px'; quote.style.transform = 'translateX(-50%)'; quote.style.textAlign = 'center';
+  quote.style.top = (R(5) + 210) + 'px';
   quote.innerHTML = '<div class="eyebrow">საგვარეულო გადმოცემა · ნონა ბიცოლას (ნორა ცერცვაძის) ნაამბობით</div><blockquote>მიხა კალანდიას თქმით, გვარის თავდაპირველი ფორმა იყო <strong>კალანდაძე</strong> (წარმოშობით გურიიდან). კონფლიქტის გამო წინაპრები სამეგრელოში (ზუგდიდი / წалენჯიხა) გადასახლდნენ და გვარი კალანდიად დაიწერეს.</blockquote>';
   world.appendChild(quote);
 
   const colophon = el('div', 'colophon');
-  colophon.style.left = '330px'; colophon.style.top = (R(5) + 250) + 'px';
+  colophon.style.left = '330px'; colophon.style.top = (R(5) + 490) + 'px';
   colophon.innerHTML = '<div class="mark"></div><p>' + (V === 'temo'
     ? 'საგვარეულო გენეალოგიური ხე შედგენილია საოჯახო გადმოცემებისა და საარქივო ცნობების მიხედვით.'
     : 'საგვარეულო გენეალოგიური ხე შედგენილია ირაკლი ვაჟას ძე ბენიძის დაბადების დღის (13 ნოემბერი) საჩუქრად.')
@@ -723,8 +772,7 @@
       [kinHeadings.children[lIdx], childrenOf(id)],
       [kinHeadings.siblings[lIdx], siblingsOf(id)]
     ].filter(k => k[1].length);
-    const link = linkOf(id);
-    const chain = link && id !== PROTO ? (chainTo(link) || []).concat(link === id ? [] : [id]) : [];
+    const chain = kinshipChain(id);
     if (kin.length || chain.length > 1) {
       h += '<div class="d-kin"' + st() + '>';
       if (chain.length > 1) h += '<h4>' + kinHeadings.line[lIdx] + '</h4><div class="d-line">' + chain.map(chip).join('<span class="arrow">→</span>') + '</div>';

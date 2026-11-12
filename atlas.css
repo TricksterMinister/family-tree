@@ -334,13 +334,13 @@ body[data-lang="en"] .hero .nm, body[data-lang="ru"] .hero .nm { font-size: 34px
 body.revealed .wing { opacity: 1; }
 
 .legend-quote {
-  position: absolute; width: 760px; z-index: 1; opacity: 0; transition: opacity 1.4s var(--soft) 2s;
+  position: absolute; transform: translateX(-50%); width: 820px; max-width: 90vw; text-align: center; z-index: 2; opacity: 0; transition: opacity 1.4s var(--soft) 2s;
 }
 body.revealed .legend-quote { opacity: 1; }
-.legend-quote .eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-2); margin-bottom: 18px; line-height: 1.6; }
-.legend-quote blockquote { font-family: var(--geo); font-size: 27px; line-height: 1.55; font-weight: 400; color: rgba(226, 232, 240, 0.8); }
-.legend-quote blockquote strong { color: #ffffff; font-weight: 600; }
-.legend-quote blockquote::before { content: '„'; display: block; font-family: var(--serif); font-size: 110px; line-height: 0.4; color: rgba(190, 205, 225, 0.4); margin: 30px 0 4px -6px; }
+.legend-quote .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-2); margin-bottom: 18px; line-height: 1.6; }
+.legend-quote blockquote { font-family: var(--geo); font-size: 26px; line-height: 1.6; font-weight: 400; color: rgba(235, 242, 252, 0.88); }
+.legend-quote blockquote strong { color: #ffffff; font-weight: 600; text-shadow: 0 0 16px rgba(212, 175, 55, 0.4); }
+.legend-quote blockquote::before { content: '„'; display: block; font-family: var(--serif); font-size: 90px; line-height: 0.35; color: rgba(212, 175, 55, 0.45); margin: 24px auto 12px; }
 
 .colophon { position: absolute; transform: translateX(-50%); width: 900px; text-align: center; opacity: 0; transition: opacity 1.4s var(--soft) 2.2s; }
 body.revealed .colophon { opacity: 1; }
