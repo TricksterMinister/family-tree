@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>კალანდია და ლუკავა — საგვარეულო ცნობარი</title>
+  <meta name="theme-color" content="#0a0c0f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+Georgian:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0c0f;
+      --card: #13161d;
+      --card-border: rgba(180, 205, 235, 0.18);
+      --card-focus: rgba(220, 235, 255, 0.55);
+      --text: #eef2f7;
+      --text-muted: #8c98aa;
+      --accent: #dbe5f2;
+      --green: #25d366;
+      --green-dark: #128c7e;
+      --font-geo: 'Noto Serif Georgian', Georgia, serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-geo);
+      padding: 16px 14px 120px;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      text-align: center;
+      padding: 18px 12px 24px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .intro {
+      font-size: 15px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .intro p + p { margin-top: 8px; }
+    .intro strong { color: #ffffff; }
+
+    .group-title {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9cb0c7;
+      margin: 30px 4px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .group-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px 14px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .card:focus-within {
+      border-color: var(--card-focus);
+      background: #171c26;
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .name-geo {
+      font-size: 19px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .name-ru {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      margin-top: 2px;
+    }
+
+    .role-badge {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: #b0c4de;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 4px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .field.full-w {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 480px) {
+      .fields { grid-template-columns: 1fr; }
+      .field.full-w { grid-column: auto; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    label {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    label span.ru {
+      color: #6d798a;
+      font-size: 11px;
+    }
+
+    input[type="text"] {
+      background: #0b0d12;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: #ffffff;
+      padding: 12px 14px;
+      font-size: 16px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus {
+      border-color: #799ec9;
+      background: #0f131a;
+    }
+    input[type="text"]::placeholder {
+      color: #495465;
+    }
+
+    /* Fixed Bottom Action Bar */
+    .bottom-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 12, 16, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--card-border);
+      padding: 12px 16px 16px;
+      display: flex;
+      gap: 10px;
+      max-width: 680px;
+      margin: 0 auto;
+      z-index: 100;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+    .btn:active { transform: scale(0.98); }
+
+    .btn-wa {
+      background: var(--green);
+      color: #052410;
+    }
+
+    .btn-save {
+      background: #202734;
+      color: #eef2f7;
+      border: 1px solid var(--card-border);
+      flex: 0 0 130px;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #1b2838;
+      border: 1px solid #4d7cb0;
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.3s;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="eyebrow">საგვარეულო მატიანე • Родовой Атлас</div>
+    <h1>კალანდია და ლუკავა</h1>
+    <div class="intro">
+      <p><strong>ძვირფასო ალდონა!</strong> ჩაწერე მხოლოდ ის, რაც გახსოვს (დაბადების წელი, გარდაცვალების წელი თუ უცნობია, და ადგილი). თუ რომელიმე არ გახსოვს — გამოტოვე და დატოვე ცარიელი.</p>
+      <p style="color:var(--text-muted);font-size:13px;">ბოლოს დააჭირე ქვედა მწვანე ღილაკს — მონაცემები ავტომატურად გაიგზავნება WhatsApp-ში თემოსთან.</p>
+    </div>
+  </header>
+
+  <div id="toast" class="toast">✓ შენახულია! • Сохранено!</div>
+
+  <main id="list"></main>
+
+  <div class="bottom-bar">
+    <button class="btn btn-save" onclick="saveLocal(true)">💾 შენახვა</button>
+    <button class="btn btn-wa" onclick="sendWhatsApp()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+      გაგზავნა WhatsApp-ში
+    </button>
+  </div>
+
+  <script>
+    const ROSTER = [
+      {
+        group: 'ალდონა და დები • Альдона и сёстры',
+        members: [
+          { id: 'aldona', geo: 'ალდონა კალანდია', ru: 'Альдона Каландия', role: 'თქვენ • Сама Альдона', defDate: '1947', defDecease: '', defPlace: 'სოხუმი' },
+          { id: 'medea', geo: 'მედეა კალანდია', ru: 'Медея Каландия', role: 'და • Сестра', defDate: '', defDecease: '', defPlace: 'სოხუმი' },
+          { id: 'irakli_m', geo: 'ირაკლი', ru: 'Ираклий', role: 'მედეას შვილი • Сын Медеи', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'levan_m', geo: 'ლევან', ru: 'Леван', role: 'მედეას შვილი • Сын Медеи', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'nanuli', geo: 'ნანული კალანდია', ru: 'Нанули Каландия', role: 'და • Сестра', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'maiko', geo: 'მაიკო ბოჯგუა', ru: 'Майко Боджгуа', role: 'და • Сестра', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'dodo', geo: 'დოდო ბოჯგუა', ru: 'Додо Боджгуа', role: 'და • Сестра', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'vakho', geo: 'ვახტანგ (ვახო) ბოჯგუა', ru: 'Вахтанг (Вахо) Боджгуа', role: 'ძმა • Брат', defDate: '', defDecease: '', defPlace: '' }
+        ]
+      },
+      {
+        group: 'მშობლები და ბებია-ბაბუა • Родители и дедушки',
+        members: [
+          { id: 'otar', geo: 'ოთარ კალანდია', ru: 'Отар Каландия', role: 'მამა • Отец', defDate: '1926', defDecease: '', defPlace: '' },
+          { id: 'nora', geo: 'ნორა წერწვაძე (ნონა ბიცოლა)', ru: 'Нора Церцвадзе (Нона Бицола)', role: 'დედა • Мать', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'nadezhda', geo: 'ნადეჟდა ლუკავა', ru: 'Надежда Лукава', role: 'ბებია • Бабушка', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'mikha', geo: 'მიხა კალანდია', ru: 'Миха Каландия', role: 'ბაბუა • Дедушка', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'evdokia', geo: 'ევდოკია', ru: 'Евдокия', role: 'ბებია • Бабушка', defDate: '', defDecease: '', defPlace: '' }
+        ]
+      },
+      {
+        group: 'ჟორას ოჯახი • Семья Жоры',
+        members: [
+          { id: 'zhora', geo: 'ჟორა', ru: 'Жора', role: 'ბიძა • Дядя', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'eliso', geo: 'ელისო', ru: 'Элисо', role: 'ჟორას შვილი • Дочь Жоры', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'nana', geo: 'ნანა', ru: 'Нана', role: 'ჟორას შვილი • Дочь Жоры', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'khatuna', geo: 'ხათუნა', ru: 'Хатуна', role: 'ჟორას შვილი • Дочь Жоры', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'paata', geo: 'პაატა', ru: 'Паაატა', role: 'ჟორას შვილი • Сын Жоры', defDate: '', defDecease: '', defPlace: '' }
+        ]
+      },
+      {
+        group: 'ვენერას ოჯახი • Семья Венеры',
+        members: [
+          { id: 'venera', geo: 'ვენერა', ru: 'Венера', role: 'დეიდა • Тётя', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'mzia', geo: 'მზია ჯიჯილავა', ru: 'Мзия Джиджилава', role: 'ვენერას შვილი • Дочь Венеры', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'ioseb', geo: 'იოსებ ჯიჯილავა', ru: 'Иოსиф Джиджилава', role: 'ვენერას შვილი • Сын Венеры', defDate: '', defDecease: '', defPlace: '' }
+        ]
+      },
+      {
+        group: 'ნონა და ნიკა • Нона и Ника',
+        members: [
+          { id: 'nona_n', geo: 'ნონა ნაცივლიშვილი', ru: 'Нона Нацивлиშвили', role: 'ნათესავი • Родственница', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'nika_n', geo: 'ნიკა ნაცივლიშვილი', ru: 'Ника Нацивлиშვილი', role: 'ნონას შვილი • Сын Ноны', defDate: '', defDecease: '', defPlace: '' }
+        ]
+      },
+      {
+        group: 'უფროსი წინაპრები • Старшие предки',
+        members: [
+          { id: 'bachu', geo: 'ბაჩუ კალანდია', ru: 'Бачу Каландия', role: 'დიდი ბაბუა • Прадедушка', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'keso', geo: 'კესო', ru: 'Кесо', role: 'დიდი ბებია • Прабабушка', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'bitu', geo: 'ბიტუ კალანდაძე', ru: 'Биту Каландадзе', role: 'ფესვი • Древний прадед', defDate: '', defDecease: '', defPlace: '' },
+          { id: 'lukava_s', geo: 'ლუკავას დები', ru: 'Сёстры Лукава', role: 'ნადეჟდას დები • Сёстры Надежды', defDate: '', defDecease: '', defPlace: '' }
+        ]
+      },
+      {
+        group: 'ნონა პაპავა (ვისაც ვეძებთ • кого ищем)',
+        members: [
+          { id: 'nona_papava', geo: 'ნონა პაპავა', ru: 'Нона Папава', role: 'დედას დეიდაშვილი • Двоюродная сестра мамы', defDate: '', defDecease: '', defPlace: '' }
+        ]
+      }
+    ];
+
+    const STORAGE_KEY = 'kalandia_atlas_data_v2';
+
+    function render() {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+
+      ROSTER.forEach(g => {
+        const gTitle = document.createElement('div');
+        gTitle.className = 'group-title';
+        gTitle.textContent = g.group;
+        list.appendChild(gTitle);
+
+        g.members.forEach(m => {
+          const s = saved[m.id] || {};
+          const curDate = s.date !== undefined ? s.date : m.defDate;
+          const curDecease = s.decease !== undefined ? s.decease : m.defDecease;
+          const curPlace = s.place !== undefined ? s.place : m.defPlace;
+
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <div class="card-head">
+              <div>
+                <div class="name-geo">${m.geo}</div>
+                <div class="name-ru">${m.ru}</div>
+              </div>
+              <span class="role-badge">${m.role}</span>
+            </div>
+            <div class="fields">
+              <div class="field">
+                <label>📅 დაბადების თარიღი <span class="ru">• Год/дата рождения</span></label>
+                <input type="text" id="${m.id}_date" value="${curDate}" placeholder="მაგ. 1947" oninput="saveLocal(false)">
+              </div>
+              <div class="field">
+                <label>🕊️ გარდაცვალების წელი <span class="ru">• Дата смерти</span></label>
+                <input type="text" id="${m.id}_decease" value="${curDecease}" placeholder="თუ გარდაცვლილია" oninput="saveLocal(false)">
+              </div>
+              <div class="field full-w">
+                <label>📍 დაბადების ადგილი <span class="ru">• Место рождения</span></label>
+                <input type="text" id="${m.id}_place" value="${curPlace}" placeholder="მაგ. სოხუმი, სენაკი..." oninput="saveLocal(false)">
+              </div>
+            </div>
+          `;
+          list.appendChild(card);
+        });
+      });
+    }
+
+    function collectData() {
+      const data = {};
+      ROSTER.forEach(g => {
+        g.members.forEach(m => {
+          const dInput = document.getElementById(m.id + '_date');
+          const decInput = document.getElementById(m.id + '_decease');
+          const pInput = document.getElementById(m.id + '_place');
+          data[m.id] = {
+            id: m.id,
+            name: m.geo + ' (' + m.ru + ')',
+            date: dInput ? dInput.value.trim() : '',
+            decease: decInput ? decInput.value.trim() : '',
+            place: pInput ? pInput.value.trim() : ''
+          };
+        });
+      });
+      return data;
+    }
+
+    function saveLocal(showToast) {
+      const data = collectData();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (showToast) {
+        const t = document.getElementById('toast');
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2200);
+      }
+    }
+
+    function sendWhatsApp() {
+      saveLocal(false);
+      const data = collectData();
+
+      let lines = ['🌳 *კალანდია და ლუკავა — მონაცემები თემოსთვის*:\n'];
+      let count = 0;
+
+      ROSTER.forEach(g => {
+        const groupFilled = [];
+        g.members.forEach(m => {
+          const item = data[m.id];
+          if (item && (item.date || item.decease || item.place)) {
+            let row = '• ' + m.geo + ' (' + m.ru + ')';
+            if (item.date) row += '\n   📅 დაბადება: ' + item.date;
+            if (item.decease) row += '\n   🕊️ გარდაცვალება: ' + item.decease;
+            if (item.place) row += '\n   📍 ადგილი: ' + item.place;
+            groupFilled.push(row);
+            count++;
+          }
+        });
+        if (groupFilled.length > 0) {
+          lines.push('\n*' + g.group + '*');
+          lines.push(groupFilled.join('\n'));
+        }
+      });
+
+      if (count === 0) {
+        alert('გთხოვთ ჩაწეროთ თუნდაც ერთი მონაცემი გაგზავნამდე.');
+        return;
+      }
+
+      const text = encodeURIComponent(lines.join('\n'));
+      window.location.href = 'https://api.whatsapp.com/send?text=' + text;
+    }
+
+    render();
+  </script>
+</body>
+</html>
