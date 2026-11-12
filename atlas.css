@@ -210,10 +210,31 @@ body.revealed .ring { opacity: 0.9; transform: scale(1); }
 .ring.h-main { --ec: var(--c-main); } .ring.h-paternal { --ec: var(--c-paternal); }
 .ring.h-kalandia { --ec: var(--c-kalandia); } .ring.h-lukava { --ec: var(--c-lukava); }
 
-body.has-focus .edge { opacity: 0.09; }
-body.has-focus .ring { opacity: 0.15; }
-body.has-focus .edge.lit { opacity: 1; stroke: #ffffff; stroke-width: 2.4; filter: drop-shadow(0 0 6px rgba(235, 242, 252, 0.55)); }
-body.has-focus .ring.lit { opacity: 1; stroke: #ffffff; fill: #ffffff; }
+body.has-focus .edge { opacity: 0.08; transition: opacity 0.4s var(--soft), stroke 0.4s, stroke-width 0.4s; }
+body.has-focus .ring { opacity: 0.12; transition: opacity 0.4s var(--soft); }
+body.has-focus .edge.lit {
+  opacity: 1;
+  stroke: #ffffff;
+  stroke-width: 2.8;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.6));
+  animation: lineShimmer 2.2s ease-in-out infinite alternate;
+}
+body.has-focus .ring.lit {
+  opacity: 1;
+  stroke: #ffffff;
+  fill: #ffffff;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.7));
+  transform: scale(1.4);
+}
+
+@keyframes lineShimmer {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
+  }
+  100% {
+    filter: drop-shadow(0 0 9px rgba(255, 255, 255, 1)) drop-shadow(0 0 24px rgba(212, 175, 55, 0.8));
+  }
+}
 
 /* ---------- nodes ---------- */
 .node { position: absolute; width: 0; height: 0; z-index: 2; transition: opacity 0.5s var(--soft), filter 0.5s var(--soft); }
@@ -328,9 +349,16 @@ body.revealed .colophon { opacity: 1; }
 .colophon .houses { margin-top: 10px; font-size: 13px; letter-spacing: 0.08em; color: var(--gold-2); }
 
 /* focus states */
-body.has-focus .node { opacity: 0.2; filter: saturate(0.5); }
+body.has-focus .node { opacity: 0.18; filter: saturate(0.4); }
 body.has-focus .node.lit { opacity: 1; filter: none; }
-body.has-focus .node.sel .card { border-color: #ffffff; box-shadow: 0 0 0 1px #ffffff, 0 0 0 9px rgba(190, 205, 225, 0.10), 0 30px 70px -24px #000; }
+body.has-focus .node.lit .card {
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 0 20px rgba(212, 175, 55, 0.28), 0 20px 50px -15px rgba(0, 0, 0, 0.8);
+}
+body.has-focus .node.sel .card {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 24px rgba(255, 255, 255, 0.85), 0 0 45px rgba(212, 175, 55, 0.5), 0 30px 70px -24px #000;
+}
 body.has-focus .wing, body.has-focus .legend-quote { opacity: 0.25; }
 
 body.direct-only .node.k-collateral { opacity: 0 !important; pointer-events: none; }

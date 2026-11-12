@@ -223,22 +223,93 @@
   const siblingsOf = id => { const p = PARENTS[id]; return p ? Object.keys(PARENTS).filter(c => c !== id && has(c) && PARENTS[c][0] === p[0]) : []; };
   function ancestors(id, acc) { acc = acc || new Set(); parentsOf(id).forEach(p => { if (!acc.has(p)) { acc.add(p); ancestors(p, acc); } }); return acc; }
   const PROTO_ANC = ancestors(PROTO);
-  function chainTo(a, from) {
-    from = from || PROTO;
-    if (from === a) return [from];
-    for (const p of parentsOf(from)) { const c = chainTo(a, p); if (c) return [from].concat(c); }
+
+  function pathToAncestor(target, anc) {
+    if (target === anc) return [target];
+    for (const p of parentsOf(target)) {
+      const sub = pathToAncestor(p, anc);
+      if (sub) return [target].concat(sub);
+    }
     return null;
   }
-  function linkOf(id) {
-    if (id === PROTO || PROTO_ANC.has(id)) return id;
-    if (id === 'keti' && V === 'irakli') return 'irakli';
-    return parentsOf(id).find(p => PROTO_ANC.has(p) || p === PROTO) || null;
-  }
+
   function lineageSet(id) {
-    const s = ancestors(id); s.add(id);
-    const link = linkOf(id);
-    if (link) (chainTo(link) || []).forEach(x => s.add(x));
-    if (id === 'keti') s.add('irakli');
+    const s = new Set();
+    if (!id || !has(id)) return s;
+    s.add(id);
+
+    let coreId = id;
+    if (id === 'keti') { s.add('irakli'); coreId = 'irakli'; }
+    if (id.startsWith('child-')) { s.add('irakli'); s.add('keti'); coreId = 'irakli'; }
+
+    if (coreId === PROTO) {
+      ancestors(PROTO, s);
+      parentsOf(PROTO).forEach(p => {
+        const sp = spouseOf(p);
+        if (sp) s.add(sp);
+      });
+      return s;
+    }
+
+    if (PROTO_ANC.has(coreId)) {
+      const p = pathToAncestor(PROTO, coreId);
+      if (p) p.forEach(x => {
+        s.add(x);
+        const sp = spouseOf(x);
+        if (sp && (PROTO_ANC.has(sp) || sp === PROTO)) s.add(sp);
+      });
+      ancestors(coreId, s);
+      s.add(PROTO);
+      return s;
+    }
+
+    function findConnecting(curr) {
+      const pars = parentsOf(curr);
+      for (const p of pars) {
+        if (p === PROTO || PROTO_ANC.has(p)) return p;
+      }
+      for (const p of pars) {
+        const found = findConnecting(p);
+        if (found) return found;
+      }
+      return null;
+    }
+
+    function pathToCommon(curr, common) {
+      if (curr === common) return [curr];
+      for (const p of parentsOf(curr)) {
+        const sub = pathToCommon(p, common);
+        if (sub) return [curr].concat(sub);
+      }
+      return null;
+    }
+
+    const common = findConnecting(coreId);
+    if (common) {
+      const up = pathToCommon(coreId, common);
+      if (up) up.forEach(x => s.add(x));
+
+      const down = pathToAncestor(PROTO, common);
+      if (down) down.forEach(x => {
+        s.add(x);
+        const sp = spouseOf(x);
+        if (sp && (PROTO_ANC.has(sp) || sp === PROTO)) s.add(sp);
+      });
+
+      const spCommon = spouseOf(common);
+      if (spCommon && PROTO_ANC.has(spCommon)) s.add(spCommon);
+    }
+
+    ancestors(coreId, s);
+    s.add(PROTO);
+
+    parentsOf(PROTO).forEach(p => {
+      if (s.has(p)) {
+        const sp = spouseOf(p);
+        if (sp) s.add(sp);
+      }
+    });
+
     if (V === 'irakli' && s.has('irakli') && !id.startsWith('child-')) childrenOf('irakli').forEach(c => s.add(c));
     return s;
   }
@@ -374,8 +445,8 @@
   const wingEls = WINGS.map(() => { const e = el('div', 'wing'); world.appendChild(e); return e; });
 
   const quote = el('div', 'legend-quote');
-  quote.style.left = '-1820px'; quote.style.top = (R(3) + 30) + 'px';
-  quote.innerHTML = '<div class="eyebrow">საგვარეულო გადმოცემა · ნონა ბიცოლას (ნორა ცერცვაძის) ნაამბობით</div><blockquote>მიხა კალანდიას თქმით, გვარის თავდაპირველი ფორმა იყო <strong>კალანდაძე</strong> (წარმოშობით გურიიდან). კონფლიქტის გამო წინაპრები სამეგრელოში (ზუგდიდი / წალენჯიხა) გადასახლდნენ და გვარი კალანდიად დაიწერეს.</blockquote>';
+  quote.style.left = '-760px'; quote.style.top = (R(3) + 40) + 'px';
+  quote.innerHTML = '<div class="eyebrow">საგვარეულო გადმოცემა · ნონა ბიცოლას (ნორა ცერცვაძის) ნაამბობით</div><blockquote>მიხა კალანდიას თქმით, გვარის თავდაპირველი ფორმა იყო <strong>კალანდაძე</strong> (წარმოშობით გურიიდან). კონფლიქტის გამო წინაპრები სამეგრელოში (ზუგდიდი / წалენჯიხა) გადასახლდნენ და გვარი კალანდიად დაიწერეს.</blockquote>';
   world.appendChild(quote);
 
   const colophon = el('div', 'colophon');
