@@ -404,17 +404,17 @@
     add('lekso', -725, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
     add('data', -560, Y_COUSINS, 155, 'bottom', 'collateral', 0.7);
     add('anzor-bacho', -395, Y_COUSINS, 155, 'bottom', 'collateral', 0.8);
-    // Revaz's daughters (maternal first cousins):
-    add('nino-papava', 980, Y_COUSINS, 190, 'bottom', 'collateral', 0.5);
-    add('zhenia-papava', 1195, Y_COUSINS, 190, 'bottom', 'collateral', 0.6);
-    // Medea's & Giya's sons:
-    add('irakli-medea', 1410, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
-    add('levan-medea', 1590, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
-    add('giorgi-giya', 1770, Y_COUSINS, 170, 'bottom', 'collateral', 0.9);
-    add('nino-djalagonia', 1945, Y_COUSINS, 160, 'bottom', 'collateral', 0.9);
-    add('nika-natsivlishvili', 2115, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
-    add('anzhela-papava', 2280, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
-    add('levan-anatolievich-papava', 2445, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
+    // Papava cousins:
+    add('nino-papava', 980, Y_COUSINS, 170, 'bottom', 'collateral', 0.5);
+    add('zhenia-papava', 1160, Y_COUSINS, 170, 'bottom', 'collateral', 0.6);
+    add('nino-djalagonia', 1340, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
+    add('anzhela-papava', 1520, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
+    add('levan-anatolievich-papava', 1700, Y_COUSINS, 160, 'bottom', 'collateral', 0.9);
+    // Kalandia cousins:
+    add('irakli-medea', 1880, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
+    add('levan-medea', 2050, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
+    add('giorgi-giya', 2220, Y_COUSINS, 170, 'bottom', 'collateral', 0.9);
+    add('nika-natsivlishvili', 2390, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
   } else {
     add('child-leila', -225, 170, 200, 'bottom', 'kin', 0, { child: 1 });
     add('child-vazha', 0, 170, 200, 'bottom', 'kin', 0.1, { child: 1 });
@@ -435,40 +435,40 @@
     add('lekso', -1120, Y_COUSINS, 155, 'bottom', 'collateral', 0.6);
     add('data', -955, Y_COUSINS, 155, 'bottom', 'collateral', 0.7);
     add('anzor-bacho', -790, Y_COUSINS, 155, 'bottom', 'collateral', 0.8);
-    // Revaz's daughters:
-    add('nino-papava', 430, Y_COUSINS, 190, 'bottom', 'collateral', 0.5);
-    add('zhenia-papava', 645, Y_COUSINS, 190, 'bottom', 'collateral', 0.6);
-    // Medea's & Giya's sons:
-    add('irakli-medea', 860, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
-    add('levan-medea', 1040, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
-    add('giorgi-giya', 1220, Y_COUSINS, 170, 'bottom', 'collateral', 0.9);
-    add('nino-djalagonia', 1395, Y_COUSINS, 160, 'bottom', 'collateral', 0.9);
-    add('nika-natsivlishvili', 1565, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
-    add('anzhela-papava', 1730, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
-    add('levan-anatolievich-papava', 1895, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
+    // Papava cousins:
+    add('nino-papava', 430, Y_COUSINS, 170, 'bottom', 'collateral', 0.5);
+    add('zhenia-papava', 610, Y_COUSINS, 170, 'bottom', 'collateral', 0.6);
+    add('nino-djalagonia', 790, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
+    add('anzhela-papava', 970, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
+    add('levan-anatolievich-papava', 1150, Y_COUSINS, 160, 'bottom', 'collateral', 0.9);
+    // Kalandia cousins:
+    add('irakli-medea', 1330, Y_COUSINS, 160, 'bottom', 'collateral', 0.7);
+    add('levan-medea', 1500, Y_COUSINS, 160, 'bottom', 'collateral', 0.8);
+    add('giorgi-giya', 1670, Y_COUSINS, 170, 'bottom', 'collateral', 0.9);
+    add('nika-natsivlishvili', 1840, Y_COUSINS, 155, 'bottom', 'collateral', 0.9);
   }
   add('vazha', -170, R(1), 250, 'top', 'direct', 1.4); add('leila', 170, R(1), 250, 'top', 'direct', 1.5);
   add('nestor', -870, R(2), 250, 'top', 'direct', 2.4); add('minusha', -530, R(2), 250, 'top', 'direct', 2.5);
-  add('levan-papava', 250, R(2), 220, 'top', 'collateral', 2.4);
   add('orest', 530, R(2), 250, 'top', 'direct', 2.4); add('zhenia', 870, R(2), 250, 'top', 'direct', 2.5);
   ['sharden', 'zhora', 'ilya', 'venera', 'inessa'].forEach((id, i) => add(id, -1584 + i * 206, MZ(1), 190, 'bottom', 'collateral', 3 + i * 0.08));
-  add('anatoliy-papava', 740, MZ(1), 170, 'bottom', 'collateral', 3);
-  add('nona-papava', 920, MZ(1), 170, 'bottom', 'collateral', 3);
   add('revaz', 1100, MZ(1), 200, 'bottom', 'collateral', 3);
-  add('aldona', 1280, MZ(1), 155, 'bottom', 'collateral', 3.1);
-  add('medea', 1445, MZ(1), 155, 'bottom', 'collateral', 3.2);
-  add('giya-kalandia', 1610, MZ(1), 155, 'bottom', 'collateral', 3.3);
-  add('maiko-bodjgua', 1775, MZ(1), 155, 'bottom', 'collateral', 3.4);
-  add('dodo-bodjgua', 1940, MZ(1), 155, 'bottom', 'collateral', 3.5);
-  add('vakhtang-bodjgua', 2105, MZ(1), 155, 'bottom', 'collateral', 3.6);
-  add('nona-natsivlishvili', 2270, MZ(1), 155, 'bottom', 'collateral', 3.7);
-  add('nanuli', 2435, MZ(1), 155, 'bottom', 'collateral', 3.8);
+  add('nona-papava', 1340, MZ(1), 170, 'bottom', 'collateral', 3.1);
+  add('anatoliy-papava', 1610, MZ(1), 170, 'bottom', 'collateral', 3.2);
+  add('aldona', 1880, MZ(1), 155, 'bottom', 'collateral', 3.3);
+  add('medea', 2050, MZ(1), 155, 'bottom', 'collateral', 3.4);
+  add('giya-kalandia', 2220, MZ(1), 155, 'bottom', 'collateral', 3.5);
+  add('maiko-bodjgua', 2390, MZ(1), 155, 'bottom', 'collateral', 3.6);
+  add('dodo-bodjgua', 2560, MZ(1), 155, 'bottom', 'collateral', 3.7);
+  add('vakhtang-bodjgua', 2730, MZ(1), 155, 'bottom', 'collateral', 3.8);
+  add('nona-natsivlishvili', 2900, MZ(1), 155, 'bottom', 'collateral', 3.9);
+  add('nanuli', 3070, MZ(1), 155, 'bottom', 'collateral', 4.0);
   add('georgiy-papava', 390, R(3), 240, 'top', 'direct', 3.4);
   add('mikha', 700, R(3), 250, 'top', 'direct', 3.6); add('evdokia', 1040, R(3), 250, 'top', 'direct', 3.7);
-  add('shalva', 1445, MZ(2), 190, 'bottom', 'collateral', 4.2);
-  add('otar', 1940, MZ(2), 190, 'bottom', 'collateral', 4.3);
-  add('nina', 2270, MZ(2), 170, 'bottom', 'collateral', 4.4);
-  add('nadezhda', 2435, MZ(2), 170, 'bottom', 'collateral', 4.5);
+  add('levan-papava', 1475, MZ(2), 220, 'bottom', 'collateral', 3.5);
+  add('shalva', 1880, MZ(2), 190, 'bottom', 'collateral', 4.2);
+  add('otar', 2220, MZ(2), 190, 'bottom', 'collateral', 4.3);
+  add('nina', 2560, MZ(2), 170, 'bottom', 'collateral', 4.4);
+  add('nadezhda', 2900, MZ(2), 170, 'bottom', 'collateral', 4.5);
   add('bachu', 330, R(4), 250, 'top', 'direct', 4.8); add('keso', 670, R(4), 250, 'top', 'direct', 4.9);
   add('pavel', 1070, R(4), 250, 'top', 'direct', 4.8); add('salome', 1410, R(4), 250, 'top', 'direct', 4.9);
   ['ana', 'tatusha', 'konstantine', 'estate'].forEach((id, i) => add(id, -328 + i * 206, MZ(3), 190, 'bottom', 'collateral', 5.4 + i * 0.08));
@@ -483,7 +483,7 @@
     { key: 'wMik', ids: ['ana', 'tatusha', 'konstantine', 'estate'] },
     { key: 'wLuk', ids: ['lukava-sisters'] }
   ];
-  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 2620, y0: -100, y1: R(5) + 720 };
+  const BOUNDS = { x0: V === 'temo' ? -2150 : -2500, x1: 3300, y0: -100, y1: R(5) + 720 };
   const HOME = V === 'temo' ? { x0: -1100, x1: 1300, y0: -100, y1: R(1) + 180 } : { x0: -1200, x1: 1200, y0: -100, y1: R(1) + 180 };
   const GENS = [
     ['', 'g0', Y_COUSINS - 190], ['I', 'g1', R(1) + 70], ['II', 'g2', R(2) + 70], ['III', 'g3', R(3) + 70], ['IV', 'g4', R(4) + 70], ['V', 'g5', R(5) + 70]
