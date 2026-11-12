@@ -15,9 +15,9 @@
     'temo': ['Teimuraz (Temo) Benidze', 'Теймураз (Темо) Важаевич Бенидзе', 'm', V === 'temo' ? 'self' : 'brother'],
     'irakli': ['Irakli Benidze', 'Ираклий Важаевич Бенидзе', 'm', V === 'temo' ? 'brother' : 'birthday'],
     'keti': ['Keti Bochorishvili', 'Кети Бочоришвили', 'f', V === 'temo' ? 'inlaw' : 'wife'],
-    'child-leila': ['Leila (Lela) Benidze', 'Лейла (Лела) Бенидзе', 'f', 'daughter'],
-    'child-vazha': ['Vazha Benidze', 'Важа Бенидзе', 'm', 'son'],
-    'child-giorgi': ['Giorgi Benidze', 'Георгий Бенидзе', 'm', 'son'],
+    'child-leila': ['Leila (Lela) Benidze', 'Лейла (Лела) Бенидзе', 'f', V === 'temo' ? 'niece' : 'daughter'],
+    'child-vazha': ['Vazha Benidze', 'Важа Бенидзе', 'm', V === 'temo' ? 'nephew' : 'son'],
+    'child-giorgi': ['Giorgi Benidze', 'Георгий Бенидзе', 'm', V === 'temo' ? 'nephew' : 'son'],
     'vazha': ['Vazha Benidze', 'Важа Несторович Бенидзе', 'm', 'father'],
     'leila': ['Leila Papava', 'Лейла Орестовна Папава', 'f', 'mother'],
     'nestor': ['Nestor Benidze', 'Нестор Бенидзе', 'm', 'gfp'],
@@ -87,6 +87,8 @@
     wife: ['მეუღლე', 'Wife', 'Супруга'],
     daughter: ['ქალიშვილი', 'Daughter', 'Дочь'],
     son: ['ვაჟი', 'Son', 'Сын'],
+    niece: ['ძმისშვილი (ქალიშვილი)', 'Niece', 'Племянница (дочь брата)'],
+    nephew: ['ძმისშვილი (ვაჟი)', 'Nephew', 'Племянник (сын брата)'],
     father: ['მამა', 'Father', 'Отец'],
     mother: ['დედა', 'Mother', 'Мать'],
     gfp: ['ბაბუა · მამის მხრიდან', 'Paternal grandfather', 'Дедушка по отцу'],
@@ -333,7 +335,7 @@
       }
     });
 
-    if (V === 'irakli' && s.has('irakli') && !id.startsWith('child-')) childrenOf('irakli').forEach(c => s.add(c));
+    if (s.has('irakli') && !id.startsWith('child-')) childrenOf('irakli').forEach(c => s.add(c));
     return s;
   }
 
@@ -400,6 +402,10 @@
   if (V === 'temo') {
     // Teimuraz is the sole Apex at the summit:
     add('temo', 0, Y0, 580, 'bottom', 'direct', 0, { hero: 'photo' });
+    // Irakli's children (niece and nephews of Teimuraz):
+    add('child-leila', 415, 170, 175, 'bottom', 'kin', 0, { child: 1 });
+    add('child-vazha', 595, 170, 175, 'bottom', 'kin', 0.1, { child: 1 });
+    add('child-giorgi', 775, 170, 175, 'bottom', 'kin', 0.2, { child: 1 });
     // Brother and wife stepped down to side terrace:
     add('irakli', 455, Y_COUSINS, 230, 'bottom', 'direct', 0.4);
     add('keti', 735, Y_COUSINS, 230, 'bottom', 'kin', 0.6);
